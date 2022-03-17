@@ -138,7 +138,7 @@ return [
 
         'repository_pattern' => true,
 
-        'resources' => false,
+        'resources' => true,
 
         'excluded_fields' => ['id'], // Array of columns that doesn't required while creating module
     ],
@@ -170,7 +170,7 @@ return [
 
     'add_on' => [
 
-        'swagger'       => false,
+        'swagger'       => true,
 
         'tests'         => true,
 
