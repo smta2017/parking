@@ -1,0 +1,78 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "plate_number",
+        "dbType": "string",
+        "validations": "required"
+    },
+    {
+        "name": "plate_img",
+        "dbType": "string",
+        "validations": ""
+    },
+    {
+        "name": "mobile",
+        "dbType": "string",
+        "validations": ""
+    },
+    {
+        "name": "driver_name",
+        "dbType": "string",
+        "validations": ""
+    },
+    {
+        "name": "out_at",
+        "dbType": "string",
+        "validations": ""
+    },
+    {
+        "name": "qr_code",
+        "dbType": "string",
+        "validations": ""
+    },
+    {
+        "name": "is_bayed",
+        "dbType": "string",
+        "validations": ""
+    },
+    {
+        "name": "created_by",
+        "dbType": "integer",
+        "htmlType": "",
+        "relation": "mt1,User,user_id,id"
+
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]
