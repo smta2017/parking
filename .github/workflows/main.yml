@@ -30,7 +30,7 @@ jobs:
         with:
           command: |
             cd 
-            mkdir samehci
+            ./deploy.sh
           host: ${{ secrets.HOST }}
           user: ubuntu
           key: ${{ secrets.PRIVATE_KEY}}
