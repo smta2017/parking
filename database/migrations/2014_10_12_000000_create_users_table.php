@@ -31,8 +31,9 @@ class CreateUsersTable extends Migration
              $table->string('firebase_token')->nullable();
              $table->string('google_id')->nullable();
              $table->string('facebook_id')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
+             $table->rememberToken();
+             $table->timestamps();
+             $table->softDeletes();
         });
     }
 

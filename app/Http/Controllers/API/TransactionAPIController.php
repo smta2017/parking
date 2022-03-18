@@ -78,6 +78,7 @@ class TransactionAPIController extends AppBaseController
      *      summary="Store a newly created Transaction in storage",
      *      tags={"Transaction"},
      *      description="Store Transaction",
+     *      security = {{"Bearer": {}}},
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
@@ -124,6 +125,7 @@ class TransactionAPIController extends AppBaseController
      *      path="/transactions/{id}",
      *      summary="Display the specified Transaction",
      *      tags={"Transaction"},
+     *      security = {{"Bearer": {}}},
      *      description="Get Transaction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
@@ -176,6 +178,7 @@ class TransactionAPIController extends AppBaseController
      *      summary="Update the specified Transaction in storage",
      *      tags={"Transaction"},
      *      description="Update Transaction",
+     *      security = {{"Bearer": {}}},
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
@@ -237,6 +240,7 @@ class TransactionAPIController extends AppBaseController
      *      summary="Remove the specified Transaction from storage",
      *      tags={"Transaction"},
      *      description="Delete Transaction",
+     *      security = {{"Bearer": {}}},
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",

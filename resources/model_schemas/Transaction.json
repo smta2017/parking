@@ -1,16 +1,6 @@
 [
-    {
-        "name": "id",
-        "dbType": "increments",
-        "htmlType": "",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": true,
-        "inForm": false,
-        "inIndex": false,
-        "inView": false
-    },
+    
+      
     {
         "name": "plate_number",
         "dbType": "string",

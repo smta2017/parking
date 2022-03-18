@@ -11,12 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      definition="Transaction",
  *      required={"plate_number"},
  *      @SWG\Property(
- *          property="id",
- *          description="id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
  *          property="plate_number",
  *          description="plate_number",
  *          type="string"
@@ -51,24 +45,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          description="is_bayed",
  *          type="string"
  *      ),
- *      @SWG\Property(
- *          property="created_by",
- *          description="created_by",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
- *      )
  * )
  */
 class Transaction extends Model

@@ -24,8 +24,8 @@ class TransactionResource extends JsonResource
             'qr_code' => $this->qr_code,
             'is_bayed' => $this->is_bayed,
             'created_by' => $this->created_by,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'created_at' => $this->created_at->toDateString(),
+            'updated_at' => $this->updated_at->toDateString()
         ];
     }
 }

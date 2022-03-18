@@ -8,8 +8,24 @@ use Response;
 /**
  * @SWG\Swagger(
  *   basePath="/api/v1",
+ *   schemes={"http","https"},
+ * 
+ * @swg\SecurityScheme(
+ *      securityDefinition="Bearer",
+ *      type="apiKey",
+ *      in="header",
+ *      name="Authorization",
+ *      description="Auth Bearer Token
+ *      Format as 'Bearer <access_token>'",
+ *  ),
+ * 
+ * 
+ *   @SWG\Tag(
+ *     name="Auth",
+ *     description="System users Auth"
+ *   ),
  *   @SWG\Info(
- *     title="Nile Falcon Parking-app APIs",
+ *     title="Specialist APP APIs",
  *     version="1.0.0",
  *   )
  * )
