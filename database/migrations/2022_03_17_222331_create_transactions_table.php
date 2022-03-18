@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->string('out_at');
             $table->string('qr_code');
             $table->string('is_bayed');
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -44,7 +44,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *          property="is_bayed",
  *          description="is_bayed",
  *          type="string"
- *      ),
+ *      )
  * )
  */
 class Transaction extends Model

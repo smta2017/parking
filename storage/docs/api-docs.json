@@ -437,6 +437,11 @@
                 "is_bayed": {
                     "description": "is_bayed",
                     "type": "string"
+                },
+                "created_by": {
+                    "description": "created_by",
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         },
