@@ -36,6 +36,7 @@ class TransactionAPIController extends AppBaseController
      *      path="/transactions",
      *      summary="Get a listing of the Transactions.",
      *      tags={"Transaction"},
+     *      security = {{"Bearer": {}}},
      *      description="Get all Transactions",
      *      produces={"application/json"},
      *      @SWG\Response(

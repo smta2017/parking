@@ -181,7 +181,12 @@
                             "type": "object"
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
