@@ -369,7 +369,7 @@
                 ]
             }
         },
-        "/checkin": {
+        "/transactions/checkin": {
             "post": {
                 "tags": [
                     "Mobile-Api"
@@ -400,6 +400,51 @@
                                 },
                                 "data": {
                                     "$ref": "#/definitions/CheckIn"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/transactions/checkout/{qr_code}": {
+            "post": {
+                "tags": [
+                    "Mobile-Api"
+                ],
+                "summary": "Set checkout for Transaction",
+                "description": "Get Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "qr_code",
+                        "in": "path",
+                        "description": "qr code of Transaction",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CheckOut"
                                 },
                                 "message": {
                                     "type": "string"
@@ -453,6 +498,29 @@
     },
     "definitions": {
         "CheckIn": {
+            "required": [
+                "plate_number"
+            ],
+            "properties": {
+                "plate_number": {
+                    "description": "car plate number",
+                    "type": "string"
+                },
+                "plate_img": {
+                    "description": "image of car plate",
+                    "type": "string"
+                },
+                "mobile": {
+                    "description": "driver mobile",
+                    "type": "string"
+                },
+                "driver_name": {
+                    "description": "driver name",
+                    "type": "string"
+                }
+            }
+        },
+        "CheckOut": {
             "required": [
                 "plate_number"
             ],

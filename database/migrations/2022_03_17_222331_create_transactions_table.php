@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->string('plate_img')->nullable();
             $table->string('mobile')->nullable();
             $table->string('driver_name')->nullable();
-            $table->string('out_at')->nullable();
+            $table->dateTime('out_at')->nullable();
             $table->string('qr_code')->nullable();
             $table->string('is_bayed')->nullable();
             $table->integer('created_by')->nullable();

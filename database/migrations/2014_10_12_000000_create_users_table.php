@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -35,6 +36,15 @@ class CreateUsersTable extends Migration
              $table->timestamps();
              $table->softDeletes();
         });
+
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => \Hash::make('password'),
+            'email_verified_at' => Carbon::now(),
+
+        ]);
+
     }
 
     /**

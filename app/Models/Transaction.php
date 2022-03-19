@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @SWG\Definition(
@@ -17,7 +17,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * ) 
   
  
-
+/**
+ * @SWG\Definition(
+ *      definition="CheckOut",
+ *      required={"plate_number"},
+ *       @SWG\Property(property="plate_number", type="string", description="car plate number"),
+ *       @SWG\Property(property="plate_img", type="string", description="image of car plate"),
+ *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
+ *       @SWG\Property(property="driver_name", type="string", description="driver name"),
+ * ) 
+  
   
  * @SWG\Definition(
  *      definition="Transaction",

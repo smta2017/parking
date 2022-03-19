@@ -34,7 +34,6 @@ class AuthRepository extends BaseRepository
 
     public function getFieldsSearchable()
     {
-        
     }
     /**
      * Get the token array structure.
@@ -49,7 +48,11 @@ class AuthRepository extends BaseRepository
             'access_token' => $token,
             'token_type' => 'Bearer',
             'full_token' => 'Bearer ' . $token,
-            'user' => auth()->user()
+            'user' => [
+                'id' => auth()->user()->id,
+                'name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+            ]
         ]);
     }
 

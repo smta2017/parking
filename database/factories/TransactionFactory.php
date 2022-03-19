@@ -24,14 +24,14 @@ class TransactionFactory extends Factory
         return [
             'plate_number' => $this->faker->word,
             'plate_img' => $this->faker->word,
-            'mobile' => $this->faker->word,
-            'driver_name' => $this->faker->word,
-            'out_at' => $this->faker->word,
-            'qr_code' => $this->faker->word,
-            'is_bayed' => $this->faker->word,
-            'created_by' => $this->faker->randomDigitNotNull,
+            'mobile' => $this->faker->phoneNumber,
+            'driver_name' => $this->faker->name(),
+            'out_at' => $this->faker->date('Y-m-d H:i:s'),
+            'qr_code' => $this->faker->randomDigitNotNull,
+            'is_bayed' => $this->faker->randomDigitNotNull,
+            'created_by' => $this->faker->unique()->numberBetween(1,10),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')
-            ];
+        ];
     }
 }
