@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Resources\CheckInResource;
 use App\Http\Resources\TransactionResource;
 use Response;
 
@@ -282,5 +283,59 @@ class TransactionAPIController extends AppBaseController
         $transaction->delete();
 
         return $this->sendSuccess('Transaction deleted successfully');
+    }
+
+
+ /**
+     * @param CreateTransactionAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/checkin",
+     *      summary="Store a newly created Transaction in storage",
+     *      tags={"Mobile-Api"},
+     *      description="Store Transaction",
+     *      security = {{"Bearer": {}}},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Transaction that should be stored",
+     *          required=false,
+     *          @SWG\Schema(ref="#/definitions/CheckIn"
+     *             
+     *          ),
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckIn"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkIn(CreateTransactionAPIRequest $request)
+    {
+        $input = $request->all();
+        
+        $input["created_by"]=auth()->user()->id;
+
+        $transaction = $this->transactionRepository->create($input);
+
+        return $this->sendResponse(new CheckInResource($transaction), 'CheckIn saved successfully');
+        
     }
 }

@@ -16,13 +16,13 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('plate_number');
-            $table->string('plate_img');
-            $table->string('mobile');
-            $table->string('driver_name');
-            $table->string('out_at');
-            $table->string('qr_code');
-            $table->string('is_bayed');
+            $table->string('plate_number')->nullable();
+            $table->string('plate_img')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('driver_name')->nullable();
+            $table->string('out_at')->nullable();
+            $table->string('qr_code')->nullable();
+            $table->string('is_bayed')->nullable();
             $table->integer('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();

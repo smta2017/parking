@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\TransactionAPIController;
+use App\Http\Controllers\API\UserAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +26,9 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::resource('transactions', App\Http\Controllers\API\TransactionAPIController::class);
+    Route::post('checkin', [TransactionAPIController::class, 'checkIn']);
+    Route::resource('transactions', TransactionAPIController::class);
 });
 
 
-Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+Route::resource('users', UserAPIController::class);

@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @SWG\Definition(
+ *      definition="CheckIn",
+ *      required={"plate_number"},
+ *       @SWG\Property(property="plate_number", type="string", description="car plate number"),
+ *       @SWG\Property(property="plate_img", type="string", description="image of car plate"),
+ *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
+ *       @SWG\Property(property="driver_name", type="string", description="driver name"),
+ * ) 
+  
+ 
+
+  
+ * @SWG\Definition(
  *      definition="Transaction",
  *      required={"plate_number"},
  *      @SWG\Property(
@@ -54,7 +66,7 @@ class Transaction extends Model
     use HasFactory;
 
     public $table = 'transactions';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -102,6 +114,6 @@ class Transaction extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+        return $this->belongsTo(\App\Models\User::class, 'created_by', 'id');
     }
 }

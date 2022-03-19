@@ -19,11 +19,19 @@ use Response;
  *      Format as 'Bearer <access_token>'",
  *  ),
  * 
- * 
+ *  @SWG\Tag(
+ *     name="User",
+ *     description="System users Auth"
+ *   ),
  *   @SWG\Tag(
  *     name="Auth",
  *     description="System users Auth"
  *   ),
+ *   @SWG\Tag(
+ *     name="Mobile-Api",
+ *     description="System users Auth"
+ *   ),
+ *  
  *   @SWG\Info(
  *     title="Specialist APP APIs",
  *     version="1.0.0",
