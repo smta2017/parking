@@ -6,18 +6,18 @@ services:
             context: .
             dockerfile: .docker/app/Dockerfile
         image: 'shouts.dev/laravel'
-        container_name: laravel-parking-app
+        container_name: park-app
         ports:
             - "8001:80"
         volumes:
             - ./:/var/www/html
         networks:
-            - parking-app
+            - park-network
         depends_on:
             - mysql
     mysql:
         image: mysql
-        container_name: laravel-parking-db
+        container_name: park-db
         restart: unless-stopped
         tty: true
         ports:
@@ -31,8 +31,8 @@ services:
         volumes:
             - ./.docker/mysql:/var/lib/mysql
         networks:
-            - parking-app
+            - park-network
 
 networks:
-    parking-app:
+    park-network:
         driver: bridge
