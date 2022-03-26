@@ -60,73 +60,23 @@ $widgets['before_content'][] = [
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">New Orders</h4>
-                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                    </ul>
+    <div class="col-12 col-md-4">
+            <div class="card">
+              <div class="card-content">
+                <div class="earning-chart position-relative">
+                  <div class="chart-title position-absolute mt-2 ml-2">
+                    <h1 class="display-4">$1,596</h1>
+                    <span class="text-muted">Total Earning</span>
+                  </div>
+                  <canvas id="earning-chart" class="height-450"></canvas>
+                  <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
+                    <a href="#" class="btn round btn-danger mr-1 btn-glow">Statistics <i class="ft-bar-chart"></i></a>
+                    <span class="text-muted">for the <a href="#" class="danger darken-2">last year.</a></span>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="card-content">
-                <div id="new-orders" class="media-list position-relative">
-                    <div class="table-responsive">
-                        <table id="new-orders-table" class="table table-hover table-xl mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="border-top-0">Product</th>
-                                    <th class="border-top-0">Customers</th>
-                                    <th class="border-top-0">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-truncate">Galaxy</td>
-                                    <td class="text-truncate p-1">
-                                        <ul class="list-unstyled users-list m-0">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Ryan Schneider" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-14.png" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Tiffany Oliver" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-13.png" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Joan Reid" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-12.png" alt="Avatar">
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="text-truncate">$7500</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-truncate">Moto Z2</td>
-                                    <td class="text-truncate p-1">
-                                        <ul class="list-unstyled users-list m-0">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kimberly Simmons" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-8.png" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Willie Torres" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-7.png" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Rebecca Jones" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-6.png" alt="Avatar">
-                                            </li>
-                                            <li class="avatar avatar-sm">
-                                                <span class="badge badge-info">+1 more</span>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td class="text-truncate">$8500</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+          </div>
 </div>
 <!--/ Products sell and New Orders -->
 

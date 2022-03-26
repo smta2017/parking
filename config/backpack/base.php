@@ -51,7 +51,7 @@ return [
 
 
 
-
+        'app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css',
 
 
 
@@ -162,6 +162,12 @@ return [
         'app-assets/js/core/app.js',
         'app-assets/js/scripts/customizer.js',
         'app-assets/js/scripts/pages/dashboard-ecommerce.js',
+        'app-assets/js/scripts/pages/dashboard-sales.js',
+
+
+ 
+        'app-assets/vendors/js/charts/chart.min.js',
+        'app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js',
 
         // examples (everything inside the bundle, loaded from CDN)
         // 'https://code.jquery.com/jquery-3.4.1.min.js',
