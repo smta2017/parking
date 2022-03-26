@@ -17,14 +17,14 @@ return [
 
     // Direction, according to language
     // (left-to-right vs right-to-left)
-    'html_direction' => 'rtl',
+    'html_direction' => (config('app.locale') == 'ar') ? 'rtl' : '',
 
     // ----
     // HEAD
     // ----
 
     // Project name. Shown in the window title.
-    'project_name' => 'Backpack Admin Panel',
+    'project_name' => ' Admin Panel',
 
     // When clicking on the admin panel's top-left logo/name,
     // where should the user be redirected?
@@ -43,7 +43,22 @@ return [
     // CSS files that are loaded in all pages, using Laravel's asset() helper
     'styles' => [
         // 'packages/backpack/base/css/bundle.css', // has primary color electric purple (backpack default)
-        'packages/backpack/base/css/blue-bundle.css', // has primary color blue
+        // 'packages/backpack/base/css/blue-bundle.css', // has primary color blue
+        (config('app.locale') == 'ar') ?  'app-assets/css-rtl/vendors.css' : 'app-assets/css/vendors.css',
+        'app-assets/vendors/css/weather-icons/climacons.min.css',
+        'app-assets/fonts/meteocons/style.css',
+        'app-assets/vendors/css/charts/morris.css',
+        'app-assets/vendors/css/charts/chartist.css',
+        'app-assets/vendors/css/charts/chartist-plugin-tooltip.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/app.css' : 'app-assets/css/app.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/custom-rtl.css' : 'app-assets/css/custom.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/menu/menu-types/vertical-content-menu.css' : 'app-assets/css/core/menu/menu-types/vertical-content-menu.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/colors/palette-gradient.css' : 'app-assets/css/core/colors/palette-gradient.css',
+        'app-assets/fonts/simple-line-icons/style.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/colors/palette-gradient.css' : 'app-assets/css/core/colors/palette-gradient.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/timeline.css' : 'app-assets/css/pages/timeline.css',
+        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/dashboard-ecommerce.css' : 'app-assets/css/pages/dashboard-ecommerce.css',
+        (config('app.locale') == 'ar') ? 'assets/css/style-rtl.css' : 'assets/css/style.css',
 
         // Here's what's inside the bundle:
         // 'packages/@digitallyhappy/backstrap/css/style.min.css',
@@ -51,8 +66,8 @@ return [
         // 'packages/noty/noty.css',
 
         // Load the fonts separately (so that you can replace them at will):
-        'packages/source-sans-pro/source-sans-pro.css',
-        'packages/line-awesome/css/line-awesome.min.css',
+        // 'packages/source-sans-pro/source-sans-pro.css',
+        // 'packages/line-awesome/css/line-awesome.min.css',
 
         // Example (the fonts above, loaded from CDN instead)
         // 'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css',
@@ -72,13 +87,13 @@ return [
     // ------
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => '<b>Back</b>pack',
+    'project_logo'   => ' <img class="brand-logo" alt="modern admin logo" src="/app-assets/images/logo/logo.png">',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
 
     // Horizontal navbar classes. Helps make the admin panel look similar to your project's design.
-    'header_class' => 'app-header bg-light border-0 navbar',
+    'header_class' => 'header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light navbar-hide-on-scroll navbar-border navbar-shadow navbar-brand-center',
     // For background colors use: bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
     // For links to be visible on different background colors use: "navbar-dark", "navbar-light", "navbar-color"
 
@@ -87,11 +102,12 @@ return [
     // ----
 
     // Body element classes.
-    'body_class' => 'app aside-menu-fixed sidebar-lg-show',
+    // 'body_class' => 'app aside-menu-fixed sidebar-lg-show',
+    'body_class' => 'vertical-layout vertical-content-menu 2-columns   menu-expanded fixed-navbar',
     // Try sidebar-hidden, sidebar-fixed, sidebar-compact, sidebar-lg-show
 
     // Sidebar element classes.
-    'sidebar_class' => 'sidebar sidebar-pills bg-light',
+    'sidebar_class' => 'main-menu menu-static menu-light menu-accordion menu-shadow',
     // Remove "sidebar-transparent" for standard sidebar look
     // Try "sidebar-light" or "sidebar-dark" for dark/light links
     // You can also add a background class like bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan
@@ -101,12 +117,12 @@ return [
     // ------
 
     // Footer element classes.
-    'footer_class' => 'app-footer d-print-none',
+    'footer_class' => 'footer footer-static footer-light navbar-border',
     // hide it with d-none
     // change background color with bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'Cristian Tabacitu',
+    'developer_name' => 'Nile Falcon',
 
     // Developer website. Link in footer. Type false if you want to hide it.
     'developer_link' => 'http://tabacitu.ro',
@@ -121,7 +137,20 @@ return [
     // JS files that are loaded in all pages, using Laravel's asset() helper
     'scripts' => [
         // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
-        'packages/backpack/base/js/bundle.js',
+        // 'packages/backpack/base/js/bundle.js',
+
+
+        'app-assets/vendors/js/vendors.min.js',
+        'app-assets/vendors/js/ui/headroom.min.js',
+        'app-assets/vendors/js/charts/chartist.min.js',
+        'app-assets/vendors/js/charts/chartist-plugin-tooltip.min.j',
+        'app-assets/vendors/js/charts/raphael-min.js',
+        'app-assets/vendors/js/charts/morris.min.js',
+        'app-assets/vendors/js/timeline/horizontal-timeline.js',
+        'app-assets/js/core/app-menu.js',
+        'app-assets/js/core/app.js',
+        'app-assets/js/scripts/customizer.js',
+        'app-assets/js/scripts/pages/dashboard-ecommerce.js',
 
         // examples (everything inside the bundle, loaded from CDN)
         // 'https://code.jquery.com/jquery-3.4.1.min.js',
@@ -139,7 +168,7 @@ return [
     ],
 
     // JS files that are loaded in all pages, using Laravel's mix() helper
-    'mix_scripts' => [// file_path => manifest_directory_path
+    'mix_scripts' => [ // file_path => manifest_directory_path
         // 'js/app.js' => '',
     ],
 
