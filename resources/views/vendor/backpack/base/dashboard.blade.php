@@ -2,12 +2,34 @@
 
 @php
     $widgets['before_content'][] = [
-        'type'        => 'jumbotron',
-        'heading'     => trans('backpack::base.welcome'),
-        'content'     => trans('backpack::base.use_sidebar'),
-        'button_link' => backpack_url('logout'),
-        'button_text' => trans('backpack::base.logout'),
-    ];
+    'type'        => 'progress',
+    'class'       => 'card text-white bg-danger mb-2',
+    'value'       => '11.456',
+    'description' => 'Registered users.',
+    'progress'    => 57, // integer
+];
+    $widgets['before_content'][] = [
+    'type'        => 'progress',
+    'class'       => 'card text-white bg-primary mb-2',
+    'value'       => '11.456',
+    'description' => 'Registered users.',
+    'progress'    => 57, // integer,
+    'progressClass' => 'progress-bar bg-primary'
+];
+    $widgets['before_content'][] = [
+    'type'        => 'progress',
+    'class'       => 'card text-white bg-danger mb-2',
+    'value'       => '11.456',
+    'description' => 'Registered users.',
+    'progress'    => 57, // integer
+];
+    $widgets['before_content'][] = [
+    'type'        => 'progress',
+    'class'       => 'card text-white bg-light mb-2',
+    'value'       => '11.456',
+    'description' => 'Registered users.',
+    'progress'    => 57, // integer
+];
 @endphp
 
 @section('content')

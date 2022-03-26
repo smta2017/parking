@@ -1,6 +1,6 @@
 @php
 	$widget['wrapper']['element'] = $widget['wrapper']['element'] ?? 'div';
-	$widget['wrapper']['class'] = $widget['wrapper']['class'] ?? "col-sm-6 col-md-4";
+	$widget['wrapper']['class'] = $widget['wrapper']['class'] ?? "col-xl-3 col-lg-6 col-12";
 
     // each wrapper attribute can be a callback or a string
     // for those that are callbacks, run the callbacks to get the final string to use
