@@ -49,12 +49,22 @@
                             </div>
                         </div>
 
+
+
+
                         <div class="form-group">
                             <div>
                                 <button type="submit" class="btn btn-block btn-primary">
                                     {{ trans('backpack::base.login') }}
                                 </button>
                             </div>
+                        </div>
+
+
+                        <div class="form-group">
+                           Email : <label class="control-label" for="">admin@admin.com</label>
+                            <br>
+                           Password: <label class="control-label" for="">password</label>
                         </div>
                     </form>
                 </div>
