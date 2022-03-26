@@ -24,6 +24,7 @@ class CheckOutResource extends JsonResource
             'driver_name' => $this->driver_name,
             'qr_code' => $this->id,
             'checkin' => $this->created_at->format('Y-m-d H:i'),
+            'checkin_hu' => $this->created_at->diffForHumans(),
             'checkout' => $this->out_at,
             'total_time' => [
                 'days' => $diff_time2->days,

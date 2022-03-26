@@ -28,7 +28,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'transactions'], function () {
         Route::post('checkin', [TransactionAPIController::class, 'checkIn']);
-        Route::post('checkout/{qr_code?}', [TransactionAPIController::class, 'checkOut']);
+        Route::post('checkout/{qr_code?}', [TransactionAPIController::class, 'checkOut']);        
     });
     Route::resource('transactions', TransactionAPIController::class);
 });

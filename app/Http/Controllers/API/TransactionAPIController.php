@@ -11,6 +11,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\CheckInResource;
 use App\Http\Resources\CheckOutResource;
 use App\Http\Resources\TransactionResource;
+use App\Http\Resources\TransactionsChartResource;
 use Response;
 
 /**
@@ -332,7 +333,7 @@ class TransactionAPIController extends AppBaseController
     public function checkIn(CreateTransactionAPIRequest $request)
     {
         $input = $request->all();
-        
+
         $transaction = $this->transactionRepository->setCheckIn($input);
 
         return $this->sendResponse(new CheckInResource($transaction), 'CheckIn saved successfully');
@@ -382,5 +383,20 @@ class TransactionAPIController extends AppBaseController
         $transaction = $this->transactionRepository->setCheckOut($qr_code);
 
         return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut saved successfully');
+    }
+
+    public function getTransactionCart()
+    {
+        $transaction = $this->transactionRepository->getTransactionCart();
+        
+        return $this->sendResponse(TransactionsChartResource::collection($transaction), 'Successfully');
+    }
+
+    public  function getLatestTransactions()
+    {
+        $transaction = $this->transactionRepository->latestTransactions();
+        
+        // return $transaction;
+        return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');
     }
 }

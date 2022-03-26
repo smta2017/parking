@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Transaction;
 use App\Repositories\BaseRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class TransactionRepository
@@ -48,5 +49,24 @@ class TransactionRepository extends BaseRepository
     public function setCheckOut($qr_code)
     {
         return $this->update(['out_at' => Carbon::now()->toDateTimeString()], $qr_code);
+    }
+
+    public function getTransactionCart()
+    {
+        // $transaction = Transaction::orderBy('updated_at')->get();
+
+        $transaction = DB::table('transactions')
+            ->select(DB::raw('count(*) as orders, DATE(created_at) day'))
+            ->groupBy('day')
+            ->orderBy('day')
+            // ->limit(10)
+            ->get();
+        return $transaction;
+    }
+
+
+    public function latestTransactions()
+    {
+        return $this->all([],null,30)->sortBy('updated_at');
     }
 }

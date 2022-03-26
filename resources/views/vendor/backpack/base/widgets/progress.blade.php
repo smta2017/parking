@@ -10,7 +10,7 @@ $widget['wrapper']['class'] = $widget['wrapper']['class'] ?? $widget['wrapperCla
       <div class="media d-flex">
         <div class="media-body text-left">
           @if (isset($widget['value']))
-          <h3 class="info">{!! $widget['value'] !!}</h3>
+          <h3 class="{!! $widget['progressClass'] !!}">{!! $widget['value'] !!}</h3>
           @endif
 
           @if (isset($widget['description']))
@@ -18,12 +18,12 @@ $widget['wrapper']['class'] = $widget['wrapper']['class'] ?? $widget['wrapperCla
           @endif
         </div>
         <div>
-          <i class="icon-basket-loaded info font-large-2 float-right"></i>
+          <i class="{!! $widget['icon'] !!} {!! $widget['progressClass'] !!} font-large-2 float-right"></i>
         </div>
       </div>
       @if (isset($widget['progress']))
       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: {{ $widget['progress']  }}%" aria-valuenow="{{ $widget['progress']  }}" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-gradient-x-{!! $widget['progressClass'] !!}" role="progressbar" style="width: {{ $widget['progress']  }}%" aria-valuenow="{{ $widget['progress']  }}" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       @endif
 

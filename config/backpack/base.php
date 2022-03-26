@@ -24,7 +24,7 @@ return [
     // ----
 
     // Project name. Shown in the window title.
-    'project_name' => ' Admin Panel',
+    'project_name' => ' Smart Parking',
 
     // When clicking on the admin panel's top-left logo/name,
     // where should the user be redirected?
@@ -44,6 +44,18 @@ return [
     'styles' => [
         // 'packages/backpack/base/css/bundle.css', // has primary color electric purple (backpack default)
         // 'packages/backpack/base/css/blue-bundle.css', // has primary color blue
+
+        'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700',
+        'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css',
+        
+
+
+
+
+
+
+
+        
         (config('app.locale') == 'ar') ?  'app-assets/css-rtl/vendors.css' : 'app-assets/css/vendors.css',
         'app-assets/vendors/css/weather-icons/climacons.min.css',
         'app-assets/fonts/meteocons/style.css',
@@ -51,11 +63,10 @@ return [
         'app-assets/vendors/css/charts/chartist.css',
         'app-assets/vendors/css/charts/chartist-plugin-tooltip.css',
         (config('app.locale') == 'ar') ? 'app-assets/css-rtl/app.css' : 'app-assets/css/app.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/custom-rtl.css' : 'app-assets/css/custom.css',
+        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/custom-rtl.css' : 'app-assets/css/custom.css',
         (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/menu/menu-types/vertical-content-menu.css' : 'app-assets/css/core/menu/menu-types/vertical-content-menu.css',
         (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/colors/palette-gradient.css' : 'app-assets/css/core/colors/palette-gradient.css',
         'app-assets/fonts/simple-line-icons/style.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/colors/palette-gradient.css' : 'app-assets/css/core/colors/palette-gradient.css',
         (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/timeline.css' : 'app-assets/css/pages/timeline.css',
         (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/dashboard-ecommerce.css' : 'app-assets/css/pages/dashboard-ecommerce.css',
         (config('app.locale') == 'ar') ? 'assets/css/style-rtl.css' : 'assets/css/style.css',
@@ -143,7 +154,7 @@ return [
         'app-assets/vendors/js/vendors.min.js',
         'app-assets/vendors/js/ui/headroom.min.js',
         'app-assets/vendors/js/charts/chartist.min.js',
-        'app-assets/vendors/js/charts/chartist-plugin-tooltip.min.j',
+        'app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js',
         'app-assets/vendors/js/charts/raphael-min.js',
         'app-assets/vendors/js/charts/morris.min.js',
         'app-assets/vendors/js/timeline/horizontal-timeline.js',
@@ -158,7 +169,7 @@ return [
         // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
         // 'https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js',
         // 'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
-        // 'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
+        'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
         // 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js'
 
         // examples (VueJS or React)

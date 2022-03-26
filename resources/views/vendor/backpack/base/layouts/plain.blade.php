@@ -3,12 +3,16 @@
 <head>
     @include(backpack_view('inc.head'))
 </head>
-<body class="app flex-row align-items-center">
-
+<body class="vertical-layout vertical-content-menu 1-column  bg-full-screen-image menu-expanded blank-page blank-page" data-open="click" data-menu="vertical-content-menu" data-col="1-column">
   @yield('header')
 
-  <div class="container">
+  <div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-header row">
+      </div>
   @yield('content')
+  </div>
+  </div>
   </div>
 
   <footer class="app-footer sticky-footer">
