@@ -153,6 +153,7 @@ class User extends Authenticatable
         'firebase_token',
         'google_id',
         'facebook_id',
+        'zone_id',
         'remember_token'
     ];
 

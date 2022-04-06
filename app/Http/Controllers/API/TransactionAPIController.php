@@ -394,7 +394,7 @@ class TransactionAPIController extends AppBaseController
 
     public  function getLatestTransactions()
     {
-        $transaction = $this->transactionRepository->latestTransactions();
+        $transaction = $this->transactionRepository->latestTransactions(["{'zone_id': 2}"]);
         
         // return $transaction;
         return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');

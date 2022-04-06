@@ -29,8 +29,9 @@ class TransactionFactory extends Factory
             'out_at' => $this->faker->randomElement([$this->faker->dateTimeBetween($startDate = '0 days', $endDate = '2hours', $timezone = null), null]),
             'qr_code' => $this->faker->randomDigitNotNull,
             'is_bayed' => $this->faker->randomDigitNotNull,
+            'zone_id' => $this->faker->numberBetween(1,10),
             'created_by' => $this->faker->numberBetween(1,10),
-            'created_at' => $this->faker->dateTimeBetween($startDate = '-9 days', $endDate = '2hours', $timezone = null),
+            'created_at' => $this->faker->dateTimeBetween($startDate = '-2 hours', $endDate = '2hours', $timezone = null),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }

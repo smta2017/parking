@@ -90,6 +90,7 @@ class Transaction extends Model
         'out_at',
         'qr_code',
         'is_bayed',
+        'zone_id',
         'created_by'
     ];
 
@@ -107,6 +108,7 @@ class Transaction extends Model
         'out_at' => 'string',
         'qr_code' => 'string',
         'is_bayed' => 'string',
+        'zone_id' => 'integer',
         'created_by' => 'integer'
     ];
 
@@ -122,8 +124,13 @@ class Transaction extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function user()
+    public function User()
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by', 'id');
+    }
+
+    public function Zone()
+    {
+        return $this->belongsTo(\App\Models\Zone::class, 'zone_id', 'id');
     }
 }

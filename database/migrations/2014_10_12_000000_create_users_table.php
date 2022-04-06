@@ -28,10 +28,12 @@ class CreateUsersTable extends Migration
             $table->enum('gender', ['mail', 'femail'])->nullable();
             $table->tinyInteger('sms_notification')->nullable();
             $table->tinyInteger('is_active')->nullable();
+            $table->tinyInteger('is_admin')->nullable();
             $table->string('lang')->nullable();
             $table->string('firebase_token')->nullable();
             $table->string('google_id')->nullable();
             $table->string('facebook_id')->nullable();
+            $table->integer('zone_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
@@ -42,6 +44,8 @@ class CreateUsersTable extends Migration
             'email' => 'admin@admin.com',
             'password' => \Hash::make('password'),
             'email_verified_at' => Carbon::now(),
+            'is_admin' => 1,
+            'zone_id' => 1,
             'created_at' => '2022-03-19 19:18:23',
             'updated_at' => '2022-03-19 19:18:23'
 

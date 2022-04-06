@@ -42,6 +42,7 @@ class TransactionRepository extends BaseRepository
     public function setCheckIn(array $input = [])
     {
         $input["created_by"] = auth()->user()->id;
+        $input["zone_id"] = auth()->user()->zone_id;
 
         return $this->create($input);
     }
@@ -65,8 +66,8 @@ class TransactionRepository extends BaseRepository
     }
 
 
-    public function latestTransactions()
+    public function latestTransactions($filter = [])
     {
-        return $this->all([],null,30)->sortBy('updated_at');
+        return $this->all($filter, null, 30)->sortBy('updated_at');
     }
 }

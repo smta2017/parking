@@ -24,6 +24,7 @@ class CreateTransactionsTable extends Migration
             $table->string('qr_code')->nullable();
             $table->string('is_bayed')->nullable();
             $table->integer('created_by')->nullable();
+            $table->integer('zone_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -35,3 +35,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 
 Route::resource('users', UserAPIController::class);
+
+
+Route::resource('zones', App\Http\Controllers\API\ZoneAPIController::class);
