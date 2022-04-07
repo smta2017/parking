@@ -14,3 +14,13 @@
         <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ backpack_url('logout') }}"><i class="ft-power"></i> {{ trans('backpack::base.logout') }}</a>
     </div>
 </li>
+
+<li class="dropdown dropdown-user nav-item">
+<div class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+  <select name="zone_id" id="zone">
+      <option value="1">zone 1</option>
+      <option value="2">zone 2</option>
+      <option value="3">zone 3</option>
+  </select>
+</div>
+</li>

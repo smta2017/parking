@@ -143,7 +143,7 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'phone',
-        'dop',
+        'dob',
         'profile_picture',
         'phone_verified_at',
         'gender',
@@ -154,6 +154,8 @@ class User extends Authenticatable
         'google_id',
         'facebook_id',
         'zone_id',
+        'job_title',
+        'edu',
         'remember_token'
     ];
 
@@ -189,12 +191,12 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users',
         'email_verified_at' => 'nullable',
         'password' => 'required|string|max:255',
-        'phone' => 'nullable|string|max:255',
-        'dop' => 'nullable',
-        'profile_picture' => 'required|string|max:255',
+        'phone' => 'nullable|string|unique:users|max:255',
+        'dob' => 'nullable',
+        'profile_picture' => 'nullable|string|max:255',
         'phone_verified_at' => 'nullable',
         'gender' => 'nullable|string',
         'sms_notification' => 'nullable|boolean',

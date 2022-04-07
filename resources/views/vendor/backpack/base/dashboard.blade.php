@@ -1,4 +1,19 @@
 @extends(backpack_view('blank'))
+<?php
+
+use App\Http\Controllers\API\TransactionAPIController;
+use App\Repositories\TransactionRepository;
+use Illuminate\Container\Container;
+
+session(['session_zone_id' => 1]);
+
+
+$transaction = new TransactionAPIController(new TransactionRepository(new Container()));
+$transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
+
+// dd( $transactions);
+
+?>
 
 @php
 $widgets['before_content'][] = [
@@ -43,7 +58,7 @@ $widgets['before_content'][] = [
 @section('content')
 <!-- Products sell and New Orders -->
 <div class="row match-height">
-    <div class="col-xl-8 col-12" id="ecommerceChartView">
+    <div class="col-xl-12 col-12" id="ecommerceChartView">
         <div class="card card-shadow">
             <div class="card-header card-header-transparent py-20">
 
@@ -60,7 +75,7 @@ $widgets['before_content'][] = [
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <!-- <div class="col-12 col-md-4">
             <div class="card">
               <div class="card-content">
                 <div class="earning-chart position-relative">
@@ -76,23 +91,12 @@ $widgets['before_content'][] = [
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 </div>
 <!--/ Products sell and New Orders -->
 
 
-<?php
 
-use App\Http\Controllers\API\TransactionAPIController;
-use App\Repositories\TransactionRepository;
-use Illuminate\Container\Container;
-
-$transaction = new TransactionAPIController(new TransactionRepository(new Container()));
-$transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
-
-// dd( $transactions);
-
-?>
 
 <!-- Recent Transactions -->
 <div class="row">
@@ -125,7 +129,7 @@ $transactions = json_decode(json_encode($transaction->getLatestTransactions()))-
                             @foreach ($transactions as $transaction)
                             <tr>
                                 <td class="text-truncate">
-                                {{$transaction->zone_id}}
+                                <span style="font-size: 3px;">{{$transaction->zone_id}}</span>
                                 <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span></td>
                                 <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
                                 <td class="text-truncate">

@@ -121,6 +121,14 @@ class Transaction extends Model
         'plate_number' => 'required'
     ];
 
+
+
+    public function newQuery()
+    {
+        return parent::newQuery()->where('zone_id', session('session_zone_id'));
+    }
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

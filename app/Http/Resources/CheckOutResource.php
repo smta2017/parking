@@ -23,7 +23,7 @@ class CheckOutResource extends JsonResource
             'mobile' => $this->mobile,
             'driver_name' => $this->driver_name,
             'zone_id' => $this->zone_id,
-            'qr_code' => $this->id,
+            'qr_code' => "$this->id",
             'checkin' => $this->created_at->format('Y-m-d H:i'),
             'checkin_hu' => $this->created_at->diffForHumans(),
             'checkout' => $this->out_at,

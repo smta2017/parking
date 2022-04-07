@@ -18,7 +18,17 @@ class TransactionRepository extends BaseRepository
     /**
      * @var array
      */
-    protected $fieldSearchable = [];
+    protected $fieldSearchable = [
+        'plate_number',
+        'plate_img',
+        'mobile',
+        'driver_name',
+        'out_at',
+        'qr_code',
+        'is_bayed',
+        'zone_id',
+        'created_by'
+    ];
 
     /**
      * Return searchable fields
@@ -56,8 +66,7 @@ class TransactionRepository extends BaseRepository
     {
         // $transaction = Transaction::orderBy('updated_at')->get();
 
-        $transaction = DB::table('transactions')
-            ->select(DB::raw('count(*) as orders, DATE(created_at) day'))
+        $transaction = Transaction::select(DB::raw('count(*) as orders, DATE(created_at) day'))
             ->groupBy('day')
             ->orderBy('day')
             // ->limit(10)
@@ -68,6 +77,6 @@ class TransactionRepository extends BaseRepository
 
     public function latestTransactions($filter = [])
     {
-        return $this->all($filter, null, 30)->sortBy('updated_at');
+        return $this->all($filter, null, 50)->sortBy('updated_at');
     }
 }

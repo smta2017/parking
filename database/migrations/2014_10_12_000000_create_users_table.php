@@ -22,7 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             //---------------------------------
             $table->string('phone')->nullable();
-            $table->date('dop')->nullable();
+            $table->string('job_title')->nullable();
+            $table->string('edu')->nullable();
+            $table->date('dob')->nullable();
             $table->string('profile_picture')->default('avatar.png');
             $table->timestamp('phone_verified_at')->nullable();
             $table->enum('gender', ['mail', 'femail'])->nullable();

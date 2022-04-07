@@ -82,24 +82,18 @@ class AuthRepository extends BaseRepository
 
         if ($user) {
             $user['access_token'] = $user->createToken('')->plainTextToken;
-            //need db teansactions
-            foreach ($request->areas as $area) {
-                $this->addUserArea($user->id, $area);
-            }
-            foreach ($request->specials as $special) {
-                $this->addUserSpecial($user->id, $special);
-            }
+            $user['full_token'] = 'Bearer '.$user['access_token'];
         }
 
         try {
             //need job
-            if (\config("app.enable_email_verification")) {
-                $user->sendEmailVerificationNotification();
-            }
-            //need job
-            if (\config("app.enable_phone_verification")) {
-                $user->sendPhoneVerificationOTP();
-            }
+            // if (\config("app.enable_email_verification")) {
+            //     $user->sendEmailVerificationNotification();
+            // }
+            // //need job
+            // if (\config("app.enable_phone_verification")) {
+            //     $user->sendPhoneVerificationOTP();
+            // }
         } catch (\Throwable $th) {
             return $user;
         }

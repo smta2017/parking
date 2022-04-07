@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\API\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\Auth\AuthRepository;
 use Illuminate\Http\Request;
@@ -114,14 +114,15 @@ class AuthController extends AppBaseController
      *          required=false,
      *          @SWG\Schema(example= 
      *               {
-     *                "name":"sameh",
-     *                "email":"sameh@test.com",
-     *                "phone":"01274200778",
-     *                "password":"password",
-     *                "firebase_token":"2986tGfr56hb5tg6r6f6",
-     *                "user_type_id":2,
-     *                "areas":{2,5,1},
-     *                "specials":{3,1,2},
+     *                  "name":"sameh",
+     *                  "email":"sameh@test.com",
+     *                  "phone":"+18542753292",
+     *                  "password":"password",
+     *                  "zone_id":2,
+     *                  "job_title":"Sheriff",
+     *                  "dob":"2001-12-12",
+     *                  "edu":"Postsecondary Education Administrators",
+     *                  "firebase_token":null,
      *               }
      *          )
      *      ),

@@ -353,7 +353,7 @@ class TransactionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="qr_code",
      *          description="qr code of Transaction",
-     *          type="integer",
+     *          type="string",
      *          required=true,
      *          in="path"
      *      ),
@@ -388,14 +388,19 @@ class TransactionAPIController extends AppBaseController
     public function getTransactionCart()
     {
         $transaction = $this->transactionRepository->getTransactionCart();
-        
+
         return $this->sendResponse(TransactionsChartResource::collection($transaction), 'Successfully');
     }
 
     public  function getLatestTransactions()
     {
-        $transaction = $this->transactionRepository->latestTransactions(["{'zone_id': 2}"]);
-        
+
+        // $zone_id = \Auth::guard('backpack')->user()->zone_id;
+        $zone_id = session('session_zone_id');
+
+        // return \phpinfo();
+        $transaction = $this->transactionRepository->latestTransactions();
+
         // return $transaction;
         return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');
     }

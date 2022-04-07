@@ -96,9 +96,10 @@ return [
     // ------
     // HEADER
     // ------
+    
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => ' <img class="brand-logo" alt="modern admin logo" src="/app-assets/images/logo/logo.png">',
+    'project_logo'   => ' <img class="brand-logo" alt="modern admin logo" src="/app-assets/images/ico/icon.png">',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
