@@ -77,6 +77,6 @@ class TransactionRepository extends BaseRepository
 
     public function latestTransactions($filter = [])
     {
-        return $this->all($filter, null, 50)->sortBy('updated_at');
+        return $this->all($filter, null, 50)->sortByDesc('updated_at');
     }
 }

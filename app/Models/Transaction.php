@@ -125,7 +125,15 @@ class Transaction extends Model
 
     public function newQuery()
     {
-        return parent::newQuery()->where('zone_id', session('session_zone_id'));
+        if (session('session_zone_id')) {
+            return parent::newQuery()->where('zone_id', session('session_zone_id'));
+        }
+
+        if (\auth()->user()->zone_id) {
+            return parent::newQuery()->where('zone_id', \auth()->user()->zone_id);
+        }
+        
+        return  parent::newQuery();
     }
 
 
