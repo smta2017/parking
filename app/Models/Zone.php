@@ -61,6 +61,7 @@ class Zone extends Model
         'name',
         'address',
         'manager',
+        'capacity',
         'phone'
     ];
 
@@ -73,6 +74,7 @@ class Zone extends Model
         'name' => 'string',
         'address' => 'string',
         'manager' => 'string',
+        'capacity' => 'integer',
         'phone' => 'string'
     ];
 

@@ -26,6 +26,7 @@ class ZoneFactory extends Factory
             'address' => $this->faker->address,
             'manager' => $this->faker->word,
             'phone' => $this->faker->word,
+            'capacity' => $this->faker->numberBetween(10,50),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

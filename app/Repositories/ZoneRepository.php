@@ -20,6 +20,7 @@ class ZoneRepository extends BaseRepository
         'name',
         'address',
         'manager',
+        'capacity',
         'phone'
     ];
 

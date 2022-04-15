@@ -20,6 +20,7 @@ class CreateZonesTable extends Migration
             $table->string('address');
             $table->string('manager');
             $table->string('phone');
+            $table->integer('capacity');
             $table->timestamps();
             $table->softDeletes();
         });
