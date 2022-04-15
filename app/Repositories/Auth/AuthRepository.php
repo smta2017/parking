@@ -63,9 +63,15 @@ class AuthRepository extends BaseRepository
      */
     public function loginUser($request)
     {
+        // login by phone or email
+        if (is_numeric($request['email'])) {
+            $request = ['phone' => $request['email'], 'password' => $request['password']];
+        }
+
         if (!auth()->attempt($request)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        
         return  ApiResponse::format("success", $this->respondWithToken(auth()->user()->createToken('')->plainTextToken));
     }
 
@@ -82,7 +88,7 @@ class AuthRepository extends BaseRepository
 
         if ($user) {
             $user['access_token'] = $user->createToken('')->plainTextToken;
-            $user['full_token'] = 'Bearer '.$user['access_token'];
+            $user['full_token'] = 'Bearer ' . $user['access_token'];
         }
 
         try {
