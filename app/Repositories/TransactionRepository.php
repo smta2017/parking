@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Transaction;
 use App\Repositories\BaseRepository;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -49,12 +50,17 @@ class TransactionRepository extends BaseRepository
     }
 
 
-    public function setCheckIn(array $input = [])
+    public function setCheckIn(Request $request)
     {
-        $input["created_by"] = auth()->user()->id;
-        $input["zone_id"] = auth()->user()->zone_id;
+        $imageName = time() . '.' . $request->plate_img->extension();
+        $request->plate_img->move(storage_path('app/public/images/plate'), $imageName);
 
-        return $this->create($input);
+        $request["created_by"] = auth()->user()->id;
+        $request["zone_id"] = auth()->user()->zone_id;
+        
+        $transaction = $this->create($request->all());
+
+        return  $this->update(['plate_img' => $imageName], $transaction->id);
     }
 
     public function setCheckOut($qr_code)

@@ -13,10 +13,10 @@ use Auth;
 class AuthController extends AppBaseController
 {
 
-  
+
     protected $auth;
 
-  
+
     public function __construct(AuthRepository $auth)
     {
         $this->middleware('auth:sanctum', ['except' => ['login', 'register']]);
@@ -107,32 +107,91 @@ class AuthController extends AppBaseController
      *          )
      *      ),
      * 
-     *  @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="CustomerAddress that should be updated",
-     *          required=false,
-     *          @SWG\Schema(example= 
-     *               {
-     *                  "name":"sameh",
-     *                  "email":"sameh@test.com",
-     *                  "phone":"+18542753292",
-     *                  "password":"password",
-     *                  "zone_id":2,
-     *                  "job_title":"Sheriff",
-     *                  "dob":"2001-12-12",
-     *                  "edu":"Postsecondary Education Administrators",
-     *                  "firebase_token":null,
-     *               }
-     *          )
+     *      @SWG\Parameter(
+     *          name="image",
+     *          description="user photo",
+     *          type="file",
+     *          required=true,
+     *          in="formData"
      *      ),
-     * 
+     *      @SWG\Parameter(
+     *             name="name",
+     *             description="name",
+     *             default="sameh",           
+     *             type="string",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="email",
+     *             description="email",
+     *             default="email@example.com",           
+     *             type="string",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="phone",
+     *             description="phone",
+     *             default="+20125655445",           
+     *             type="string",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="password",
+     *             description="password",
+     *             default="password",           
+     *             type="string",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="zone_id",
+     *             description="zone_id",
+     *             default="1",           
+     *             type="integer",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="job_title",
+     *             description="job_title",
+     *             default="job_title",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="dob",
+     *             description="Date Of Birth",
+     *             default="2020/10/10",           
+     *             type="string",
+     *             format ="date",
+     *             required=false,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="edu",
+     *             description="edu",
+     *             default="education",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="firebase_token",
+     *             description="firebase_token",
+     *             default="firebase_token",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
      * )
      */
-
-
     public function register(RegisterRequest $request)
     {
+    
         $user = $this->auth->registerUser($request);
         return  $this->sendResponse($user, "success");
     }
@@ -175,7 +234,7 @@ class AuthController extends AppBaseController
 
     public function me()
     {
-        return ApiResponse::format("sucsess",new UserResource(auth()->user()));
+        return ApiResponse::format("sucsess", new UserResource(auth()->user()));
     }
 
     /**

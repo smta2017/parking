@@ -300,15 +300,39 @@ class TransactionAPIController extends AppBaseController
      *      description="Store Transaction",
      *      security = {{"Bearer": {}}},
      *      produces={"application/json"},
+     *     
      *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Transaction that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/CheckIn"
-     *             
-     *          ),
+     *          name="plate_img",
+     *          description="plate photo",
+     *          type="file",
+     *          required=true,
+     *          in="formData"
      *      ),
+     *      @SWG\Parameter(
+     *             name="plate_number",
+     *             description="plate_number",
+     *             default="sameh",           
+     *             type="string",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="driver_name",
+     *             description="driver_name",
+     *             default="sameh",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="mobile",
+     *             description="mobile",
+     *             default="+20125655445",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
+     * 
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -332,10 +356,7 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkIn(CreateTransactionAPIRequest $request)
     {
-        $input = $request->all();
-
-        $transaction = $this->transactionRepository->setCheckIn($input);
-
+        $transaction = $this->transactionRepository->setCheckIn($request);
         return $this->sendResponse(new CheckInResource($transaction), 'CheckIn saved successfully');
     }
 
