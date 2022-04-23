@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('job_title')->nullable();
             $table->string('edu')->nullable();
             $table->date('dob')->nullable();
-            $table->string('profile_picture')->default('avatar.png');
+            $table->string('avatar')->default('avatar.png');
             $table->timestamp('phone_verified_at')->nullable();
             $table->enum('gender', ['mail', 'femail'])->nullable();
             $table->tinyInteger('sms_notification')->nullable();

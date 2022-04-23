@@ -22,7 +22,6 @@ use Illuminate\Support\Str;
  */
 class AuthRepository extends BaseRepository
 {
-
     /**
      * @return string
      */
@@ -52,6 +51,7 @@ class AuthRepository extends BaseRepository
                 'id' => auth()->user()->id,
                 'name' => auth()->user()->name,
                 'email' => auth()->user()->email,
+                'avatar' => url('') . '/images/avatar/' . auth()->user()->avatar,
             ]
         ]);
     }
@@ -71,7 +71,7 @@ class AuthRepository extends BaseRepository
         if (!auth()->attempt($request)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        
+
         return  ApiResponse::format("success", $this->respondWithToken(auth()->user()->createToken('')->plainTextToken));
     }
 
@@ -81,6 +81,12 @@ class AuthRepository extends BaseRepository
      */
     public function registerUser($request)
     {
+        $imageName = time() . '.' . $request->image->extension();
+
+        $request->image->move(storage_path('app/public/images/avatar'), $imageName);
+        $request["avatar"] = $imageName;
+
+
         $user = $this->create(array_merge(
             $request->all(),
             ['password' => Hash::make($request->password)],
@@ -89,6 +95,7 @@ class AuthRepository extends BaseRepository
         if ($user) {
             $user['access_token'] = $user->createToken('')->plainTextToken;
             $user['full_token'] = 'Bearer ' . $user['access_token'];
+            $user['avatar'] = url('') . '/images/avatar/' . $user['avatar'];
         }
 
         try {
