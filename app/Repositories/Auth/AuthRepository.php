@@ -95,7 +95,7 @@ class AuthRepository extends BaseRepository
         if ($user) {
             $user['access_token'] = $user->createToken('')->plainTextToken;
             $user['full_token'] = 'Bearer ' . $user['access_token'];
-            $user['avatar'] = url('') . '/images/avatar/' . $user['avatar'];
+            $user['avatar'] = url('') . '/storage/images/avatar/' . $user['avatar'];
         }
 
         try {
