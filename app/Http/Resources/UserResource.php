@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             'password' => $this->password,
             'phone' => $this->phone,
             'dop' => $this->dop,
-            'avatar' => url('') . '/images/avatar/' . $this->avatar,
+            'avatar' => url('') . '/storage/images/avatar/' . $this->avatar,
             'phone_verified_at' => $this->phone_verified_at,
             'gender' => $this->gender,
             'sms_notification' => $this->sms_notification,
