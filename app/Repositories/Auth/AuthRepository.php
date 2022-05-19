@@ -81,11 +81,11 @@ class AuthRepository extends BaseRepository
      */
     public function registerUser($request)
     {
-        $imageName = time() . '.' . $request->image->extension();
-
-        $request->image->move(storage_path('app/public/images/avatar'), $imageName);
-        $request["avatar"] = $imageName;
-
+        // if ($this->request->hasFile('image')) {
+        // $imageName = time() . '.' . $request->image->extension();
+        //     $request->image->move(storage_path('app/public/images/avatar'), $imageName);
+        //     $request["avatar"] = $imageName;
+        // }
 
         $user = $this->create(array_merge(
             $request->all(),

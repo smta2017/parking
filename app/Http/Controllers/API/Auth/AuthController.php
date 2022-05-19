@@ -85,8 +85,9 @@ class AuthController extends AppBaseController
      *      path="/auth/register",
      *      summary="User registration",
      *      tags={"Auth"},
-     *      description="the system users login",
+     *      consumes={"multipart/form-data, boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL"},
      *      produces={"application/json"},
+     *      description="the system users login",
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -111,7 +112,7 @@ class AuthController extends AppBaseController
      *          name="image",
      *          description="user photo",
      *          type="file",
-     *          required=true,
+     *          required=false,
      *          in="formData"
      *      ),
      *      @SWG\Parameter(
