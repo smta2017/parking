@@ -80,12 +80,13 @@ class AuthController extends AppBaseController
 
     /**
      *
+     * 
      * @param  \Illuminate\Http\Request  $request
      *  * @SWG\Post(
      *      path="/auth/register",
      *      summary="User registration",
      *      tags={"Auth"},
-     *      description="the system users login",
+     *      description="the system users login ",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,

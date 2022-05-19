@@ -61,7 +61,7 @@
                     "Auth"
                 ],
                 "summary": "User registration",
-                "description": "the system users login",
+                "description": "the system users login ",
                 "produces": [
                     "application/json"
                 ],
