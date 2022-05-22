@@ -7,9 +7,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * * @SWG\Definition(
+ *      definition="CheckIn",
+ *      required={"plate_number"},
+ *       @SWG\Property(property="plate_number", type="string", description="car plate number"),
+ *       @SWG\Property(property="plate_img", type="string", description="image of car plate"),
+ *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
+ *       @SWG\Property(property="driver_name", type="string", description="driver name"),
+ * ) 
+  
+ 
+/**
+ * @SWG\Definition(
+ *      definition="CheckOut",
+ *      required={"plate_number"},
+ *       @SWG\Property(property="plate_number", type="string", description="car plate number"),
+ *       @SWG\Property(property="plate_img", type="string", description="image of car plate"),
+ *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
+ *       @SWG\Property(property="driver_name", type="string", description="driver name"),
+ * ) 
+  
+  
  * @SWG\Definition(
  *      definition="Transaction",
- *      required={"plate_number", "plate_img"},
+ *      required={"plate_number","plate_img"},
  *      @SWG\Property(
  *          property="plate_number",
  *          description="plate_number",
@@ -19,18 +40,6 @@ use Illuminate\Database\Eloquent\Model;
  *          property="plate_img",
  *          description="plate_img",
  *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="zone_id",
- *          description="zone_id",
- *          type="integer",
- *          format="int32"
- *      ),
- *      @SWG\Property(
- *          property="created_by",
- *          description="created_by",
- *          type="integer",
- *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="out_at",
@@ -46,20 +55,9 @@ use Illuminate\Database\Eloquent\Model;
  *          property="is_bayed",
  *          description="is_bayed",
  *          type="boolean"
- *      ),
- *      @SWG\Property(
- *          property="created_at",
- *          description="created_at",
- *          type="string",
- *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="updated_at",
- *          description="updated_at",
- *          type="string",
- *          format="date-time"
  *      )
  * )
+ *
  */
 class Transaction extends Model
 {

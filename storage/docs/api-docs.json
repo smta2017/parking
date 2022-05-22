@@ -456,22 +456,6 @@
                         "required": true,
                         "type": "string",
                         "default": "sameh"
-                    },
-                    {
-                        "name": "driver_name",
-                        "in": "query",
-                        "description": "driver_name",
-                        "required": false,
-                        "type": "string",
-                        "default": "sameh"
-                    },
-                    {
-                        "name": "mobile",
-                        "in": "query",
-                        "description": "mobile",
-                        "required": false,
-                        "type": "string",
-                        "default": "+20125655445"
                     }
                 ],
                 "responses": {
@@ -828,7 +812,8 @@
         },
         "Transaction": {
             "required": [
-                "plate_number"
+                "plate_number",
+                "plate_img"
             ],
             "properties": {
                 "plate_number": {
@@ -837,14 +822,6 @@
                 },
                 "plate_img": {
                     "description": "plate_img",
-                    "type": "string"
-                },
-                "mobile": {
-                    "description": "mobile",
-                    "type": "string"
-                },
-                "driver_name": {
-                    "description": "driver_name",
                     "type": "string"
                 },
                 "out_at": {
@@ -857,7 +834,7 @@
                 },
                 "is_bayed": {
                     "description": "is_bayed",
-                    "type": "string"
+                    "type": "boolean"
                 }
             }
         },

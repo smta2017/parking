@@ -316,23 +316,6 @@ class TransactionAPIController extends AppBaseController
      *             required=true,
      *             in="query"
      *      ),
-     *         @SWG\Parameter(
-     *             name="driver_name",
-     *             description="driver_name",
-     *             default="sameh",           
-     *             type="string",
-     *             required=false,
-     *             in="query"
-     *      ),
-     *         @SWG\Parameter(
-     *             name="mobile",
-     *             description="mobile",
-     *             default="+20125655445",           
-     *             type="string",
-     *             required=false,
-     *             in="query"
-     *      ),
-     * 
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
