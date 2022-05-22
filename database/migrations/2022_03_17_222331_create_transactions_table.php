@@ -18,11 +18,9 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->string('plate_number')->nullable();
             $table->string('plate_img')->nullable();
-            $table->string('mobile')->nullable();
-            $table->string('driver_name')->nullable();
             $table->dateTime('out_at')->nullable();
             $table->string('qr_code')->nullable();
-            $table->string('is_bayed')->nullable();
+            $table->boolean('is_bayed')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('zone_id')->nullable();
             $table->timestamps();

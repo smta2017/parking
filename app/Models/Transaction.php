@@ -8,29 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @SWG\Definition(
- *      definition="CheckIn",
- *      required={"plate_number"},
- *       @SWG\Property(property="plate_number", type="string", description="car plate number"),
- *       @SWG\Property(property="plate_img", type="string", description="image of car plate"),
- *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
- *       @SWG\Property(property="driver_name", type="string", description="driver name"),
- * ) 
-  
- 
-/**
- * @SWG\Definition(
- *      definition="CheckOut",
- *      required={"plate_number"},
- *       @SWG\Property(property="plate_number", type="string", description="car plate number"),
- *       @SWG\Property(property="plate_img", type="string", description="image of car plate"),
- *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
- *       @SWG\Property(property="driver_name", type="string", description="driver name"),
- * ) 
-  
-  
- * @SWG\Definition(
  *      definition="Transaction",
- *      required={"plate_number"},
+ *      required={"plate_number", "plate_img"},
  *      @SWG\Property(
  *          property="plate_number",
  *          description="plate_number",
@@ -42,14 +21,16 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="mobile",
- *          description="mobile",
- *          type="string"
+ *          property="zone_id",
+ *          description="zone_id",
+ *          type="integer",
+ *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="driver_name",
- *          description="driver_name",
- *          type="string"
+ *          property="created_by",
+ *          description="created_by",
+ *          type="integer",
+ *          format="int32"
  *      ),
  *      @SWG\Property(
  *          property="out_at",
@@ -64,19 +45,32 @@ use Illuminate\Database\Eloquent\Model;
  *      @SWG\Property(
  *          property="is_bayed",
  *          description="is_bayed",
- *          type="string"
+ *          type="boolean"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
  *      )
  * )
  */
 class Transaction extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+
     use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'transactions';
-
+    
 
     protected $dates = ['deleted_at'];
 
@@ -85,13 +79,11 @@ class Transaction extends Model
     public $fillable = [
         'plate_number',
         'plate_img',
-        'mobile',
-        'driver_name',
+        'zone_id',
+        'created_by',
         'out_at',
         'qr_code',
-        'is_bayed',
-        'zone_id',
-        'created_by'
+        'is_bayed'
     ];
 
     /**
@@ -100,16 +92,13 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
         'plate_number' => 'string',
         'plate_img' => 'string',
-        'mobile' => 'string',
-        'driver_name' => 'string',
+        'zone_id' => 'integer',
+        'created_by' => 'integer',
         'out_at' => 'string',
         'qr_code' => 'string',
-        'is_bayed' => 'string',
-        'zone_id' => 'integer',
-        'created_by' => 'integer'
+        'is_bayed' => 'boolean'
     ];
 
     /**
@@ -118,7 +107,8 @@ class Transaction extends Model
      * @var array
      */
     public static $rules = [
-        'plate_number' => 'required'
+        'plate_number' => 'required',
+        'plate_img' => 'required'
     ];
 
 

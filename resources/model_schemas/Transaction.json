@@ -26,8 +26,8 @@
         "inView": true
     },
     {
-        "name": "mobile",
-        "dbType": "string",
+        "name": "zone_id",
+        "dbType": "integer",
         "htmlType": "",
         "validations": "",
         "searchable": false,
@@ -38,8 +38,8 @@
         "inView": true
     },
     {
-        "name": "driver_name",
-        "dbType": "string",
+        "name": "created_by",
+        "dbType": "integer",
         "htmlType": "",
         "validations": "",
         "searchable": false,
@@ -75,7 +75,7 @@
     },
     {
         "name": "is_bayed",
-        "dbType": "string",
+        "dbType": "boolean",
         "htmlType": "",
         "validations": "",
         "searchable": false,
