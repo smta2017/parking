@@ -21,6 +21,7 @@ class CreateZonesTable extends Migration
             $table->string('manager');
             $table->string('phone');
             $table->integer('capacity');
+            $table->float('hour_rate');
             $table->timestamps();
             $table->softDeletes();
         });

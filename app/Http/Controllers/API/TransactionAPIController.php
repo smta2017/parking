@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\CheckInResource;
 use App\Http\Resources\CheckOutResource;
+use App\Http\Resources\TransactionCollectResource;
 use App\Http\Resources\TransactionResource;
 use App\Http\Resources\TransactionsChartResource;
 use Response;
@@ -389,6 +390,16 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut saved successfully');
     }
 
+   
+    public function actualCollect(Request $request)
+    {
+        // return $request->all();
+        $transaction = $this->transactionRepository->setActualCollect($request);
+
+        return $this->sendResponse(TransactionCollectResource::collection($transaction), 'Successfully');
+
+    }
+
     public function getTransactionCart()
     {
         $transaction = $this->transactionRepository->getTransactionCart();
@@ -396,16 +407,18 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse(TransactionsChartResource::collection($transaction), 'Successfully');
     }
 
-    public  function getLatestTransactions()
+    public function getLatestTransactions()
     {
-
-        // $zone_id = \Auth::guard('backpack')->user()->zone_id;
-        $zone_id = session('session_zone_id');
-
-        // return \phpinfo();
         $transaction = $this->transactionRepository->latestTransactions();
 
-        // return $transaction;
         return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');
+    }
+
+
+    public function getDashboardInfo()
+    {
+        return $transaction = $this->transactionRepository->dashboardInfo();
+
+        // return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');
     }
 }

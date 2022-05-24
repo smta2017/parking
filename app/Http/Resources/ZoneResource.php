@@ -20,8 +20,8 @@ class ZoneResource extends JsonResource
             'address' => $this->address,
             'manager' => $this->manager,
             'phone' => $this->phone,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'capacity' => $this->capacity,
+            'hour_rate' => $this->hour_rate
         ];
     }
 }

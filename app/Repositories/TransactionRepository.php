@@ -12,16 +12,14 @@ use Illuminate\Support\Facades\DB;
  * Class TransactionRepository
  * @package App\Repositories
  * @version May 22, 2022, 4:08 pm UTC
-*/
+ */
 
 class TransactionRepository extends BaseRepository
 {
     /**
      * @var array
      */
-    protected $fieldSearchable = [
-        
-    ];
+    protected $fieldSearchable = [];
 
     /**
      * Return searchable fields
@@ -49,7 +47,7 @@ class TransactionRepository extends BaseRepository
 
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
-        
+
         $transaction = $this->create($request->all());
 
         return  $this->update(['plate_img' => $imageName], $transaction->id);
@@ -60,10 +58,14 @@ class TransactionRepository extends BaseRepository
         return $this->update(['out_at' => Carbon::now()->toDateTimeString()], $qr_code);
     }
 
+
+    public function setActualCollect(Request $request)
+    {
+        return $this->update(['is_payed' => $request['collected']], $request['qr_code']);
+    }
+
     public function getTransactionCart()
     {
-        // $transaction = Transaction::orderBy('updated_at')->get();
-
         $transaction = Transaction::select(DB::raw('count(*) as orders, DATE(created_at) day'))
             ->groupBy('day')
             ->orderBy('day')
@@ -77,4 +79,23 @@ class TransactionRepository extends BaseRepository
     {
         return $this->all($filter, null, 50)->sortByDesc('updated_at');
     }
+
+
+    public function currentDayProfit()
+    {
+        $total_day_profit = Transaction::whereDate('created_at', Carbon::today())->count();
+        return $total_day_profit;
+    }
+    public function dashboardInfo()
+    {
+        return $this->currentDayProfit();
+    }
+    // public function dashboardInfo()
+    // {
+    //     return ;
+    // }
+    // public function dashboardInfo()
+    // {
+    //     return ;
+    // }
 }

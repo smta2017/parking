@@ -840,9 +840,9 @@
                     "description": "qr_code",
                     "type": "string"
                 },
-                "is_bayed": {
-                    "description": "is_bayed",
-                    "type": "boolean"
+                "is_payed": {
+                    "description": "is_payed",
+                    "type": "string"
                 }
             }
         },

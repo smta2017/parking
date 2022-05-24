@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->string('plate_img')->nullable();
             $table->dateTime('out_at')->nullable();
             $table->string('qr_code')->nullable();
-            $table->boolean('is_bayed')->nullable();
+            $table->float('is_payed')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('zone_id')->nullable();
             $table->timestamps();

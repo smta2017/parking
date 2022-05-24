@@ -42,7 +42,7 @@
         "validations": ""
     },
     {
-        "name": "is_bayed",
+        "name": "is_payed",
         "dbType": "string",
         "validations": ""
     },

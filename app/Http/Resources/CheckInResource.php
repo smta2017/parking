@@ -19,6 +19,7 @@ class CheckInResource extends JsonResource
             'plate_number' => $this->plate_number,
             'plate_img' => url('') . '/storage/images/plate/' . $this->plate_img,
             'zone' => $this->Zone['name'],
+            'hour_rate' => $this->Zone['hour_rate'],
             'mobile' => $this->mobile,
             'driver_name' => $this->driver_name,
             'qr_code' => "$this->id",

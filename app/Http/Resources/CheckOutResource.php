@@ -29,10 +29,10 @@ class CheckOutResource extends JsonResource
             'checkout' => $this->out_at,
             'total_time' => [
                 'days' => $diff_time2->days,
-                'hours' => $diff_time2->h . ':' . $diff_time2->i,
+                'hours' => $diff_time2->h . ':' . $diff_time2->i . ':' . $diff_time2->s,
             ],
-            'hour_rate' => 5,
-            'amount' => ($diff_time / 60) * 5,
+            'hour_rate' => $this->Zone['hour_rate'],
+            'amount' => round(($diff_time / 60) * ($this->Zone['hour_rate']), 2),
             'created_by' => new UserMiniResource($this->User),
         ];
     }

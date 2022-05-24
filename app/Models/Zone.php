@@ -62,6 +62,7 @@ class Zone extends Model
         'address',
         'manager',
         'capacity',
+        'hour_rate',
         'phone'
     ];
 
@@ -75,6 +76,7 @@ class Zone extends Model
         'address' => 'string',
         'manager' => 'string',
         'capacity' => 'integer',
+        'hour_rate' => 'float',
         'phone' => 'string'
     ];
 

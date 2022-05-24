@@ -45,7 +45,7 @@ class TransactionCrudController extends CrudController
         CRUD::column('mobile');
         // CRUD::column('out_at');
         // CRUD::column('qr_code');
-        // CRUD::column('is_bayed');
+        // CRUD::column('is_payed');
         CRUD::column('created_by');
         CRUD::column('created_at');
 
@@ -72,7 +72,7 @@ class TransactionCrudController extends CrudController
         CRUD::field('driver_name');
         CRUD::field('out_at');
         CRUD::field('qr_code');
-        CRUD::field('is_bayed');
+        CRUD::field('is_payed');
         CRUD::field('created_by');
 
         /**

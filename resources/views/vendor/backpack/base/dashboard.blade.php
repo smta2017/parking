@@ -1,19 +1,5 @@
 @extends(backpack_view('blank'))
-<?php
 
-use App\Http\Controllers\API\TransactionAPIController;
-use App\Repositories\TransactionRepository;
-use Illuminate\Container\Container;
-
-session(['session_zone_id' => 1]);
-
-
-$transaction = new TransactionAPIController(new TransactionRepository(new Container()));
-$transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
-
-// dd( $transactions);
-
-?>
 
 @php
 $widgets['before_content'][] = [
@@ -24,7 +10,7 @@ $widgets['before_content'][] = [
 'description' => 'Today Orders.',
 'progress' => 57, // integer,
 'icon' => 'icon-list',
-'progressClass' => 'info'
+'progressClass' => 'blue-grey'
 ];
 $widgets['before_content'][] = [
 'type' => 'progress',
@@ -34,7 +20,7 @@ $widgets['before_content'][] = [
 'description' => 'Today Orders.',
 'progress' => 57, // integer,
 'icon' => 'icon-list',
-'progressClass' => 'info'
+'progressClass' => 'blue-grey'
 ];
 $widgets['before_content'][] = [
 'type' => 'progress',
@@ -44,13 +30,13 @@ $widgets['before_content'][] = [
 'description' => 'Today Orders.',
 'progress' => 57, // integer,
 'icon' => 'icon-list',
-'progressClass' => 'info'
+'progressClass' => 'blue-grey'
 ];
 
 $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-danger mb-2',
+'class' => 'card text-white bg-darck mb-2',
 'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
 'description' => 'Today Orders.',
 'progress' => 57, // integer,
@@ -84,7 +70,7 @@ $widgets['before_content'][] = [
 'value' => '1290',
 'description' => 'Earns.',
 'progress' => 57, // integer,
-'icon' => 'icon-credit-card',
+'icon' => 'icon-doler',
 'progressClass' => 'danger'
 ];
 
@@ -121,7 +107,7 @@ $widgets['before_content'][] = [
                             @foreach ($transactions as $transaction)
                             <tr>
                                 <td class="text-truncate">
-                                    <span style="font-size: 3px;">{{$transaction->zone_id}}</span>
+                                    <span style="font-size: 3px;">{{$transaction->zone}}</span>
                                     <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
                                 </td>
                                 <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>

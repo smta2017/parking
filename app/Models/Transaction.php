@@ -52,9 +52,9 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="is_bayed",
- *          description="is_bayed",
- *          type="boolean"
+ *          property="is_payed",
+ *          description="is_payed",
+ *          type="string"
  *      )
  * )
  *
@@ -81,7 +81,7 @@ class Transaction extends Model
         'created_by',
         'out_at',
         'qr_code',
-        'is_bayed'
+        'is_payed'
     ];
 
     /**
@@ -96,7 +96,7 @@ class Transaction extends Model
         'created_by' => 'integer',
         'out_at' => 'string',
         'qr_code' => 'string',
-        'is_bayed' => 'boolean'
+        'is_payed' => 'float'
     ];
 
     /**
