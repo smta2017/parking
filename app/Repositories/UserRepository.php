@@ -22,6 +22,7 @@ class UserRepository extends BaseRepository
         'email_verified_at',
         'password',
         'phone',
+        'national_id',
         'dop',
         'profile_picture',
         'phone_verified_at',

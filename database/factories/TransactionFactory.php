@@ -24,8 +24,6 @@ class TransactionFactory extends Factory
         return [
             'plate_number' => $this->faker->word,
             'plate_img' => $this->faker->word,
-            'mobile' => $this->faker->phoneNumber,
-            'driver_name' => $this->faker->name(),
             'out_at' => $this->faker->randomElement([$this->faker->dateTimeBetween($startDate = '0 days', $endDate = '2 hours', $timezone = null), null]),
             'qr_code' => $this->faker->randomDigitNotNull,
             'is_bayed' => $this->faker->randomDigitNotNull,

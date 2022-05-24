@@ -18,6 +18,7 @@ $transactions = json_decode(json_encode($transaction->getLatestTransactions()))-
 @php
 $widgets['before_content'][] = [
 'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-6',
 'class' => 'card text-white bg-danger mb-2',
 'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
 'description' => 'Today Orders.',
@@ -27,15 +28,48 @@ $widgets['before_content'][] = [
 ];
 $widgets['before_content'][] = [
 'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
+'class' => 'card text-white bg-danger mb-2',
+'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
+'description' => 'Today Orders.',
+'progress' => 57, // integer,
+'icon' => 'icon-list',
+'progressClass' => 'info'
+];
+$widgets['before_content'][] = [
+'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
+'class' => 'card text-white bg-danger mb-2',
+'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
+'description' => 'Today Orders.',
+'progress' => 57, // integer,
+'icon' => 'icon-list',
+'progressClass' => 'info'
+];
+
+$widgets['before_content'][] = [
+'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
+'class' => 'card text-white bg-danger mb-2',
+'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
+'description' => 'Today Orders.',
+'progress' => 57, // integer,
+'icon' => 'icon-list',
+'progressClass' => 'info'
+];
+$widgets['before_content'][] = [
+'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-primary mb-2',
-'value' =>  \App\Models\Transaction::whereNull('out_at')->count(),
+'value' => \App\Models\Transaction::whereNull('out_at')->count(),
 'description' => 'Busy.',
 'progress' => 57, // integer,
 'icon' => 'icon-hourglass',
 'progressClass' => 'warning'
 ];
 $widgets['before_content'][] = [
-    'type' => 'progress',
+'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-danger mb-2',
 'value' => \App\Models\Transaction::whereNotNull('out_at')->whereDate('created_at',date('Y/m/d'))->count(),
 'description' => 'Check Out.',
@@ -45,6 +79,7 @@ $widgets['before_content'][] = [
 ];
 $widgets['before_content'][] = [
 'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-danger mb-2',
 'value' => '1290',
 'description' => 'Earns.',
@@ -56,6 +91,85 @@ $widgets['before_content'][] = [
 @endphp
 
 @section('content')
+
+<!-- Recent Transactions -->
+<div class="row">
+    <div id="recent-transactions" class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{__("dashboard.recent_transactions")}}</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <!-- <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right" href="invoice-summary.html" target="_blank">Invoice Summary</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="table-responsive">
+                    <table id="recent-orders" class="table table-hover table-xl mb-0">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">{{__("dashboard.user")}}</th>
+                                <th class="border-top-0">{{__("dashboard.plate_number")}}</th>
+                                <th class="border-top-0">{{__("dashboard.status")}}</th>
+                                <th class="border-top-0">{{__("dashboard.reservation")}}</th>
+                                <th class="border-top-0">{{__("dashboard.amount")}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($transactions as $transaction)
+                            <tr>
+                                <td class="text-truncate">
+                                    <span style="font-size: 3px;">{{$transaction->zone_id}}</span>
+                                    <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
+                                </td>
+                                <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
+
+                                <td>
+                                    @if ($transaction->checkout)
+                                    <button type="button" class="btn btn-sm btn-outline-success round">{{__("dashboard.checkout")}}</button>
+                                    @else
+                                    <button type="button" class="btn btn-sm btn-outline-danger round">{{__("dashboard.checkin")}}</button>
+                                    @endif
+                                    <br>
+                                    <span style="font-size: 14px;">{{__("dashboard.checkin")}}: {{$transaction->checkin}}</span> <br>
+                                    <span style="font-size: 14px;">{{__("dashboard.checkout")}}: {{$transaction->checkout}}</span>
+                                </td>
+                                <td>
+                                    @if (!$transaction->checkout)
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: {{explode(':',$transaction->total_time->hours)[0]}}%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="25"></div>
+                                    </div>
+                                    <span style="font-size: 11px;">{{$transaction->checkin_hu}}</span>
+                                    @else
+                                    <span class="badge badge badge-success">{{$transaction->total_time->hours}}</span>
+                                    @endif
+                                </td>
+
+                                <td class="text-truncate">
+                                    @if (!$transaction->checkout)
+                                    <i class="la la-clock"></i>
+                                    @else
+                                    <span>{{round($transaction->amount, 2)}}</span>
+                                    @endif
+
+
+
+                                </td>
+                            </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Recent Transactions -->
+
 <!-- Products sell and New Orders -->
 <div class="row match-height">
     <div class="col-xl-12 col-12" id="ecommerceChartView">
@@ -94,94 +208,6 @@ $widgets['before_content'][] = [
           </div> -->
 </div>
 <!--/ Products sell and New Orders -->
-
-
-
-
-<!-- Recent Transactions -->
-<div class="row">
-    <div id="recent-transactions" class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Recent Transactions</h4>
-                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right" href="invoice-summary.html" target="_blank">Invoice Summary</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="table-responsive">
-                    <table id="recent-orders" class="table table-hover table-xl mb-0">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">User</th>
-                                <th class="border-top-0">Plate #</th>
-                                <th class="border-top-0">Customer</th>
-                                <th class="border-top-0">Phone</th>
-                                <th class="border-top-0">Status</th>
-                                <th class="border-top-0">Reservation</th>
-                                <th class="border-top-0">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($transactions as $transaction)
-                            <tr>
-                                <td class="text-truncate">
-                                <span style="font-size: 3px;">{{$transaction->zone_id}}</span>
-                                <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span></td>
-                                <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
-                                <td class="text-truncate">
-                                    <!-- <span class="avatar avatar-xs">
-                                            <img class="box-shadow-2" src="../../../app-assets/images/portrait/small/avatar-s-4.png" alt="avatar">
-                                        </span> -->
-                                    <span>{{$transaction->driver_name}}.</span>
-                                </td>
-                                <td class="text-truncate p-1">
-                                    <span>{{$transaction->mobile}}.</span>
-
-                                </td>
-                                <td>
-                                    @if ($transaction->checkout)
-                                    <button type="button" class="btn btn-sm btn-outline-success round">Checked Out</button>
-                                    @else
-                                    <button type="button" class="btn btn-sm btn-outline-danger round">Checked In</button>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if (!$transaction->checkout)
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: {{explode(':',$transaction->total_time->hours)[0]}}%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="25"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">{{$transaction->checkin_hu}}</span>
-                                    @else
-                                    <span class="badge badge badge-success">{{$transaction->total_time->hours}}</span>
-                                    @endif
-                                </td>
-
-                                <td class="text-truncate">
-                                @if (!$transaction->checkout)
-                                      <i class="la la-clock"></i>
-                                    @else
-                                        <span>{{round($transaction->amount, 2)}}</span>
-                                    @endif
-                                    
-                                 
-                                
-                                </td>
-                            </tr>
-                            @endforeach
-
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--/ Recent Transactions -->
 
 @endsection
 

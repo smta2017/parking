@@ -143,6 +143,7 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'phone',
+        'national_id',
         'dob',
         'avatar',
         'phone_verified_at',
@@ -191,11 +192,12 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users',
+        'email' => 'email|max:255|unique:users',
         'email_verified_at' => 'nullable',
         // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'password' => 'required|string|max:255',
         'phone' => 'nullable|string|unique:users|max:255',
+        'national_id' => 'nullable|string|unique:users|max:255',
         'dob' => 'nullable',
         'phone_verified_at' => 'nullable',
         'gender' => 'nullable|string',

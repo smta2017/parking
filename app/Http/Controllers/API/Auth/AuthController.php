@@ -128,13 +128,21 @@ class AuthController extends AppBaseController
      *             description="email",
      *             default="email@example.com",           
      *             type="string",
-     *             required=true,
+     *             required=false,
      *             in="query"
      *      ),
      *         @SWG\Parameter(
      *             name="phone",
      *             description="phone",
      *             default="+20125655445",           
+     *             type="string",
+     *             required=true,
+     *             in="query"
+     *      ),
+     *         @SWG\Parameter(
+     *             name="national_id",
+     *             description="national card id",
+     *             default="234567890456",           
      *             type="string",
      *             required=true,
      *             in="query"
@@ -192,7 +200,6 @@ class AuthController extends AppBaseController
      */
     public function register(RegisterRequest $request)
     {
-    
         $user = $this->auth->registerUser($request);
         return  $this->sendResponse($user, "success");
     }

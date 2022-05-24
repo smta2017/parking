@@ -88,7 +88,7 @@
                         "name": "email",
                         "in": "query",
                         "description": "email",
-                        "required": true,
+                        "required": false,
                         "type": "string",
                         "default": "email@example.com"
                     },
@@ -99,6 +99,14 @@
                         "required": true,
                         "type": "string",
                         "default": "+20125655445"
+                    },
+                    {
+                        "name": "national_id",
+                        "in": "query",
+                        "description": "national card id",
+                        "required": true,
+                        "type": "string",
+                        "default": "234567890456"
                     },
                     {
                         "name": "password",
