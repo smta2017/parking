@@ -22,7 +22,7 @@ class CheckOutResource extends JsonResource
             'plate_img' => url('') . '/storage/images/plate/' . $this->plate_img,
             'mobile' => $this->mobile,
             'driver_name' => $this->driver_name,
-            'zone_id' => $this->zone_id,
+            'zone' => $this->Zone['name'],
             'qr_code' => "$this->id",
             'checkin' => $this->created_at->format('Y-m-d H:i'),
             'checkin_hu' => $this->created_at->diffForHumans(),
