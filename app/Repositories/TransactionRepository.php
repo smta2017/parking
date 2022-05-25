@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Transaction;
+use App\Models\Zone;
 use App\Repositories\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -80,22 +81,51 @@ class TransactionRepository extends BaseRepository
         return $this->all($filter, null, 50)->sortByDesc('updated_at');
     }
 
-
-    public function currentDayProfit()
+    public function currentDayCollected()
     {
-        $total_day_profit = Transaction::whereDate('created_at', Carbon::today())->count();
+        $total_day_profit = Transaction::whereDate('created_at', Carbon::today())->sum('is_payed');
         return $total_day_profit;
     }
+
+    public function currentDayCheckInCount()
+    {
+        $check_in_count = Transaction::whereDate('created_at', Carbon::today())->count();
+        return $check_in_count;
+    }
+
+    public function currentDayCheckOutCount()
+    {
+        $check_out_count = Transaction::whereDate('out_at', Carbon::today())->count();
+        return $check_out_count;
+    }
+    public function totalReserved()
+    {
+        $total_transaction_count = Transaction::count();
+        $total_inside = Transaction::whereNull('out_at')->count();
+        return $total_transaction_count - $total_inside;
+    }
+
+    public function available()
+    {
+        $inside = $this->totalReserved();
+        return Zone::zoneCapacity() - $inside;
+    }
+
+    public function reserved_persntage()
+    {
+        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100,1);
+    }
+
     public function dashboardInfo()
     {
-        return $this->currentDayProfit();
+        return [
+            'current_day_collected' => $this->currentDayCollected(),
+            'current_day_checkIn_count' => $this->currentDayCheckInCount(),
+            'current_day_checkOut_count' => $this->currentDayCheckOutCount(),
+            'capacity' => Zone::zoneCapacity(),
+            'available' => $this->available(),
+            'total_reserved' => $this->totalReserved(),
+            'reserved_persntage' => $this->reserved_persntage(),
+        ];
     }
-    // public function dashboardInfo()
-    // {
-    //     return ;
-    // }
-    // public function dashboardInfo()
-    // {
-    //     return ;
-    // }
 }

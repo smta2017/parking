@@ -89,10 +89,9 @@ class Zone extends Model
         'name' => 'required'
     ];
 
-    
-    public function Zone()
+    public  function scopeZoneCapacity($query)
     {
-        return $this->hasMany(\App\Models\Zone::class, 'zone_id', 'id');
+        return $query->find(session('session_zone_id'))->capacity;
     }
 
 }

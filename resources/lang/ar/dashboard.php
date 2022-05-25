@@ -1,19 +1,31 @@
 <?php
 
-return[
+return [
 
     'plate_number' => 'اللوحات',
     'checkin' => 'دخول',
     'checkout' => 'خروج',
 
+    'dashboard' => 'لوحة القيادة',
+    'transactions' => 'الحجوزات',
 
-    'recent_transactions'=>'',
-    'user'=>'اسم الموظف',
-    'status'=>'الحالة',
-    'reservation'=>'مدة الانتطار',
-    'amount'=>'التكلفة',
+    'authentication' => 'الازونات',
+    'users' => 'المستخدمين',
+    'roles' => 'الصلاحيات',
+    'permissions' => 'الاوزنات',
 
-
+    'recent_transactions' => '',
+    'user' => 'اسم الموظف',
+    'status' => 'الحالة',
+    'reservation' => 'مدة الانتطار',
+    'amount' => 'التكلفة',
+    'collected_day' => 'ربح اليوم',
+    'totalReserved' => 'محجوز',
+    'available' => 'شاغر',
+    'current_day_checkIn_count' => 'دخول',
+    'current_day_checkOut_count' => 'خروج',
+    'reserved_persntage' => 'نسبة الاشغال',
+    'capacity' => 'عدد السيارات',
 
 
 

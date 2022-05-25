@@ -192,7 +192,7 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'email|max:255|unique:users',
+        // 'email' => 'email|max:255|unique:users',
         'email_verified_at' => 'nullable',
         // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'password' => 'required|string|max:255',

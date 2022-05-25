@@ -39,17 +39,8 @@ class AdminController extends Controller
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
         $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
         $this->data['transactions'] = $transactions;
+        $this->data['dashboardInfo'] = $transaction->getDashboardInfo();
 
-    //    return $today_profit= $transaction->getDashboardInfo();
-        // $check_in_count=;
-        // $check_out_count=;
-
-        // $this->data['today_profit'] = $today_profit;
-
-
-        // return $today_profit;
-        // $this->data['check_in_count'] = $check_in_count;
-        // $this->data['check_out_count'] = $check_out_count;
         return view(backpack_view('dashboard'), $this->data);
     }
 

@@ -6,30 +6,32 @@ $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-6',
 'class' => 'card text-white bg-danger mb-2',
-'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
-'description' => 'Today Orders.',
+'value' => $dashboardInfo['current_day_collected'],
+'description' => __("dashboard.collected_day"),
 'progress' => 57, // integer,
-'icon' => 'icon-list',
-'progressClass' => 'blue-grey'
+'icon' => 'icon-credit-card',
+'progressClass' => 'danger'
 ];
+
 $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-danger mb-2',
-'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
-'description' => 'Today Orders.',
+'value' => $dashboardInfo['total_reserved'],
+'description' => __("dashboard.totalReserved"),
 'progress' => 57, // integer,
-'icon' => 'icon-list',
+'icon' => 'la la-battery-full',
 'progressClass' => 'blue-grey'
 ];
+
 $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-danger mb-2',
-'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
-'description' => 'Today Orders.',
+'value' => $dashboardInfo['available'],
+'description' => __("dashboard.available"),
 'progress' => 57, // integer,
-'icon' => 'icon-list',
+'icon' => 'la la-battery-empty',
 'progressClass' => 'blue-grey'
 ];
 
@@ -37,41 +39,44 @@ $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-darck mb-2',
-'value' => \App\Models\Transaction::whereDate('created_at',date('Y/m/d'))->count(),
-'description' => 'Today Orders.',
+'value' => $dashboardInfo['current_day_checkIn_count'],
+'description' => __("dashboard.current_day_checkIn_count"),
 'progress' => 57, // integer,
-'icon' => 'icon-list',
+'icon' => 'icon-arrow-down',
 'progressClass' => 'info'
 ];
+
 $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-primary mb-2',
-'value' => \App\Models\Transaction::whereNull('out_at')->count(),
-'description' => 'Busy.',
-'progress' => 57, // integer,
-'icon' => 'icon-hourglass',
-'progressClass' => 'warning'
-];
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-danger mb-2',
-'value' => \App\Models\Transaction::whereNotNull('out_at')->whereDate('created_at',date('Y/m/d'))->count(),
-'description' => 'Check Out.',
+'value' => $dashboardInfo['current_day_checkOut_count'],
+'description' => __("dashboard.current_day_checkOut_count"),
 'progress' => 57, // integer,
 'icon' => 'icon-arrow-up',
-'progressClass' => 'success'
+'progressClass' => 'warning'
 ];
+
 $widgets['before_content'][] = [
 'type' => 'progress',
 'wrapperClass' => 'col-sm-6 col-lg-3',
 'class' => 'card text-white bg-danger mb-2',
-'value' => '1290',
-'description' => 'Earns.',
+'value' => $dashboardInfo['reserved_persntage'].'%',
+'description' => __("dashboard.reserved_persntage") ,
+'progress' => $dashboardInfo['reserved_persntage'], // integer,
+'icon' => 'icon-hourglass',
+'progressClass' => 'success'
+];
+
+$widgets['before_content'][] = [
+'type' => 'progress',
+'wrapperClass' => 'col-sm-6 col-lg-3',
+'class' => 'card text-white bg-danger mb-2',
+'value' => $dashboardInfo['capacity'],
+'description' => __("dashboard.capacity"),
 'progress' => 57, // integer,
-'icon' => 'icon-doler',
-'progressClass' => 'danger'
+'icon' => 'la la-car',
+'progressClass' => 'primary'
 ];
 
 @endphp
