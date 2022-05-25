@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'email_verified_at' => $this->email_verified_at,
             'password' => $this->password,
             'phone' => $this->phone,
+            'zone_id' => $this->zone_id,
             'national_id' => $this->national_id,
             'dop' => $this->dop,
             'avatar' => url('') . '/storage/images/avatar/' . $this->avatar,

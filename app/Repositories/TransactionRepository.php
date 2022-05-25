@@ -110,19 +110,20 @@ class TransactionRepository extends BaseRepository
     public function totalReserved()
     {
         $total_transaction_count = Transaction::count();
+
         $total_inside = Transaction::whereNull('out_at')->count();
-        return $total_transaction_count - $total_inside;
+        return    $total_inside;
     }
 
     public function available()
     {
-        $inside = $this->totalReserved();
-        return Zone::zoneCapacity() - $inside;
+        $avilable =Zone::zoneCapacity() - $this->totalReserved();
+        return $avilable;
     }
 
     public function reserved_persntage()
     {
-        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
+        return 10;//\round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
     }
 
     public function dashboardInfo()
