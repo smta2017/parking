@@ -42,18 +42,7 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
         });
 
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => \Hash::make('password'),
-            'email_verified_at' => Carbon::now(),
-            'phone' => '+201274200778',
-            'is_admin' => 1,
-            'zone_id' => 1,
-            'created_at' => '2022-03-19 19:18:23',
-            'updated_at' => '2022-03-19 19:18:23'
-
-        ]);
+       
     }
 
     /**
