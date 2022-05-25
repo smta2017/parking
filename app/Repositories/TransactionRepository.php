@@ -123,7 +123,7 @@ class TransactionRepository extends BaseRepository
 
     public function reserved_persntage()
     {
-        return 10;//\round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
+        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
     }
 
     public function dashboardInfo()
