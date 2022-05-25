@@ -59,6 +59,14 @@ class TransactionRepository extends BaseRepository
         return $this->update(['out_at' => Carbon::now()->toDateTimeString()], $qr_code);
     }
 
+    public function setCheckOutByPlate($plate)
+    {
+        $transaction = Transaction::where('plate_number', $plate)->first();
+        $transaction->out_at = Carbon::now()->toDateTimeString();
+        $transaction->update();
+        return $transaction;
+    }
+
 
     public function setActualCollect(Request $request)
     {
@@ -113,7 +121,7 @@ class TransactionRepository extends BaseRepository
 
     public function reserved_persntage()
     {
-        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100,1);
+        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 1);
     }
 
     public function dashboardInfo()

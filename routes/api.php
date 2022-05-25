@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('checkin', [TransactionAPIController::class, 'checkIn']);
         Route::post('checkout/{qr_code?}', [TransactionAPIController::class, 'checkOut']);        
         Route::put('collect', [TransactionAPIController::class, 'actualCollect']);        
+        Route::post('checkout-plate/{plate}', [TransactionAPIController::class, 'checkOutByPlate']);        
     });
     Route::resource('transactions', TransactionAPIController::class);
 });

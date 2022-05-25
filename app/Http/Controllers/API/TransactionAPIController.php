@@ -390,6 +390,52 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut saved successfully');
     }
 
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/transactions/checkout-plate/{plate}",
+     *      summary="Set checkout for Transaction",
+     *      tags={"Mobile-Api"},
+     *      security = {{"Bearer": {}}},
+     *      description="Get Transaction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="plate",
+     *          description="plate number of Transaction",
+     *          type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckOut"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkOutByPlate($plate)
+    {
+        $transaction = $this->transactionRepository->setCheckOutByPlate($plate);
+
+        return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut by plate saved successfully');
+    }
+
    
     public function actualCollect(Request $request)
     {
