@@ -163,14 +163,14 @@ $widgets['before_content'][] = [
 
 <!-- Products sell and New Orders -->
 <div class="row match-height">
-    <div class="col-xl-12 col-12" id="ecommerceChartView">
+    <div class="col-xl-12 col-4" id="ecommerceChartView">
         <div class="card card-shadow">
             <div class="card-header card-header-transparent py-20">
 
                 <ul class="nav nav-pills nav-pills-rounded chart-action float-right btn-group" role="group">
-                    <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay">Day</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">Week</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">Month</a></li>
+                    <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay">{{__('dashboard.day')}}</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">{{__('dashboard.week')}}</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">{{__('dashboard.month')}}</a></li>
                 </ul>
             </div>
             <div class="widget-content tab-content bg-white p-20">

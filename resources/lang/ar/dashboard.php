@@ -26,7 +26,9 @@ return [
     'current_day_checkOut_count' => 'خروج',
     'reserved_persntage' => 'نسبة الاشغال',
     'capacity' => 'عدد السيارات',
-
+    'day' => 'يوم',
+    'week' => 'اسبوع',
+    'month' => 'شهر',
 
 
 ];

@@ -56,7 +56,8 @@ class TransactionRepository extends BaseRepository
 
     public function setCheckOut($qr_code)
     {
-        return $this->update(['out_at' => Carbon::now()->toDateTimeString()], $qr_code);
+     
+        return $this->update(['is_payed' =>  10, 'out_at' => Carbon::now()->toDateTimeString()], $qr_code);
     }
 
     public function setCheckOutByPlate($plate)
@@ -121,7 +122,7 @@ class TransactionRepository extends BaseRepository
 
     public function reserved_persntage()
     {
-        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 1);
+        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
     }
 
     public function dashboardInfo()

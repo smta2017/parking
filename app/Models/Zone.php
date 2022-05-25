@@ -94,4 +94,9 @@ class Zone extends Model
         return $query->find(session('session_zone_id'))->capacity;
     }
 
+    public  function scopeHourRate($query)
+    {
+        return $query->find(session('session_zone_id'))->hour_rate;
+    }
+
 }

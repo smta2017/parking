@@ -32,7 +32,7 @@ class CheckOutResource extends JsonResource
                 'hours' => $diff_time2->h . ':' . $diff_time2->i . ':' . $diff_time2->s,
             ],
             'hour_rate' => $this->Zone['hour_rate'],
-            'amount' => round(($diff_time / 60) * ($this->Zone['hour_rate']), 2),
+            'amount' => $this->is_payed, //round(($diff_time / 60) * ($this->Zone['hour_rate']), 2),
             'created_by' => new UserMiniResource($this->User),
         ];
     }
