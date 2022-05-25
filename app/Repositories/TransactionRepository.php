@@ -56,7 +56,6 @@ class TransactionRepository extends BaseRepository
 
     public function setCheckOut($qr_code)
     {
-     
         return $this->update(['is_payed' =>  10, 'out_at' => Carbon::now()->toDateTimeString()], $qr_code);
     }
 
@@ -64,6 +63,7 @@ class TransactionRepository extends BaseRepository
     {
         $transaction = Transaction::where('plate_number', $plate)->first();
         $transaction->out_at = Carbon::now()->toDateTimeString();
+        $transaction->is_payed = 10;
         $transaction->update();
         return $transaction;
     }
