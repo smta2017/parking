@@ -20,7 +20,7 @@ $widgets['before_content'][] = [
 'value' => $dashboardInfo['total_reserved'],
 'description' => __("dashboard.totalReserved"),
 'progress' => 57, // integer,
-'icon' => 'la la-battery-full',
+'icon' => 'la la-battery-half',
 'progressClass' => 'blue-grey'
 ];
 
