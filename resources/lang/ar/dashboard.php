@@ -29,6 +29,7 @@ return [
     'day' => 'يوم',
     'week' => 'اسبوع',
     'month' => 'شهر',
+    'plate_image' => 'اللوحة',
 
 
 ];

@@ -102,6 +102,7 @@ $widgets['before_content'][] = [
                         <thead>
                             <tr>
                                 <th class="border-top-0">{{__("dashboard.user")}}</th>
+                                <th class="border-top-0">{{__("dashboard.plate_image")}}</th>
                                 <th class="border-top-0">{{__("dashboard.plate_number")}}</th>
                                 <th class="border-top-0">{{__("dashboard.checkin")}}</th>
                                 <th class="border-top-0">{{__("dashboard.checkout")}}</th>
@@ -117,6 +118,7 @@ $widgets['before_content'][] = [
                                     <span style="font-size: 3px;">{{$transaction->zone}}</span>
                                     <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
                                 </td>
+                                <td class="text-truncate"><a href="{{$transaction->plate_img}}"  target="_blank" ><img src="{{$transaction->plate_img}}" alt="plate_image" width="60px" height="40px"></a></td>
                                 <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
                                 <td>{{$transaction->checkin}}</td>
                                 <td>{{$transaction->checkout}}</td>
