@@ -103,6 +103,8 @@ $widgets['before_content'][] = [
                             <tr>
                                 <th class="border-top-0">{{__("dashboard.user")}}</th>
                                 <th class="border-top-0">{{__("dashboard.plate_number")}}</th>
+                                <th class="border-top-0">{{__("dashboard.checkin")}}</th>
+                                <th class="border-top-0">{{__("dashboard.checkout")}}</th>
                                 <th class="border-top-0">{{__("dashboard.status")}}</th>
                                 <th class="border-top-0">{{__("dashboard.reservation")}}</th>
                                 <th class="border-top-0">{{__("dashboard.amount")}}</th>
@@ -116,16 +118,14 @@ $widgets['before_content'][] = [
                                     <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
                                 </td>
                                 <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
-
+                                <td>{{$transaction->checkin}}</td>
+                                <td>{{$transaction->checkout}}</td>
                                 <td>
                                     @if ($transaction->checkout)
                                     <button type="button" class="btn btn-sm btn-outline-success round">{{__("dashboard.checkout")}}</button>
                                     @else
                                     <button type="button" class="btn btn-sm btn-outline-danger round">{{__("dashboard.checkin")}}</button>
                                     @endif
-                                    <br>
-                                    <span style="font-size: 14px;">{{__("dashboard.checkin")}}: {{$transaction->checkin}}</span> <br>
-                                    <span style="font-size: 14px;">{{__("dashboard.checkout")}}: {{$transaction->checkout}}</span>
                                 </td>
                                 <td>
                                     @if (!$transaction->checkout)

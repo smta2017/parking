@@ -20,7 +20,7 @@ return [
     'reservation' => 'مدة الانتطار',
     'amount' => 'التكلفة',
     'collected_day' => 'ربح اليوم',
-    'totalReserved' => 'محجوز',
+    'totalReserved' => 'مشغول',
     'available' => 'شاغر',
     'current_day_checkIn_count' => 'دخول',
     'current_day_checkOut_count' => 'خروج',
