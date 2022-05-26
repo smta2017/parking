@@ -9,7 +9,7 @@ $widgets['before_content'][] = [
 'value' => $dashboardInfo['current_day_collected'],
 'description' => __("dashboard.collected_day"),
 'progress' => 57, // integer,
-'icon' => 'icon-credit-card',
+'icon' => 'la la-money',
 'progressClass' => 'danger'
 ];
 
