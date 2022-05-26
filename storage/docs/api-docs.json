@@ -461,7 +461,7 @@
                         "name": "plate_number",
                         "in": "query",
                         "description": "plate_number",
-                        "required": true,
+                        "required": false,
                         "type": "string",
                         "default": "sameh"
                     }

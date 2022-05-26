@@ -314,7 +314,7 @@ class TransactionAPIController extends AppBaseController
      *             description="plate_number",
      *             default="sameh",           
      *             type="string",
-     *             required=true,
+     *             required=false,
      *             in="query"
      *      ),
      *      @SWG\Response(

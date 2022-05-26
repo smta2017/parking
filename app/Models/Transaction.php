@@ -105,7 +105,7 @@ class Transaction extends Model
      * @var array
      */
     public static $rules = [
-        'plate_number' => 'required',
+        // 'plate_number' => 'required',
         'plate_img' => 'required'
     ];
 
