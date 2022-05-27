@@ -56,7 +56,12 @@ class TransactionRepository extends BaseRepository
 
     public function setCheckOut($qr_code)
     {
-        return $this->update(['is_payed' =>  10, 'out_at' => Carbon::now()->toDateTimeString()], $qr_code);
+        session(['session_zone_id' => auth()->user()->zone_id]);
+        $transaction = Transaction::find($qr_code);
+        $hour_rate = Zone::hourRate();
+        $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false) + 1;
+        $total_amount = $hour_rate * $total_hors;
+        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $qr_code);
     }
 
     public function setCheckOutByPlate($plate)
