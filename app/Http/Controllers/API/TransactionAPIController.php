@@ -16,6 +16,7 @@ use App\Http\Resources\CheckOutResource;
 use App\Http\Resources\TransactionCollectResource;
 use App\Http\Resources\TransactionResource;
 use App\Http\Resources\TransactionsChartResource;
+use App\Models\User;
 use Response;
 
 /**
@@ -343,7 +344,7 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkIn(CreateTransactionAPIRequest $request)
     {
-        $request["client_id"] = env('DEFAULT_CLIENT',2);
+        $request["client_id"] = env('DEFAULT_CLIENT', 2);
         $request["type"] = Transaction::GENERAL_TRANSACTION;
 
         $transaction = $this->transactionRepository->setCheckIn($request);
@@ -407,6 +408,14 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkInClient(CreateClinetTransactionAPIRequest $request)
     {
+        $client = User::customer()->find($request['client_id']);
+        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($client)->orderBy('ends_at', 'desc')->first();
+        $subscripe = $this->Client->subscription($subs['slug']);
+        if ($subscripe->ended()) {
+            return $this->sendError([], __('subscription expired'));
+        }
+
+
         $transaction = $this->transactionRepository->setCheckInClient($request);
         return $this->sendResponse(new CheckInClientResource($transaction), 'CheckIn saved successfully');
     }
@@ -549,14 +558,13 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut by plate saved successfully');
     }
 
-   
+
     public function actualCollect(Request $request)
     {
         // return $request->all();
         $transaction = $this->transactionRepository->setActualCollect($request);
 
         return $this->sendResponse(TransactionCollectResource::collection($transaction), 'Successfully');
-
     }
 
     public function getTransactionCart()
