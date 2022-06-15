@@ -20,7 +20,7 @@ class TransactionRepository extends BaseRepository
     /**
      * @var array
      */
-    protected $fieldSearchable = ['client_id','type'];
+    protected $fieldSearchable = ['client_id', 'type'];
 
     /**
      * Return searchable fields
@@ -78,18 +78,20 @@ class TransactionRepository extends BaseRepository
         session(['session_zone_id' => auth()->user()->zone_id]);
         $transaction = Transaction::find($qr_code);
         $hour_rate = Zone::hourRate();
-        $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false) + 1;
-        $total_amount = $hour_rate * $total_hors;
+        $second_hour_rate = Zone::secondHourRate();
+        $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
+        $total_amount = ($second_hour_rate * $total_hors) + $hour_rate;
         return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
     }
 
     public function setCheckOutClient($client_id)
     {
         session(['session_zone_id' => auth()->user()->zone_id]);
-        $transaction = Transaction::subscribe()->where('client_id',$client_id)->first();
+        $transaction = Transaction::subscribe()->where('client_id', $client_id)->first();
         $hour_rate = Zone::hourRate();
-        $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false) + 1;
-        $total_amount = $hour_rate * $total_hors;
+        $second_hour_rate = Zone::secondHourRate();
+        $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
+        $total_amount = ($second_hour_rate * $total_hors) + $hour_rate;
         return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
     }
 
@@ -151,7 +153,7 @@ class TransactionRepository extends BaseRepository
 
     public function available()
     {
-        $avilable =Zone::zoneCapacity() - $this->totalReserved();
+        $avilable = Zone::zoneCapacity() - $this->totalReserved();
         return $avilable;
     }
 

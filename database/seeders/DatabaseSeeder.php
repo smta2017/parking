@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\Zone::factory()->create([
             'name' => 'الفلكي',
             'hour_rate' => 10,
+            'second_hour_rate' => 5,
             'capacity' => 70,
         ]);
 
         \App\Models\Zone::factory()->create([
-            'name' => 'hglkj.m',
+            'name' => 'المنتزة',
             'hour_rate' => 10,
+            'second_hour_rate' => 5,
             'capacity' => 100,
         ]);
 
