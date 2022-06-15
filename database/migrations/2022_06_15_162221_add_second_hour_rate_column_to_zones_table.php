@@ -14,7 +14,7 @@ class AddSecondHourRateColumnToZonesTable extends Migration
     public function up()
     {
         Schema::table('zones', function (Blueprint $table) {
-            $table->integer('second_hour_rate')->nullable()->after('hour_rate');
+            $table->float('second_hour_rate')->nullable()->after('hour_rate');
         });
     }
 
