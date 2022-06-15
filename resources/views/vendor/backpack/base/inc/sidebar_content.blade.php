@@ -21,4 +21,4 @@
     </ul>
 </li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('plan-subscription') }}'><i class='nav-icon la la-question'></i> {{__('dashboard.plan_subscriptions')}}</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('client') }}'><i class='nav-icon la la-question'></i> Clients</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('client') }}'><i class='nav-icon la la-question'></i> {{__('dashboard.clients')}}</a></li>

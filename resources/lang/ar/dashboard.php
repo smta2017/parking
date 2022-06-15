@@ -14,6 +14,7 @@ return [
     'roles' => 'الصلاحيات',
     'permissions' => 'الاوزنات',
     'plan_subscriptions' => 'الاشتراكات',
+    'clients' => 'المشتركين',
 
     'recent_transactions' => '',
     'user' => 'اسم الموظف',
