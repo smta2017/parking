@@ -13,6 +13,7 @@ return [
     'users' => 'المستخدمين',
     'roles' => 'الصلاحيات',
     'permissions' => 'الاوزنات',
+    'plan_subscriptions' => 'الاشتراكات',
 
     'recent_transactions' => '',
     'user' => 'اسم الموظف',
