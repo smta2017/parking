@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class AddSecondHourRateColumnToZonesTable extends Migration
 {
+
+
+
+
+
+
+
+
     /**
      * Run the migrations.
      *
@@ -13,6 +21,9 @@ class AddSecondHourRateColumnToZonesTable extends Migration
      */
     public function up()
     {
+      
+
+
         Schema::table('zones', function (Blueprint $table) {
             $table->float('second_hour_rate')->nullable()->after('hour_rate')->default(5);
         });
