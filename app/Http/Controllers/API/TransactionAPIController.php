@@ -410,10 +410,12 @@ class TransactionAPIController extends AppBaseController
     {
         $client = User::customer()->find($request['client_id']);
         $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($client)->orderBy('ends_at', 'desc')->first();
-        if ($subs->ended()) {
-            return $this->sendError([], __('subscription expired'));
+        if (!$subs) {
+            return $this->sendError([], __('no_subscription_found'));
         }
-
+        if ($subs->ended()) {
+            return $this->sendError([], __('subscription_expired'));
+        }
 
         $transaction = $this->transactionRepository->setCheckInClient($request);
         return $this->sendResponse(new CheckInClientResource($transaction), 'CheckIn saved successfully');

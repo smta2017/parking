@@ -49,6 +49,9 @@ class TransactionRepository extends BaseRepository
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
 
+        $request["client_id"] = env('DEFAULT_CLIENT');
+        $request["type"] = Transaction::GENERAL_TRANSACTION;
+
         $transaction = $this->create($request->all());
 
         return  $this->update(['plate_img' => $imageName], $transaction->id);
