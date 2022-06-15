@@ -410,8 +410,7 @@ class TransactionAPIController extends AppBaseController
     {
         $client = User::customer()->find($request['client_id']);
         $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($client)->orderBy('ends_at', 'desc')->first();
-        $subscripe = $this->Client->subscription($subs['slug']);
-        if ($subscripe->ended()) {
+        if ($subs->ended()) {
             return $this->sendError([], __('subscription expired'));
         }
 
