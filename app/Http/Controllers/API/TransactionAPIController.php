@@ -8,7 +8,10 @@ use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\CreateClinetTransactionAPIRequest;
+use App\Http\Resources\CheckInClientResource;
 use App\Http\Resources\CheckInResource;
+use App\Http\Resources\CheckOutClientResource;
 use App\Http\Resources\CheckOutResource;
 use App\Http\Resources\TransactionCollectResource;
 use App\Http\Resources\TransactionResource;
@@ -340,8 +343,72 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkIn(CreateTransactionAPIRequest $request)
     {
+        $request["client_id"] = env('DEFAULT_CLIENT',2);
+        $request["type"] = Transaction::GENERAL_TRANSACTION;
+
         $transaction = $this->transactionRepository->setCheckIn($request);
         return $this->sendResponse(new CheckInResource($transaction), 'CheckIn saved successfully');
+    }
+
+
+    /**
+     * @param CreateTransactionAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/transactions/checkin-client/{client_id}",
+     *      summary="Store a newly client created Transaction in storage",
+     *      tags={"Mobile-Api"},
+     *      description="Store client Transaction",
+     *      security = {{"Bearer": {}}},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="client_id",
+     *          description="id of clinet",
+     *          type="integer",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="plate_img",
+     *          description="plate photo",
+     *          type="file",
+     *          required=false,
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *             name="plate_number",
+     *             description="plate_number",
+     *             default="sameh",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckIn"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkInClient(CreateClinetTransactionAPIRequest $request)
+    {
+        $transaction = $this->transactionRepository->setCheckInClient($request);
+        return $this->sendResponse(new CheckInClientResource($transaction), 'CheckIn saved successfully');
     }
 
     /**
@@ -353,7 +420,7 @@ class TransactionAPIController extends AppBaseController
      *      summary="Set checkout for Transaction",
      *      tags={"Mobile-Api"},
      *      security = {{"Bearer": {}}},
-     *      description="Get Transaction",
+     *      description="checkout Transaction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="qr_code",
@@ -388,6 +455,52 @@ class TransactionAPIController extends AppBaseController
         $transaction = $this->transactionRepository->setCheckOut($qr_code);
 
         return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut saved successfully');
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/transactions/checkout-clinet/{client_id}",
+     *      summary="Set checkout for Transaction",
+     *      tags={"Mobile-Api"},
+     *      security = {{"Bearer": {}}},
+     *      description="checkout Transaction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="client_id",
+     *          description="qr code of Transaction",
+     *          type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckOut"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkOutClient($client_id)
+    {
+        $transaction = $this->transactionRepository->setCheckOutClient($client_id);
+
+        return $this->sendResponse(new CheckOutClientResource($transaction), 'CheckOut saved successfully');
     }
 
     /**

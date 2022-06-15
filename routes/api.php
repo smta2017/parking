@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\CustomerAPIController;
 use App\Http\Controllers\API\TransactionAPIController;
 use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\PlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +30,9 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => 'transactions'], function () {
         Route::post('checkin', [TransactionAPIController::class, 'checkIn']);
+        Route::post('checkin-client/{client_id}', [TransactionAPIController::class, 'checkInClient']);
         Route::post('checkout/{qr_code?}', [TransactionAPIController::class, 'checkOut']);        
+        Route::post('checkout-clinet/{client_id}', [TransactionAPIController::class, 'checkOutClient']);        
         Route::put('collect', [TransactionAPIController::class, 'actualCollect']);        
         Route::post('checkout-plate/{plate}', [TransactionAPIController::class, 'checkOutByPlate']);        
     });
@@ -37,6 +41,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 
 Route::resource('users', UserAPIController::class);
+
+Route::resource('customers', CustomerAPIController::class);
+
+Route::post('subscriptions', [PlanController::class, 'createSubscription']);
 
 
 Route::resource('zones', App\Http\Controllers\API\ZoneAPIController::class);

@@ -99,7 +99,7 @@ class AuthRepository extends BaseRepository
         }
 
         try {
-            //need job
+            //TODO need job
             // if (\config("app.enable_email_verification")) {
             //     $user->sendEmailVerificationNotification();
             // }

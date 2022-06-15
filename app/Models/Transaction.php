@@ -67,8 +67,11 @@ class Transaction extends Model
 
     use HasFactory;
 
+    public const GENERAL_TRANSACTION = 1;
+    public const SUBSCRIBE_TRANSACTION = 2;
+
     public $table = 'transactions';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -79,7 +82,9 @@ class Transaction extends Model
         'plate_img',
         'zone_id',
         'created_by',
+        'client_id',
         'out_at',
+        'type',
         'qr_code',
         'is_payed'
     ];
@@ -92,6 +97,8 @@ class Transaction extends Model
     protected $casts = [
         'plate_number' => 'string',
         'plate_img' => 'string',
+        'client_id' => 'integer',
+        'type' => 'integer',
         'zone_id' => 'integer',
         'created_by' => 'integer',
         'out_at' => 'string',
@@ -109,6 +116,10 @@ class Transaction extends Model
         'plate_img' => 'required'
     ];
 
+    public static $rules_client = [
+        'client_id' => 'required|exists:users,id,is_customer,1'
+    ];
+
 
 
     public function newQuery()
@@ -120,10 +131,19 @@ class Transaction extends Model
         if (\auth()->user()->zone_id) {
             return parent::newQuery()->where('zone_id', \auth()->user()->zone_id);
         }
-        
+
         return  parent::newQuery();
     }
 
+    public function scopeGeneral($query)
+    {
+        return $query->where('type', self::GENERAL_TRANSACTION);
+    }
+
+    public function scopeSubscribe($query)
+    {
+        return $query->where('type', self::SUBSCRIBE_TRANSACTION);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -131,6 +151,11 @@ class Transaction extends Model
     public function User()
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by', 'id');
+    }
+
+    public function Client()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'client_id', 'id');
     }
 
     public function Zone()

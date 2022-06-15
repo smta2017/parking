@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait; // <------------------------------- this one
-use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
+use Spatie\Permission\Traits\HasRoles; // <---------------------- and this one
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Rinvex\Subscriptions\Traits\HasSubscriptions;
 
 /**
  * @SWG\Definition(
@@ -126,9 +127,10 @@ class User extends Authenticatable
     use HasFactory;
     use CrudTrait; // <----- this
     use HasRoles; // <------ and this
+    use HasSubscriptions;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -150,6 +152,7 @@ class User extends Authenticatable
         'gender',
         'sms_notification',
         'is_active',
+        'is_customer',
         'lang',
         'firebase_token',
         'google_id',
@@ -178,12 +181,23 @@ class User extends Authenticatable
         'gender' => 'string',
         'sms_notification' => 'boolean',
         'is_active' => 'boolean',
+        'is_customer' => 'boolean',
         'lang' => 'string',
         'firebase_token' => 'string',
         'google_id' => 'string',
         'facebook_id' => 'string',
         'remember_token' => 'string'
     ];
+
+    public function scopeCustomer($query)
+    {
+        return $query->where('is_customer', 1);
+    }
+
+    public function Transaction()
+    {
+        return $this->hasMany(Transaction::class, 'client_id', 'id');
+    }
 
     /**
      * Validation rules
@@ -203,6 +217,7 @@ class User extends Authenticatable
         'gender' => 'nullable|string',
         'sms_notification' => 'nullable|boolean',
         'is_active' => 'nullable|boolean',
+        'is_active' => 'nullable|boolean',
         'lang' => 'nullable|string|max:255',
         'firebase_token' => 'nullable|string|max:255',
         'google_id' => 'nullable|string|max:255',
@@ -212,5 +227,26 @@ class User extends Authenticatable
         'updated_at' => 'nullable'
     ];
 
-    
+    public static $customer_rules = [
+        'name' => 'required|string|max:255',
+        // 'email' => 'email|max:255|unique:users',
+        'email_verified_at' => 'nullable',
+        // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // 'password' => 'required|string|max:255',
+        'phone' => 'required|nullable|string|unique:users|max:255',
+        'national_id' => 'nullable|string|unique:users|max:255',
+        'dob' => 'nullable',
+        'phone_verified_at' => 'nullable',
+        'gender' => 'nullable|string',
+        'sms_notification' => 'nullable|boolean',
+        'is_active' => 'nullable|boolean',
+        'is_customer' => 'nullable|boolean',
+        'lang' => 'nullable|string|max:255',
+        'firebase_token' => 'nullable|string|max:255',
+        'google_id' => 'nullable|string|max:255',
+        'facebook_id' => 'nullable|string|max:255',
+        'remember_token' => 'nullable|string|max:100',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
+    ];
 }
