@@ -27,7 +27,7 @@ class CheckInClientResource extends JsonResource
             // 'hour_rate' => $this->Zone['hour_rate'],
             'mobile' => $this->Client->phone,
             // 'driver_name' => $this->driver_name,
-            'qr_code' => $this->id,
+            'qr_code' => $this->Client->id,
             'subscribe_ended_at' => $subscripe['ends_at']->format('Y-m-d'),
             'plan_name' => $plan['name'],
             'subscribe_price' => $plan['price'],
