@@ -124,14 +124,14 @@ $widgets['before_content'][] = [
                                 <td>{{$transaction->checkout}}</td>
                                 <td>
                                     @if ($transaction->checkout)
-                                    <button type="button" class="btn btn-sm btn-outline-success round">{{__("dashboard.checkout")}}</button>
+                                    <button type="button" class="btn btn-sm btn-success round">{{__("dashboard.checkout")}}</button>
                                     @else
-                                    <button type="button" class="btn btn-sm btn-outline-danger round">{{__("dashboard.checkin")}}</button>
+                                    <button type="button" class="btn btn-sm btn-danger round">{{__("dashboard.checkin")}}</button>
                                     @endif
                                 </td>
                                 <td>
                                     @if($transaction->type)
-                                        {{__("dashboard.subscribe")}}
+                                         <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
                                     @else
                                         @if (!$transaction->checkout)
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -146,7 +146,7 @@ $widgets['before_content'][] = [
 
                                 <td class="text-truncate">
                                     @if($transaction->type)
-                                        {{__("dashboard.subscribe")}}                                      
+                                         <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
                                     @else
                                         @if (!$transaction->checkout)
                                         <i class="la la-clock"></i>
