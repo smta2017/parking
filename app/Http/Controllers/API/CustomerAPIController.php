@@ -61,11 +61,7 @@ class CustomerAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $customers = $this->customerRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $customers = User::customer()->get();
 
         return $this->sendResponse(CustomerResource::collection($customers), 'Customers retrieved successfully');
     }
