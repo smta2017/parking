@@ -57,18 +57,18 @@ class TransactionRepository extends BaseRepository
         return  $this->update(['plate_img' => $imageName], $transaction->id);
     }
 
-    public function setCheckInClient(Request $request)
+    public function setCheckInClient($client_id)
     {
         // $imageName = time() . '.' . $request->plate_img->extension();
         // $request->plate_img->move(storage_path('app/public/images/plate'), $imageName);
-
+        $request=[];
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
 
-        $request["client_id"] = $request['client_id'];
+        $request["client_id"] = $client_id;
         $request["type"] = Transaction::SUBSCRIBE_TRANSACTION;
 
-        $transaction = $this->create($request->all());
+        $transaction = $this->create($request);
 
         return $transaction;
         // $this->update(['plate_img' => $imageName], $transaction->id);

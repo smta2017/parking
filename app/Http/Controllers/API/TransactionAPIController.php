@@ -391,7 +391,7 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function checkInClient(CreateClinetTransactionAPIRequest $request,$client_id)
+    public function checkInClient($client_id)
     {
         $client = User::customer()->find($client_id);
         $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($client)->orderBy('ends_at', 'desc')->first();
@@ -402,7 +402,7 @@ class TransactionAPIController extends AppBaseController
             return $this->sendError([], __('subscription_expired'));
         }
 
-        $transaction = $this->transactionRepository->setCheckInClient($request);
+        $transaction = $this->transactionRepository->setCheckInClient($client_id);
         return $this->sendResponse(new CheckInClientResource($transaction), 'CheckIn saved successfully');
     }
 
