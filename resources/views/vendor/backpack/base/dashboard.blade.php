@@ -130,19 +130,15 @@ $widgets['before_content'][] = [
                                     @endif
                                 </td>
                                 <td>
-                                    @if($transaction->type)
-                                         <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
+                                    @if (!$transaction->checkout)
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: {{explode(':',$transaction->total_time->hours)[0]}}%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="25"></div>
+                                    </div>
+                                    <span style="font-size: 11px;">{{$transaction->checkin_hu}}</span>
                                     @else
-                                        @if (!$transaction->checkout)
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: {{explode(':',$transaction->total_time->hours)[0]}}%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="25"></div>
-                                        </div>
-                                        <span style="font-size: 11px;">{{$transaction->checkin_hu}}</span>
-                                        @else
-                                        <span class="badge badge badge-success">{{$transaction->total_time->hours}}</span>
-                                        @endif
+                                    <span class="badge badge badge-success">{{$transaction->total_time->hours}}</span>
                                     @endif
-                                 </td>
+                                </td>
 
                                 <td class="text-truncate">
                                     @if($transaction->type)
