@@ -719,7 +719,7 @@
                 "parameters": [
                     {
                         "name": "client_id",
-                        "in": "formData",
+                        "in": "path",
                         "description": "id of clinet",
                         "required": true,
                         "type": "integer"

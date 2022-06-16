@@ -368,7 +368,7 @@ class TransactionAPIController extends AppBaseController
      *          description="id of clinet",
      *          type="integer",
      *          required=true,
-     *          in="formData"
+     *          in="path"
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -391,9 +391,9 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function checkInClient(CreateClinetTransactionAPIRequest $request)
+    public function checkInClient(CreateClinetTransactionAPIRequest $request,$client_id)
     {
-        $client = User::customer()->find($request['client_id']);
+        $client = User::customer()->find($client_id);
         $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($client)->orderBy('ends_at', 'desc')->first();
         if (!$subs) {
             return $this->sendError([], __('no_subscription_found'));
