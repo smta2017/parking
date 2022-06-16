@@ -141,7 +141,7 @@ $widgets['before_content'][] = [
                                 </td>
 
                                 <td class="text-truncate">
-                                    @if($transaction->type)
+                                    @if($transaction->type==2)
                                          <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
                                     @else
                                         @if (!$transaction->checkout)
