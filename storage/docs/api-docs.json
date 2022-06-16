@@ -723,21 +723,6 @@
                         "description": "id of clinet",
                         "required": true,
                         "type": "integer"
-                    },
-                    {
-                        "name": "plate_img",
-                        "in": "formData",
-                        "description": "plate photo",
-                        "required": false,
-                        "type": "file"
-                    },
-                    {
-                        "name": "plate_number",
-                        "in": "query",
-                        "description": "plate_number",
-                        "required": false,
-                        "type": "string",
-                        "default": "sameh"
                     }
                 ],
                 "responses": {

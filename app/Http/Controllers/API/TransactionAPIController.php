@@ -370,21 +370,6 @@ class TransactionAPIController extends AppBaseController
      *          required=true,
      *          in="formData"
      *      ),
-     *      @SWG\Parameter(
-     *          name="plate_img",
-     *          description="plate photo",
-     *          type="file",
-     *          required=false,
-     *          in="formData"
-     *      ),
-     *      @SWG\Parameter(
-     *             name="plate_number",
-     *             description="plate_number",
-     *             default="sameh",           
-     *             type="string",
-     *             required=false,
-     *             in="query"
-     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
