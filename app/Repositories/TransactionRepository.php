@@ -59,8 +59,8 @@ class TransactionRepository extends BaseRepository
 
     public function setCheckInClient(Request $request)
     {
-        $imageName = time() . '.' . $request->plate_img->extension();
-        $request->plate_img->move(storage_path('app/public/images/plate'), $imageName);
+        // $imageName = time() . '.' . $request->plate_img->extension();
+        // $request->plate_img->move(storage_path('app/public/images/plate'), $imageName);
 
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
@@ -70,7 +70,8 @@ class TransactionRepository extends BaseRepository
 
         $transaction = $this->create($request->all());
 
-        return  $this->update(['plate_img' => $imageName], $transaction->id);
+        return $transaction;
+        // $this->update(['plate_img' => $imageName], $transaction->id);
     }
 
     public function setCheckOut($qr_code)
@@ -112,6 +113,7 @@ class TransactionRepository extends BaseRepository
 
     public function getTransactionCart()
     {
+
         $transaction = Transaction::select(DB::raw('count(*) as orders, DATE(created_at) day'))
             ->groupBy('day')
             ->orderBy('day')

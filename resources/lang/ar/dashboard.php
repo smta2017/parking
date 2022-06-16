@@ -32,6 +32,8 @@ return [
     'week' => 'اسبوع',
     'month' => 'شهر',
     'plate_image' => 'اللوحة',
+    'subscriber' => 'مشترك',
+    'subscribe' => 'اشتراك',
 
 
 ];
