@@ -124,6 +124,10 @@ class Transaction extends Model
 
     public function newQuery()
     {
+        if (env("APP_ENV" == 'local')) {
+            session('session_zone_id');
+        }
+        
         if (session('session_zone_id')) {
             return parent::newQuery()->where('zone_id', session('session_zone_id'));
         }

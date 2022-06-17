@@ -39,7 +39,19 @@ class TransactionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('plate_img');
+        
+        CRUD::addColumn([
+            'name'      => 'plate_img', // The db column name
+            'label'     => 'plate_img', // Table column heading
+            'type'      => 'image',
+            'prefix' => 'storage/images/plate/',
+            // image from a different disk (like s3 bucket)
+            // 'disk'   => 'disk-name', 
+            // optional width/height if 25px is not ok with you
+            'height' => '50px',
+            'width'  => '70px',
+        ]);
+        // CRUD::column('plate_img');
         CRUD::column('driver_name');
         CRUD::column('plate_number');
         CRUD::column('mobile');

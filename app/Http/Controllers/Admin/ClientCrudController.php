@@ -29,6 +29,15 @@ class ClientCrudController extends CrudController
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/client');
         CRUD::setEntityNameStrings('client', 'clients');
+        $this->crud->addClause('customer'); // apply local scope
+
+        // $this->crud->addClause('where', 'name', '=', 'car');
+
+        // $this->crud->addClause('whereName', 'car');
+
+        // $this->crud->addClause('whereHas', 'posts', function ($query) {
+        //     $query->activePosts();
+        // });
     }
 
     /**
@@ -39,7 +48,8 @@ class ClientCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        
+
+        // CRUD::column('is_customer');
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('phone');
@@ -59,9 +69,10 @@ class ClientCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+        CRUD::field('plan_subscriptions')->subfields([['name' => 'App\Models\User']]);
         CRUD::setValidation(ClientRequest::class);
 
-        
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

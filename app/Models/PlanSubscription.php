@@ -35,6 +35,11 @@ class PlanSubscription extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function Subscriber()
+    {
+        return $this->morphTo();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

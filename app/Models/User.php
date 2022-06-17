@@ -194,10 +194,17 @@ class User extends Authenticatable
         return $query->where('is_customer', 1);
     }
 
-    public function Transaction()
+    public function Transactions()
     {
         return $this->hasMany(Transaction::class, 'client_id', 'id');
     }
+
+    public function subscribe()
+    {
+        return $this->morphMany('App\Models\PlanSubscription','subscriber');
+    }
+
+
 
     /**
      * Validation rules

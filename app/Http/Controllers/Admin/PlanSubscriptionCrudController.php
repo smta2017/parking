@@ -39,22 +39,20 @@ class PlanSubscriptionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        // CRUD::column('subscriber_type');
-        CRUD::column('subscriber_id');
-        // CRUD::column('plan_id');
-        // CRUD::column('slug');
-        CRUD::column('name');
-        CRUD::column('description');
-        // CRUD::column('trial_ends_at');
-        CRUD::column('starts_at');
-        CRUD::column('ends_at');
-        // CRUD::column('cancels_at');
-        // CRUD::column('canceled_at');
-        // CRUD::column('timezone');
-        // CRUD::column('created_at');
-        // // CRUD::column('updated_at');
-        // CRUD::column('deleted_at');
+        // CRUD::column('id');
+
+        $this->crud->addColumn([
+            'name'         => 'Subscriber.name', // name of relationship method in the model
+            'type'         => 'relationship',
+            'label'        => 'name', // Table column heading
+        ]);
+        $this->crud->addColumn([
+            'name'         => 'Subscriber.phone', // name of relationship method in the model
+            'type'         => 'relationship',
+            'label'        => 'phone', // Table column heading
+        ]);
+        CRUD::column('starts_at')->type('datetime')->format('Y-M-D');
+        CRUD::column('ends_at')->type('datetime')->format('Y-M-D');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
