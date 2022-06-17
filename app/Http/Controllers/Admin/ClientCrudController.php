@@ -54,6 +54,9 @@ class ClientCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('phone');
 
+
+        CRUD::button('approv')->stack('line')->modelFunction('approv')->makeFirst();
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -69,7 +72,7 @@ class ClientCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::field('plan_subscriptions')->subfields([['name' => 'App\Models\User']]);
+        // CRUD::field('plan_subscriptions')->subfields([['name' => 'App\Models\User']]);
         CRUD::setValidation(ClientRequest::class);
 
 

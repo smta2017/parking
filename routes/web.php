@@ -17,6 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/client-qr/{id}', function ($id) {
+
+  return view('qr',compact('id'));
+
+//   for ($i=0; $i < 1; $i++) { 
+
+//     "<div>"
+//     "<\div>"
+//     echo   \QrCode::size(200)->generate($id) ;
+    
+//     echo "<br><br>";
+    
+//     echo "عميل رقم " . $i+1;
+//     echo "<br><br>";
+    
+// }
+});
 
 
 Route::post('getTransactionCart', [TransactionAPIController::class, 'getTransactionCart']);

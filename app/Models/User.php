@@ -188,6 +188,14 @@ class User extends Authenticatable
         'facebook_id' => 'string',
         'remember_token' => 'string'
     ];
+    public function approv($crud = false)
+    {
+        // if ($this->order_state_id == 1) {
+            
+            return '<a target="_blank" class="btn btn-sm btn-link" href="/client-qr/' . urlencode($this->id) . '" data-toggle="tooltip" title="Just a demo custom button."><i class="la la-check-circle"></i> ' . trans('backpack::crud.model.printqr') . ' </a>';
+        // }
+
+    }
 
     public function scopeCustomer($query)
     {
