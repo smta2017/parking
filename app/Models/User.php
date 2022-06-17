@@ -192,7 +192,7 @@ class User extends Authenticatable
     {
         // if ($this->order_state_id == 1) {
             
-            return '<a target="_blank" class="btn btn-sm btn-link" href="/client-qr/' . urlencode($this->id) . '" data-toggle="tooltip" title="Just a demo custom button."><i class="la la-check-circle"></i> ' . trans('backpack::crud.model.printqr') . ' </a>';
+            return '<a target="_blank" class="btn btn-sm btn-link" href="/client-qr/' . urlencode($this->id) . '" data-toggle="tooltip" title="Just a demo custom button."><i class="la la-qrcode"></i> ' . trans('backpack::crud.model.printqr') . ' </a>';
         // }
 
     }

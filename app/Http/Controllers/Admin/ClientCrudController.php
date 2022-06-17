@@ -50,6 +50,8 @@ class ClientCrudController extends CrudController
     {
 
         // CRUD::column('is_customer');
+        
+
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('phone');
