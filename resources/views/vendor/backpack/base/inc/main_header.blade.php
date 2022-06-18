@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <ul class="nav navbar-nav flex-row">
         <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-        <div style="padding:20px 0 0 0; margin-left: 300px; font-weight: bold; width: 230px; font-size: 20px;">
+        <div style="padding:20px 0 0 0; margin-left: 60px; font-weight: bold; width: 230px; font-size: 20px;">
           <span id="clock-wrapper"></span>
         </div>
 
