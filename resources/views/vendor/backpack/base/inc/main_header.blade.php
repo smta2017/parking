@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <ul class="nav navbar-nav flex-row">
         <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-        <div style="padding:20px 0 0 0; margin-left: 300px; font-weight: bold; width: 200px; font-size: 20px;">
+        <div style="padding:20px 0 0 0; margin-left: 300px; font-weight: bold; width: 230px; font-size: 20px;">
           <span id="clock-wrapper"></span>
         </div>
 
@@ -38,11 +38,11 @@
     var dd = String(date.getDate()).padStart(2, '0');
     var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = date.getFullYear();
-
+    var ampm = date.getHours() >= 12 ? 'pm' : 'am';
     today =  yyyy+   '/' + mm + '/' + dd;
     var hour = (date.getHours() % 12 )|| 12 
     $('#clock-wrapper').html(
-      today + " | " + hour + ":" + date.getMinutes()
+      today + " | <span style='color:orange'>" + hour + ":" + date.getMinutes() + ' ' + ampm + "</span>"
     );
   }, 500);
 </script>
