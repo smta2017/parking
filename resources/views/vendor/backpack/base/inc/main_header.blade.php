@@ -40,8 +40,9 @@
     var yyyy = date.getFullYear();
 
     today =  yyyy+   '/' + mm + '/' + dd;
+    var hour = (date.getHours() % 12 )|| 12 
     $('#clock-wrapper').html(
-      today + " | " + date.getHours() + ":" + date.getMinutes()
+      today + " | " + hour + ":" + date.getMinutes()
     );
   }, 500);
 </script>
