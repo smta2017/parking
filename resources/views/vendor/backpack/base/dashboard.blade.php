@@ -101,6 +101,7 @@ $widgets['before_content'][] = [
                     <table id="recent-orders" class="table table-hover table-xl mb-0">
                         <thead>
                             <tr>
+                                <th class="border-top-0">#</th>
                                 <th class="border-top-0">{{__("dashboard.user")}}</th>
                                 <th class="border-top-0">{{__("dashboard.plate_image")}}</th>
                                 <th class="border-top-0">{{__("dashboard.plate_number")}}</th>
@@ -114,6 +115,10 @@ $widgets['before_content'][] = [
                         <tbody>
                             @foreach ($transactions as $transaction)
                             <tr>
+                            <td>
+                                <span style="font-size: 10px;">{{$transaction->id}}</span>
+
+                            </td>    
                                 <td class="text-truncate">
                                     <span style="font-size: 3px;">{{$transaction->zone}}</span>
                                     <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
