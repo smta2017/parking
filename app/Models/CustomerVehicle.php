@@ -75,7 +75,16 @@ class CustomerVehicle extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function setPlateImageAttribute($value)
+    {
+        $attribute_name = "plate_image";
+        $disk = "public";
+        $destination_path = "images/plate";
 
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+
+        // return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+    }
 
     public $fillable = [
         'customer_id',

@@ -40,8 +40,18 @@ class CustomerVehicleCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('id')->label('#');
+        CRUD::addColumn([
+            'name'      => 'plate_image', // The db column name
+            'label'     => trans('backpack::crud.model.plate_image'), // Table column heading
+            'type'      => 'image',
+            'prefix' => 'storage/',
+            // image from a different disk (like s3 bucket)
+            // 'disk'   => 'disk-name', 
+            // optional width/height if 25px is not ok with you
+            'height' => '50px',
+            'width'  => '70px',
+        ]);
         CRUD::column('plate_number')->label(trans('backpack::crud.model.plate_number'));
-        CRUD::column('plate_image')->label(trans('backpack::crud.model.plate_image'));
         CRUD::column('customer_id')->searchLogic('text')->label(trans('backpack::crud.model.name'));
 
         $this->crud->addClause('customerVehicle');
@@ -85,7 +95,18 @@ class CustomerVehicleCrudController extends CrudController
         ]);
 
         CRUD::field('plate_number');
-        CRUD::field('plate_image');
+        CRUD::addField(
+            [   // Upload
+                'name'      => 'plate_image',
+                'label'     => 'Image',
+                'type'      => 'upload',
+                'upload'    => true,
+                'disk'      => 'public', // if you store files in the /public folder, please omit this; if you store them in /storage or S3, please specify it;
+                // optional:
+                // 'temporary' => 10 // if using a service, such as S3, that requires you to make temporary URLs this will make a URL that is valid for the number of minutes specified
+            ]
+        );
+        // CRUD::field('plate_image');
         // CRUD::field('vehicle_color');
         // CRUD::field('vehicle_brand');
         // CRUD::field('vehicle_model');

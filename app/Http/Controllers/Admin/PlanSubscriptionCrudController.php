@@ -45,16 +45,28 @@ class PlanSubscriptionCrudController extends CrudController
     {
         CRUD::column('id')->label('#');
 
-        $this->crud->addColumn([
-            // 1-n relationship
+        CRUD::addColumn([
+            'name'      => 'Subscriber.plate_image', // The db column name
             'label'     => trans('backpack::crud.model.plate_image'), // Table column heading
-            'type'      => 'select',
-            'name'      => 'subscriber_id', // the column that contains the ID of that connected entity;
-            'entity'    => 'Subscriber', // the method that defines the relationship in your Model
-            'attribute' => 'plate_image', // foreign key attribute that is shown to user
-            'model'     => "App\Models\PlanSubscription", // foreign key model
-            'key' => 'pate_image',
+            'type'      => 'image',
+            'prefix' => 'storage/',
+            // image from a different disk (like s3 bucket)
+            // 'disk'   => 'disk-name', 
+            // optional width/height if 25px is not ok with you
+            'height' => '50px',
+            'width'  => '70px',
         ]);
+
+        // $this->crud->addColumn([
+        //     // 1-n relationship
+        //     'label'     => trans('backpack::crud.model.plate_image'), // Table column heading
+        //     'type'      => 'select',
+        //     'name'      => 'subscriber_id', // the column that contains the ID of that connected entity;
+        //     'entity'    => 'Subscriber', // the method that defines the relationship in your Model
+        //     'attribute' => 'plate_image', // foreign key attribute that is shown to user
+        //     'model'     => "App\Models\PlanSubscription", // foreign key model
+        //     'key' => 'pate_image',
+        // ]);
 
         ############------  FINE  -----###########
         $this->crud->addColumn([
