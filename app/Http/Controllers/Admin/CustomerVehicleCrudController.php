@@ -77,8 +77,13 @@ class CustomerVehicleCrudController extends CrudController
     {
         CRUD::setValidation(CustomerVehicleRequest::class);
 
+        CRUD::addField([
+            'name' => 'Customer',
+            'options'   => (function ($query) {
+                return $query->where('is_customer', '1')->get();
+            })
+        ]);
 
-        CRUD::field('Customer');
         CRUD::field('plate_number');
         CRUD::field('plate_image');
         // CRUD::field('vehicle_color');
