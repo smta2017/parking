@@ -28,7 +28,7 @@ class TransactionCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Transaction::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/transaction');
-        CRUD::setEntityNameStrings('transaction', 'transactions');
+        CRUD::setEntityNameStrings(trans('backpack::crud.model.transaction'), trans('backpack::crud.model.transactions'));
     }
 
     /**
@@ -39,7 +39,7 @@ class TransactionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        
+
         CRUD::addColumn([
             'name'      => 'plate_img', // The db column name
             'label'     => 'plate_img', // Table column heading

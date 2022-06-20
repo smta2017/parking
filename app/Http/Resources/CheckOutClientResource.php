@@ -17,8 +17,8 @@ class CheckOutClientResource extends JsonResource
         $diff_time = $this->created_at->diffInMinutes($this->out_at, false);
         $diff_time2 = $this->created_at->diff($this->out_at);
 
-        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($this->Client)->orderBy('ends_at', 'desc')->first();
-        $subscripe = $this->Client->subscription($subs['slug']);
+        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($this->Vehicle)->orderBy('ends_at', 'desc')->first();
+        $subscripe = $this->Vehicle->subscription($subs['slug']);
 
         // $plan = app('rinvex.subscriptions.plan')->find($subs['plan_id']);
       
@@ -30,7 +30,7 @@ class CheckOutClientResource extends JsonResource
             'mobile' => $this->mobile,
             'driver_name' => $this->driver_name,
             'zone' => $this->Zone['name'],
-            'qr_code' => $this->Client->id,
+            'qr_code' => $this->Vehicle->id,
             'checkin' => $this->created_at->format('Y-m-d H:i'),
             'checkin_hu' => $this->created_at->diffForHumans(),
             'checkout' => $this->out_at,

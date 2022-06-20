@@ -124,10 +124,8 @@ class Transaction extends Model
 
     public function newQuery()
     {
-        if (env("APP_ENV" == 'local')) {
-            session('session_zone_id');
-        }
-        
+        session(['session_zone_id' => 1]);
+
         if (session('session_zone_id')) {
             return parent::newQuery()->where('zone_id', session('session_zone_id'));
         }
@@ -157,9 +155,9 @@ class Transaction extends Model
         return $this->belongsTo(\App\Models\User::class, 'created_by', 'id');
     }
 
-    public function Client()
+    public function Vehicle()
     {
-        return $this->belongsTo(\App\Models\User::class, 'client_id', 'id');
+        return $this->belongsTo(\App\Models\CustomerVehicle::class, 'client_id', 'id');
     }
 
     public function Zone()

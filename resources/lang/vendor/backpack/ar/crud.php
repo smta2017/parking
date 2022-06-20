@@ -34,7 +34,7 @@ return [
     'lengthMenu'                              => 'صف في كل صفحة _MENU_',
     'created_this'                            => 'أنشئت هذه',
     'page_link_placeholder'                   => 'http://example.com/your-desired-page',
-    'actions'                                 => 'أفعال',
+    'actions'                                 => 'تحكم',
     'remove_filters'                          => 'إزالة الفلاتر',
     'add_a_new'                               => 'إضافة جديد',
     'reorder'                                 => 'إعادة ترتيب',
@@ -158,7 +158,26 @@ return [
         'special'    => 'تخصص',
         'reviews'    => 'تقييمات',
         'review'    => 'تقييم',
-        'printqr' => 'طباعة الكود'
+        'printqr' => 'طباعة الكود',
+        'client' => 'عميل',
+        'clients' => 'عملاء',
+        'subscribe' => 'اشتراك',
+        'subscribes' => 'اشتراكات',
+        'transaction' => 'الحجز',
+        'transactions' => 'الحجوزات',
+
+        'plate_number' => 'رقم اللوحات',
+        'plate_image' => 'صورة اللوحة',
+        'customer' => 'عميل',
+        'customers' => 'العملاء',
+        'starts' => 'بداية الاشراك',
+        'ends' => 'انتهاء الاشتراك',
+
+        'vehicle' => 'مركبة',
+        'vehicles' => 'مركبات',
+
+        'mobile' => 'موبايل',
+
     ],
 
 ];

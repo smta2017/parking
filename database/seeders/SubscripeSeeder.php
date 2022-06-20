@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CustomerVehicle;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -499,11 +500,15 @@ class SubscripeSeeder extends Seeder
         ];
 
         foreach ($subs as $sub) {
-            $plan = app('rinvex.subscriptions.plan')->find(1);
 
             $customer =  User::create(['name' => $sub['name'], 'password' => '0', 'phone' => $sub['phone'], 'is_customer' => 1]);
 
-            $new_subscription = $customer->newSubscription($customer['name'] . '-' . $plan['name'], $plan);
+            $Vehicle = CustomerVehicle::create(['customer_id' => $customer['id'], 'plate_number' => $sub['plate'], 'plate_image' => $sub['phone']]);
+
+            $plan = app('rinvex.subscriptions.plan')->find(1);
+
+
+            $new_subscription = $Vehicle->newSubscription($Vehicle['name'] . '-' . $plan['name'], $plan);
 
             // return $this->sendResponse($new_subscription, 'Subscription created as successfully');
         }

@@ -2,7 +2,7 @@
 
 return [
 
-    'plate_number' => 'اللوحات',
+    'plate_number' => 'رقم اللوحات',
     'checkin' => 'دخول',
     'checkout' => 'خروج',
 
@@ -31,7 +31,7 @@ return [
     'day' => 'يوم',
     'week' => 'اسبوع',
     'month' => 'شهر',
-    'plate_image' => 'اللوحة',
+    'plate_image' => 'صورة اللوحة',
     'subscriber' => 'مشترك',
     'subscribe' => 'اشتراك',
 

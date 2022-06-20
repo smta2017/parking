@@ -14,8 +14,8 @@ class CheckInClientResource extends JsonResource
      */
     public function toArray($request)
     {
-        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($this->Client)->orderBy('ends_at', 'desc')->first();
-        $subscripe = $this->Client->subscription($subs['slug']);
+        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($this->vehicle)->orderBy('ends_at', 'desc')->first();
+        $subscripe = $this->vehicle->subscription($subs['slug']);
 
         $plan = app('rinvex.subscriptions.plan')->find($subs['plan_id']);
         
@@ -25,9 +25,9 @@ class CheckInClientResource extends JsonResource
             'plate_img' => url('') . '/storage/images/plate/' . $this->plate_img,
             'zone' => $this->Zone['name'],
             // 'hour_rate' => $this->Zone['hour_rate'],
-            'mobile' => $this->Client->phone,
+            'plate_number' => $this->vehicle->plate_number,
             // 'driver_name' => $this->driver_name,
-            'qr_code' => $this->Client->id,
+            'qr_code' => $this->vehicle->id,
             'subscribe_ended_at' => $subscripe['ends_at']->format('Y-m-d'),
             'plan_name' => $plan['name'],
             'subscribe_price' => $plan['price'],

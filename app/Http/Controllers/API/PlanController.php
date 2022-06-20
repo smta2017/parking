@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\User;
-use Carbon\Carbon;
+use App\Http\Controllers\AppBaseController;
+use App\Models\CustomerVehicle;
 use Illuminate\Http\Request;
 
 class PlanController extends AppBaseController
@@ -15,7 +15,7 @@ class PlanController extends AppBaseController
      *
      * @SWG\Post(
      *      path="/subscriptions",
-     *      summary="Create a newly subscription for a customer",
+     *      summary="Create a newly subscription for a vehicle",
      *      tags={"Mobile-Api"},
      *      description="New Subscription",
      *      produces={"application/json"},
@@ -23,7 +23,7 @@ class PlanController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="Customer that should be stored",
+     *          description="vehicle that should be stored",
      *          required=false,
      *          @SWG\Schema(example= {
      *                                "customer_id":15,
@@ -54,11 +54,13 @@ class PlanController extends AppBaseController
      */
     public function createSubscription(Request $request)
     {
+        $vehicle_id = $request["customer_id"];
+
         $plan = app('rinvex.subscriptions.plan')->find($request["plan_id"]);
 
-        $customer = User::customer()->findOrFail($request["customer_id"]);
+        $vehicle = CustomerVehicle::findOrFail($vehicle_id);
 
-        $new_subscription = $customer->newSubscription($customer['name'] . '-' . $plan['name'], $plan);
+        $new_subscription = $vehicle->newSubscription($vehicle["plate_number"] . "-" . $vehicle['name'] . '-' . $plan['name'], $plan);
 
         return $this->sendResponse($new_subscription, 'Subscription created as successfully');
     }

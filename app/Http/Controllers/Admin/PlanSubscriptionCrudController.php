@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\PlanSubscriptionRequest;
+use App\Models\CustomerVehicle;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Http\Client\Request;
+use PhpParser\Node\Stmt\Label;
 
 /**
  * Class PlanSubscriptionCrudController
@@ -13,9 +16,10 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class PlanSubscriptionCrudController extends CrudController
 {
+
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+    // use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -28,7 +32,7 @@ class PlanSubscriptionCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\PlanSubscription::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/plan-subscription');
-        CRUD::setEntityNameStrings('plan subscription', 'plan subscriptions');
+        CRUD::setEntityNameStrings(trans('backpack::crud.model.subscribe'), trans('backpack::crud.model.subscribes'));
     }
 
     /**
@@ -39,20 +43,41 @@ class PlanSubscriptionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        // CRUD::column('id');
+        CRUD::column('id')->label('#');
 
         $this->crud->addColumn([
-            'name'         => 'Subscriber.name', // name of relationship method in the model
-            'type'         => 'relationship',
-            'label'        => 'name', // Table column heading
+            // 1-n relationship
+            'label'     => trans('backpack::crud.model.plate_image'), // Table column heading
+            'type'      => 'select',
+            'name'      => 'subscriber_id', // the column that contains the ID of that connected entity;
+            'entity'    => 'Subscriber', // the method that defines the relationship in your Model
+            'attribute' => 'plate_image', // foreign key attribute that is shown to user
+            'model'     => "App\Models\PlanSubscription", // foreign key model
+            'key' => 'pate_image',
         ]);
+
+        ############------  FINE  -----###########
         $this->crud->addColumn([
-            'name'         => 'Subscriber.phone', // name of relationship method in the model
-            'type'         => 'relationship',
-            'label'        => 'phone', // Table column heading
+            // 1-n relationship
+            'label'     => trans('backpack::crud.model.plate_number'), // Table column heading
+            'type'      => 'select',
+            'name'      => 'subscriber_id', // the column that contains the ID of that connected entity;
+            'entity'    => 'Subscriber', // the method that defines the relationship in your Model
+            'attribute' => 'plate_number', // foreign key attribute that is shown to user
+            'model'     => "App\Models\PlanSubscription", // foreign key model
         ]);
-        CRUD::column('starts_at')->type('datetime')->format('Y-M-D');
-        CRUD::column('ends_at')->type('datetime')->format('Y-M-D');
+        ############------  FINE  -----###########
+
+
+
+        $this->crud->addColumn([
+            'name'         => 'Vehicle.Customer.name', // name of relationship method in the model
+            'label'        => trans('backpack::crud.model.customer'), // Table column heading
+        ]);
+
+        CRUD::column('starts_at')->label(trans('backpack::crud.model.starts'))->type('datetime')->format('Y-M-D');
+        CRUD::column('ends_at')->label(trans('backpack::crud.model.ends'))->type('datetime')->format('Y-M-D');
+
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -71,28 +96,55 @@ class PlanSubscriptionCrudController extends CrudController
     {
         CRUD::setValidation(PlanSubscriptionRequest::class);
 
-        CRUD::field('id');
-        CRUD::field('subscriber_type');
-        CRUD::field('subscriber_id');
-        CRUD::field('plan_id');
-        CRUD::field('slug');
-        CRUD::field('name');
-        CRUD::field('description');
-        CRUD::field('trial_ends_at');
-        CRUD::field('starts_at');
-        CRUD::field('ends_at');
-        CRUD::field('cancels_at');
-        CRUD::field('canceled_at');
-        CRUD::field('timezone');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
-        CRUD::field('deleted_at');
+        // CRUD::field('id');
+        // CRUD::field('subscriber_type');
+        // CRUD::field('Subscriber');
+
+
+        CRUD::addField([
+            'label'     => "Subscriber",
+            'type'      => 'select',
+            'name'      => 'subscriber_id', // the db column for the foreign key
+            'entity'    => 'Vehicle',
+
+        ]);
+
+        // // CRUD::field('plan_id');
+        // CRUD::field('plan_id')->type('hidlden')->value(1);
+        // CRUD::field('subscriber_type')->typel('hidden')->value('App\Models\CustomerVehicle');
+
+        // CRUD::field('slug')->type('hidden')->value(CRUD::field('subscriber_id'));
+        // CRUD::field('name')->type('hidden')->value('test');
+        // CRUD::field('description');
+        // CRUD::field('trial_ends_at');
+        // CRUD::field('starts_at');
+        // CRUD::field('ends_at');
+        // CRUD::field('cancels_at');
+        // CRUD::field('canceled_at');
+        // CRUD::field('timezone');
+        // CRUD::field('created_at');
+        // CRUD::field('updated_at');
+        // CRUD::field('deleted_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
          * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
          */
+    }
+
+
+    public function store(PlanSubscriptionRequest $request)
+    {
+        $vehicle_id = $request["subscriber_id"];
+
+        $plan = app('rinvex.subscriptions.plan')->find(1);
+
+        $vehicle = CustomerVehicle::findOrFail($vehicle_id);
+
+        $new_subscription = $vehicle->newSubscription($vehicle["plate_number"] . "-" . $vehicle['name'] . '-' . $plan['name'], $plan);
+
+        return \response()->redirectTo(CRUD::getRoute());
     }
 
     /**

@@ -16,6 +16,7 @@ use App\Http\Resources\CheckOutResource;
 use App\Http\Resources\TransactionCollectResource;
 use App\Http\Resources\TransactionResource;
 use App\Http\Resources\TransactionsChartResource;
+use App\Models\CustomerVehicle;
 use App\Models\User;
 use Response;
 
@@ -391,10 +392,12 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function checkInClient($client_id)
+    public function checkInClient($vehicle_id)
     {
-        $client = User::customer()->find($client_id);
-        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($client)->orderBy('ends_at', 'desc')->first();
+        $vehicle = CustomerVehicle::find($vehicle_id);
+        // return $vehicle_id;
+        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($vehicle)->orderBy('ends_at', 'desc')->first();
+        // return $subs;
         if (!$subs) {
             return $this->sendError([], __('no_subscription_found'));
         }
@@ -402,7 +405,7 @@ class TransactionAPIController extends AppBaseController
             return $this->sendError([], __('subscription_expired'));
         }
 
-        $transaction = $this->transactionRepository->setCheckInClient($client_id);
+        $transaction = $this->transactionRepository->setCheckInClient($vehicle_id);
         return $this->sendResponse(new CheckInClientResource($transaction), 'CheckIn saved successfully');
     }
 

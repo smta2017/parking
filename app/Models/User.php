@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Rinvex\Subscriptions\Traits\HasSubscriptions;
+// use Rinvex\Subscriptions\Traits\HasSubscriptions;
 
 /**
  * @SWG\Definition(
@@ -127,7 +127,7 @@ class User extends Authenticatable
     use HasFactory;
     use CrudTrait; // <----- this
     use HasRoles; // <------ and this
-    use HasSubscriptions;
+    // use HasSubscriptions;
 
     public $table = 'users';
 
@@ -188,13 +188,10 @@ class User extends Authenticatable
         'facebook_id' => 'string',
         'remember_token' => 'string'
     ];
-    public function approv($crud = false)
+   
+    public function vehicles($crud = false)
     {
-        // if ($this->order_state_id == 1) {
-            
-            return '<a target="_blank" class="btn btn-sm btn-link" href="/client-qr/' . urlencode($this->id) . '" data-toggle="tooltip" title="Just a demo custom button."><i class="la la-qrcode"></i> ' . trans('backpack::crud.model.printqr') . ' </a>';
-        // }
-
+        return '<a class="btn btn-sm btn-link" target="_blank" href="customer-vehicle?customer_id=' . urlencode($this->id) . '" data-toggle="tooltip" title="Just a demo custom button."><i class="la la-car"></i> ' . trans('backpack::crud.model.vehicles') . ' </a>';
     }
 
     public function scopeCustomer($query)
@@ -205,6 +202,11 @@ class User extends Authenticatable
     public function Transactions()
     {
         return $this->hasMany(Transaction::class, 'client_id', 'id');
+    }
+
+    public function CustomerVehicles()
+    {
+        return $this->hasMany(CustomerVehicle::class, 'customer_id', 'id');
     }
 
     public function subscribe()

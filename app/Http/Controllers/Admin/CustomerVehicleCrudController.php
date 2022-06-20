@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ClientRequest;
+use App\Http\Requests\CustomerVehicleRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class ClientCrudController
+ * Class CustomerVehicleCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class ClientCrudController extends CrudController
+class CustomerVehicleCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,18 +26,9 @@ class ClientCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\User::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/client');
-        CRUD::setEntityNameStrings(trans('backpack::crud.model.client'), trans('backpack::crud.model.clients'));
-        $this->crud->addClause('customer'); // apply local scope
-
-        // $this->crud->addClause('where', 'name', '=', 'car');
-
-        // $this->crud->addClause('whereName', 'car');
-
-        // $this->crud->addClause('whereHas', 'posts', function ($query) {
-        //     $query->activePosts();
-        // });
+        CRUD::setModel(\App\Models\CustomerVehicle::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/customer-vehicle');
+        CRUD::setEntityNameStrings(trans('backpack::crud.model.vehicle'), trans('backpack::crud.model.vehicles'));
     }
 
     /**
@@ -48,14 +39,26 @@ class ClientCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-
         CRUD::column('id')->label('#');
-        CRUD::column('name')->label(trans('backpack::crud.model.name'));
-        CRUD::column('phone')->label(trans('backpack::crud.model.mobile'));
+        CRUD::column('plate_number')->label(trans('backpack::crud.model.plate_number'));
+        CRUD::column('plate_image')->label(trans('backpack::crud.model.plate_image'));
+        CRUD::column('customer_id')->searchLogic('text')->label(trans('backpack::crud.model.name'));
+
+        $this->crud->addClause('customerVehicle');
+
+        // CRUD::column('vehicle_color');
+        // CRUD::column('vehicle_brand');
+        // CRUD::column('vehicle_model');
+        // CRUD::column('vehicle_model_year');
+        // CRUD::column('vehicle_type');
+        // CRUD::column('license_number');
+        // CRUD::column('license_expiration');
+
 
         // ========================================= BUTTONS ==================================================
 
-        CRUD::button('vehicles')->stack('line')->modelFunction('vehicles')->makeFirst();
+        CRUD::button('subscribe')->stack('line')->modelFunction('subscribe')->makeFirst();
+        CRUD::button('printQr')->stack('line')->modelFunction('printQr')->makeFirst();
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -72,11 +75,19 @@ class ClientCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ClientRequest::class);
+        CRUD::setValidation(CustomerVehicleRequest::class);
 
-        CRUD::field('name');
-        CRUD::field('phone');
-        CRUD::field('is_customer')->type('hidden')->value(1);
+
+        CRUD::field('Customer');
+        CRUD::field('plate_number');
+        CRUD::field('plate_image');
+        // CRUD::field('vehicle_color');
+        // CRUD::field('vehicle_brand');
+        // CRUD::field('vehicle_model');
+        // CRUD::field('vehicle_model_year');
+        // CRUD::field('vehicle_type');
+        // CRUD::field('license_number');
+        // CRUD::field('license_expiration');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -85,7 +96,7 @@ class ClientCrudController extends CrudController
          */
     }
 
-    /** 
+    /**
      * Define what happens when the Update operation is loaded.
      * 
      * @see https://backpackforlaravel.com/docs/crud-operation-update

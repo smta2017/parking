@@ -2,10 +2,9 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\CustomerAPIController;
+use App\Http\Controllers\API\PlanController as APIPlanController;
 use App\Http\Controllers\API\TransactionAPIController;
 use App\Http\Controllers\API\UserAPIController;
-use App\Http\Controllers\PlanController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +43,13 @@ Route::resource('users', UserAPIController::class);
 
 Route::resource('customers', CustomerAPIController::class);
 
-Route::post('subscriptions', [PlanController::class, 'createSubscription']);
+Route::post('subscriptions', [APIPlanController::class, 'createSubscription']);
 
 
 Route::resource('zones', App\Http\Controllers\API\ZoneAPIController::class);
+
+
+Route::resource('customer_vehcles', App\Http\Controllers\API\CustomerVehcleAPIController::class);
+
+
+Route::resource('customerVehicles', App\Http\Controllers\API\CustomerVehicleAPIController::class);

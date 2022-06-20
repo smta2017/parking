@@ -429,6 +429,280 @@
                 }
             }
         },
+        "/customerVehicles": {
+            "get": {
+                "tags": [
+                    "CustomerVehicle"
+                ],
+                "summary": "Get a listing of the CustomerVehicles.",
+                "description": "Get all CustomerVehicles",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/CustomerVehicle"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "CustomerVehicle"
+                ],
+                "summary": "Store a newly created CustomerVehicle in storage",
+                "description": "Store CustomerVehicle",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "CustomerVehicle that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CustomerVehicle"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CustomerVehicle"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/customerVehicles/{id}": {
+            "get": {
+                "tags": [
+                    "CustomerVehicle"
+                ],
+                "summary": "Display the specified CustomerVehicle",
+                "description": "Get CustomerVehicle",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of CustomerVehicle",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CustomerVehicle"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "CustomerVehicle"
+                ],
+                "summary": "Update the specified CustomerVehicle in storage",
+                "description": "Update CustomerVehicle",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of CustomerVehicle",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "CustomerVehicle that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CustomerVehicle"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CustomerVehicle"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "CustomerVehicle"
+                ],
+                "summary": "Remove the specified CustomerVehicle from storage",
+                "description": "Delete CustomerVehicle",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of CustomerVehicle",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/subscriptions": {
+            "post": {
+                "tags": [
+                    "Mobile-Api"
+                ],
+                "summary": "Create a newly subscription for a vehicle",
+                "description": "New Subscription",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "vehicle that should be stored",
+                        "required": false,
+                        "schema": {
+                            "example": {
+                                "customer_id": 15,
+                                "plan_id": 1
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/transactions": {
             "get": {
                 "tags": [
@@ -1118,59 +1392,55 @@
                     }
                 }
             }
-        },
-        "/subscriptions": {
-            "post": {
-                "tags": [
-                    "Mobile-Api"
-                ],
-                "summary": "Create a newly subscription for a customer",
-                "description": "New Subscription",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Customer that should be stored",
-                        "required": false,
-                        "schema": {
-                            "example": {
-                                "customer_id": 15,
-                                "plan_id": 1
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
         }
     },
     "definitions": {
+        "CustomerVehicle": {
+            "required": [
+                "customer_id"
+            ],
+            "properties": {
+                "plate_number": {
+                    "description": "plate_number",
+                    "type": "string"
+                },
+                "vehicle_color": {
+                    "description": "vehicle_color",
+                    "type": "string"
+                },
+                "vehicle_brand": {
+                    "description": "vehicle_brand",
+                    "type": "string"
+                },
+                "vehicle_model": {
+                    "description": "vehicle_model",
+                    "type": "string"
+                },
+                "vehicle_model_year": {
+                    "description": "vehicle_model_year",
+                    "type": "string"
+                },
+                "license_number": {
+                    "description": "license_number",
+                    "type": "string"
+                },
+                "license_expiration": {
+                    "description": "license_expiration",
+                    "type": "string",
+                    "format": "date"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "CheckIn": {
             "required": [
                 "plate_number"

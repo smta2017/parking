@@ -1,6 +1,6 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\Customer;
+use App\Models\User as Customer;
 use App\Repositories\CustomerRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
