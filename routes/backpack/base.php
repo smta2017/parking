@@ -48,8 +48,12 @@ function () {
 
     // if not otherwise configured, setup the "my account" routes
     if (config('backpack.base.setup_my_account_routes')) {
-        Route::get('edit-account-info', 'MyAccountController@getAccountInfoForm')->name('backpack.account.info');
-        Route::post('edit-account-info', 'MyAccountController@postAccountInfoForm')->name('backpack.account.info.store');
-        Route::post('change-password', 'MyAccountController@postChangePasswordForm')->name('backpack.account.password');
+        // Route::get('edit-account-info', 'MyAccountController@getAccountInfoForm')->name('backpack.account.info');
+        // Route::post('edit-account-info', 'MyAccountController@postAccountInfoForm')->name('backpack.account.info.store');
+        // Route::post('change-password', 'MyAccountController@postChangePasswordForm')->name('backpack.account.password');
     }
+    Route::crud('permission', 'PermissionCrudController');
+    Route::crud('role', 'RoleCrudController');
+    Route::crud('user', 'UserCrudController');
+
 });

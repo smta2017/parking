@@ -49,7 +49,4 @@ Route::post('subscriptions', [APIPlanController::class, 'createSubscription']);
 Route::resource('zones', App\Http\Controllers\API\ZoneAPIController::class);
 
 
-Route::resource('customer_vehcles', App\Http\Controllers\API\CustomerVehcleAPIController::class);
-
-
 Route::resource('customerVehicles', App\Http\Controllers\API\CustomerVehicleAPIController::class);

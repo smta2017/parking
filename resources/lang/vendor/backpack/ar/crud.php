@@ -165,6 +165,7 @@ return [
         'subscribes' => 'اشتراكات',
         'transaction' => 'الحجز',
         'transactions' => 'الحجوزات',
+        'phone' => 'موبايل',
 
         'plate_number' => 'رقم اللوحات',
         'plate_image' => 'صورة اللوحة',
