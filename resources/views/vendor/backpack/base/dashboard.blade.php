@@ -121,7 +121,9 @@ $widgets['before_content'][] = [
                             </td>    
                                 <td class="text-truncate">
                                     <span style="font-size: 3px;">{{$transaction->zone}}</span>
+                                    @if (isset($transaction->created_by))
                                     <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
+                                    @endif
                                 </td>
                                 <td class="text-truncate"><a href="{{$transaction->plate_img}}"  target="_blank" ><img src="{{$transaction->plate_img}}" alt="plate_image" width="60px" height="40px"></a></td>
                                 <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
@@ -147,13 +149,13 @@ $widgets['before_content'][] = [
 
                                 <td class="text-truncate">
                                     @if($transaction->type==2)
-                                         <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
+                                    <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
                                     @else
-                                        @if (!$transaction->checkout)
-                                        <i class="la la-clock"></i>
-                                        @else
-                                        <span>{{round($transaction->amount, 2)}}</span>
-                                        @endif
+                                    @if (!$transaction->checkout)
+                                    <i class="la la-clock"></i>
+                                    @else
+                                    <span>{{round($transaction->amount, 2)}}</span>
+                                    @endif
                                     @endif
                                 </td>
                             </tr>

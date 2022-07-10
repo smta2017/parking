@@ -166,7 +166,7 @@ return [
         'transaction' => 'الحجز',
         'transactions' => 'الحجوزات',
         'phone' => 'موبايل',
-
+        'national_id' => 'رقم البطاقة',
         'plate_number' => 'رقم اللوحات',
         'plate_image' => 'صورة اللوحة',
         'customer' => 'عميل',

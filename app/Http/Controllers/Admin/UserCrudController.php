@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Hash;
 class UserCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 
     public function setup()
@@ -40,6 +44,11 @@ class UserCrudController extends CrudController
                 'name'  => 'email',
                 'label' => trans('backpack::permissionmanager.email'),
                 'type'  => 'email',
+            ],
+            [
+                'name'  => 'national_id',
+                'label' => trans('backpack::crud.model.national_id'),
+                'type'  => 'string',
             ],
             [ // n-n relationship (with pivot table)
                 'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
@@ -168,6 +177,11 @@ class UserCrudController extends CrudController
             [
                 'name'  => 'phone',
                 'label' => trans('backpack::crud.model.phone'),
+                'type'  => 'text',
+            ],
+            [
+                'name'  => 'national_id',
+                'label' => trans('backpack::crud.model.national_id'),
                 'type'  => 'text',
             ],
             [
