@@ -30,6 +30,7 @@ class CustomerVehicleFactory extends Factory
             'vehicle_model' => $this->faker->word,
             'vehicle_model_year' => $this->faker->word,
             'vehicle_type' => "sidan",
+            'slot' => $this->faker->numberBetween(1, 10),
             'license_number' => $this->faker->word,
             'license_expiration' => $this->faker->date('Y-m-d H:i:s'),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),

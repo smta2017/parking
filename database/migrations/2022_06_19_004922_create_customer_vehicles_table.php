@@ -24,6 +24,7 @@ class CreateCustomerVehiclesTable extends Migration
             $table->string('vehicle_model')->nullable();
             $table->string('vehicle_model_year')->nullable();
             $table->enum('vehicle_type', ["sidan", "suv", "van", "bus", "minibus", "microbus"])->nullable()->default("sidan");
+            $table->string('slot')->nullable();
             $table->string('license_number')->nullable();
             $table->date('license_expiration')->nullable();
             $table->timestamps();

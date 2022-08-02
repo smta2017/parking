@@ -23,6 +23,7 @@ class CustomerVehicleResource extends JsonResource
             'vehicle_model' => $this->vehicle_model,
             'vehicle_model_year' => $this->vehicle_model_year,
             'vehicle_type' => $this->vehicle_type,
+            'slot' => $this->slot,
             'license_number' => $this->license_number,
             'license_expiration' => $this->license_expiration,
             'created_at' => $this->created_at,
