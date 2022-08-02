@@ -12,6 +12,7 @@
             {!! config('backpack.base.project_logo') !!}
             <h3 class="brand-text">{{ config('backpack.base.project_name') }}</h3>
             <span>نظام ساحات الانتظار</span>
+            <h3>{{\Auth::user()->zone_id}}</h3>
           </a>
         </li>
 

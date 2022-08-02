@@ -41,6 +41,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'general@client.com',
             'is_customer' => true
         ]);
+
+          // default Admin
+          \App\Models\Admin::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'zone_id' => 1
+        ]);
+
+
         \App\Models\User::factory(10)->create();
         \App\Models\Zone::factory(10)->create();
         \App\Models\Transaction::factory(100)->create();
