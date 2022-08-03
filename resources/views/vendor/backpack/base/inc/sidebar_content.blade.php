@@ -1,26 +1,24 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
 <!-- <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li> -->
-
-<li class=" nav-item"><a href="{{ backpack_url('dashboard') }}"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">{{__('dashboard.dashboard')}}</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
-
-</li>
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('transaction') }}'><i class='nav-icon la la-list'></i> {{__('dashboard.transactions')}}</a></li>
-<li class=" navigation-header">
-
-    <span data-i18n="nav.category.layouts"><strong>{{__('dashboard.roles')}}</strong> </span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Layouts"></i>
-
-</li>
-<!-- Users, Roles, Permissions -->
-<li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> {{__('dashboard.authentication')}}</a>
-    <ul class="nav-dropdown-items">
-        <li class="nav-item "><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>{{__('dashboard.users')}}</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-id-badge"></i> <span>{{__('dashboard.roles')}}</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>{{__('dashboard.permissions')}}</span></a></li>
-    </ul>
-</li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('plan-subscription') }}'><i class='nav-icon la la-question'></i> {{__('dashboard.plan_subscriptions')}}</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('client') }}'><i class='nav-icon la la-question'></i> {{__('backpack::crud.model.customers')}}</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('customer-vehicle') }}'><i class='nav-icon la la-question'></i> {{__('backpack::crud.model.vehicles')}}</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('admin') }}'><i class='nav-icon la la-question'></i> Admins</a></li>
+<h6 class="title"><i class="fa-solid fa-fw fa-calculator"></i> الأشتراكات و المشتركين</h6>
+            <ul class="list-unstyled my-2 px-2 list">
+                <li class="my-1"><a href="add-new-subscriber.html"><i class="fa-solid fa-fw fa-user"></i> أضافه أشتراك</a></li>
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-trash-can"></i> حذف مشترك</a></li>
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-arrows-rotate"></i> تجديد عضويه</a></li>
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-ban"></i> حظر دخول</a></li>
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-flag"></i> أعاده تفعيل</a></li>
+            </ul>
+            
+            <h6 class="title"><i class="fa-solid fa-fw fa-users"></i> الموظفين و العاملين</h6>
+            <ul class="list-unstyled my-2 px-2 list">
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-user-plus"></i> أنشاء ملف موظف جديد</a></li>
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-file"></i> ملفات العاملين</a></li>
+            </ul>
+            
+            <h6 class="title"><i class="fa-solid fa-fw fa-hand-holding-dollar"></i> الأرباح و الماليات</h6>
+            <ul class="list-unstyled my-2 px-2 list">
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-cloud-arrow-up"></i> توريد الأرباح</a></li>
+                <li class="my-1"><a href="#"><i class="fa-solid fa-fw fa-money-bill-transfer"></i> توريدات متأخره</a></li>
+            </ul>
+            
+            <h6 class="title"><i class="fa-solid fa-fw fa-hand-holding-dollar"></i> التقارير و الأحصائيات</h6>

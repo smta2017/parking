@@ -1,214 +1,293 @@
 @extends(backpack_view('blank'))
 
-
-@php
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-6',
-'class' => 'card text-white bg-danger mb-2',
-'value' => $dashboardInfo['current_day_collected'],
-'description' => __("dashboard.collected_day"),
-'progress' => 57, // integer,
-'icon' => 'la la-money',
-'progressClass' => 'danger'
-];
-
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-danger mb-2',
-'value' => $dashboardInfo['total_reserved'],
-'description' => __("dashboard.totalReserved"),
-'progress' => 57, // integer,
-'icon' => 'la la-battery-half',
-'progressClass' => 'blue-grey'
-];
-
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-danger mb-2',
-'value' => $dashboardInfo['available'],
-'description' => __("dashboard.available"),
-'progress' => 57, // integer,
-'icon' => 'la la-battery-empty',
-'progressClass' => 'blue-grey'
-];
-
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-darck mb-2',
-'value' => $dashboardInfo['current_day_checkIn_count'],
-'description' => __("dashboard.current_day_checkIn_count"),
-'progress' => 57, // integer,
-'icon' => 'icon-arrow-down',
-'progressClass' => 'info'
-];
-
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-primary mb-2',
-'value' => $dashboardInfo['current_day_checkOut_count'],
-'description' => __("dashboard.current_day_checkOut_count"),
-'progress' => 57, // integer,
-'icon' => 'icon-arrow-up',
-'progressClass' => 'warning'
-];
-
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-danger mb-2',
-'value' => $dashboardInfo['reserved_persntage'].'%',
-'description' => __("dashboard.reserved_persntage") ,
-'progress' => $dashboardInfo['reserved_persntage'], // integer,
-'icon' => 'icon-hourglass',
-'progressClass' => 'success'
-];
-
-$widgets['before_content'][] = [
-'type' => 'progress',
-'wrapperClass' => 'col-sm-6 col-lg-3',
-'class' => 'card text-white bg-danger mb-2',
-'value' => $dashboardInfo['capacity'],
-'description' => __("dashboard.capacity"),
-'progress' => 57, // integer,
-'icon' => 'la la-car',
-'progressClass' => 'primary'
-];
-
-@endphp
-
+ 
 @section('content')
 
-<!-- Recent Transactions -->
-<div class="row">
-    <div id="recent-transactions" class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">{{__("dashboard.recent_transactions")}}</h4>
-                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <!-- <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right" href="invoice-summary.html" target="_blank">Invoice Summary</a></li> -->
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="table-responsive">
-                    <table id="recent-orders" class="table table-hover table-xl mb-0">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">#</th>
-                                <th class="border-top-0">{{__("dashboard.user")}}</th>
-                                <th class="border-top-0">{{__("dashboard.plate_image")}}</th>
-                                <th class="border-top-0">{{__("dashboard.plate_number")}}</th>
-                                <th class="border-top-0">{{__("dashboard.checkin")}}</th>
-                                <th class="border-top-0">{{__("dashboard.checkout")}}</th>
-                                <th class="border-top-0">{{__("dashboard.status")}}</th>
-                                <th class="border-top-0">{{__("dashboard.reservation")}}</th>
-                                <th class="border-top-0">{{__("dashboard.amount")}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($transactions as $transaction)
-                            <tr>
-                            <td>
-                                <span style="font-size: 10px;">{{$transaction->id}}</span>
+  
+        
+<div class="content my-3">
+            <div class="container-xxl">
 
-                            </td>    
-                                <td class="text-truncate">
-                                    <span style="font-size: 3px;">{{$transaction->zone}}</span>
-                                    @if (isset($transaction->created_by))
-                                    <i class="la la-dot-circle-o success font-medium-1 mr-1"></i><span style="font-size: 12px;"> {{$transaction->created_by->name}}</span>
-                                    @endif
-                                </td>
-                                <td class="text-truncate"><a href="{{$transaction->plate_img}}"  target="_blank" ><img src="{{$transaction->plate_img}}" alt="plate_image" width="60px" height="40px"></a></td>
-                                <td class="text-truncate"><a href="#">{{$transaction->plate_number}}</a></td>
-                                <td>{{$transaction->checkin}}</td>
-                                <td>{{$transaction->checkout}}</td>
-                                <td>
-                                    @if ($transaction->checkout)
-                                    <button type="button" class="btn btn-sm btn-success round">{{__("dashboard.checkout")}}</button>
-                                    @else
-                                    <button type="button" class="btn btn-sm btn-danger round">{{__("dashboard.checkin")}}</button>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if (!$transaction->checkout)
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: {{explode(':',$transaction->total_time->hours)[0]}}%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="25"></div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div style="font-size: 14px;"><strong>العمليات داخل ساحه الأنتظار</strong></div>
+                                <span class="text-danger" style="font-size:10px">عمليات الدخول و الخروج لجميع المركبات</span>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="ابحث-برقم اللوحات المعدنيه / برقم الفاتوره" />
+                                    <button class="input-group-text btn btn-info text-light" id="basic-addon1">ابحث</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-1 text-center">
+                                <div class="dropdown">
+                                    <button style="font-size:13px" class="btn btn-warning dropdown-toggle rounded-pill" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ترتيب حسب
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">اسم الموظف</a></li>
+                                        <li><a class="dropdown-item" href="#">نوع العملية</a></li>
+                                        <li><a class="dropdown-item" href="#">حالة المركبة</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-7" style="overflow: auto;">
+                        <table class="table table-striped ta-index">
+                            <tr>
+                                <th>رقم الفاتوره</th>
+                                <th>أسم الموظف</th>
+                                <th>اللوحات المعدنيه</th>
+                                <th>رقم اللوحات</th>
+                                <th>دخول</th>
+                                <th>خروج</th>
+                                <th>الحاله</th>
+                                <th>الباكيه</th>
+                                <th>مده الأنتظار</th>
+                                <th>التكلفه</th>
+                            </tr>
+
+                            <tr>
+                                <td>185</td>
+                                <td>محمود السيد</td>
+                                <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
+                                <td><strong class="text-primary">و ب ص 194</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">11 : 25 AM</strong></td>
+                                <td><strong class="text-info">تم الخروج</strong></td>
+                                <td>61</td>
+                                <td><strong class="text-danger">1 : 10</strong></td>
+                                <td><strong class="text-info">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td>185</td>
+                                <td>محمود السيد</td>
+                                <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
+                                <td><strong class="text-primary">و ب ص 194</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">11 : 25 AM</strong></td>
+                                <td><strong class="text-info">تم الخروج</strong></td>
+                                <td>61</td>
+                                <td><strong class="text-danger">4 ساعات</strong></td>
+                                <td><strong class="text-info">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td>185</td>
+                                <td>محمود السيد</td>
+                                <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
+                                <td><strong class="text-primary">و ب ص 194</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">11 : 25 AM</strong></td>
+                                <td><i class="fa-solid fa-clock"></i></td>
+                                <td>61</td>
+                                <td><strong class="text-danger">4 ساعات</strong></td>
+                                <td><strong class="text-info">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td>185</td>
+                                <td>محمود السيد</td>
+                                <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
+                                <td><strong class="text-primary">و ب ص 194</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">11 : 25 AM</strong></td>
+                                <td><strong class="text-info">تم الخروج</strong></td>
+                                <td>61</td>
+                                <td><strong class="text-danger">4 ساعات</strong></td>
+                                <td><strong class="text-info">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td>185</td>
+                                <td>محمود السيد</td>
+                                <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
+                                <td><strong class="text-primary">و ب ص 194</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">11 : 25 AM</strong></td>
+                                <td><strong class="text-info">تم الخروج</strong></td>
+                                <td>61</td>
+                                <td><strong class="text-danger">4 ساعات</strong></td>
+                                <td><strong class="text-info">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td>185</td>
+                                <td>محمود السيد</td>
+                                <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
+                                <td><strong class="text-primary">و ب ص 194</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">11 : 25 AM</strong></td>
+                                <td><strong class="text-info">تم الخروج</strong></td>
+                                <td>61</td>
+                                <td><strong class="text-danger">4 ساعات</strong></td>
+                                <td><strong class="text-info">10 جنيهات</strong></td>
+                            </tr>
+                            
+                        </table>
+
+                        <div><strong>عمليات موظفين ساحه الأنتظار</strong></div>
+                        <span class="text-danger" style="font-size:11px">جميع عمليات الموظفين العاملين الأن</span>
+                        <table class="table table-striped ta-index">
+                            <tr>
+                                <th>#</th>
+                                <th>أسم الموظف</th>
+                                <th>رقم الموبيل</th>
+                                <th>رقم الرخصه</th>
+                                <th>ساحه الأنتظار</th>
+                                <th>الحاله</th>
+                                <th>حضور</th>
+                                <th>حاله الماكينه</th>
+                                <th>المبالغ المحصله</th>
+                            </tr>
+                            <tr>
+                                <td><img src="/asset/img/face.webp" width="30" height="20" alt=""></td>
+                                <td>محمود السيد</td>
+                                <td><strong class="text-primary">01021464469</strong></td>
+                                <td><strong class="text-primary">123456789</strong></td>
+                                <td><strong class="text-primary">بنها</strong></td>
+                                <td><strong class="text-primary">في الخدمه</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-primary">متصل</strong></td>
+                                <td><strong class="text-primary">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td><img src="/asset/img/face.webp" width="30" height="20" alt=""></td>
+                                <td>محمود السيد</td>
+                                <td><strong class="text-primary">01021464469</strong></td>
+                                <td><strong class="text-primary">123456789</strong></td>
+                                <td><strong class="text-primary">بنها</strong></td>
+                                <td><strong class="text-primary">في الخدمه</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-danger">كسول</strong></td>
+                                <td><strong class="text-primary">10 جنيهات</strong></td>
+                            </tr>
+                            <tr>
+                                <td><img src="/asset/img/face2.webp" width="30" height="20" alt=""></td>
+                                <td>محمود السيد</td>
+                                <td><strong class="text-primary">01021464469</strong></td>
+                                <td><strong class="text-primary">123456789</strong></td>
+                                <td><strong class="text-primary">بنها</strong></td>
+                                <td><strong class="text-primary">في الخدمه</strong></td>
+                                <td><strong class="text-success">11 : 25 AM</strong></td>
+                                <td><strong class="text-primary">متصل</strong></td>
+                                <td><strong class="text-primary">10 جنيهات</strong></td>
+                            </tr>
+                            
+                        </table>
+                        <br />
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="row">
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-warning p-1 rounded-3 mb-5">
+                                    <div class="title text-center">المركبات المنتظره</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-car"></i>
                                     </div>
-                                    <span style="font-size: 11px;">{{$transaction->checkin_hu}}</span>
-                                    @else
-                                    <span class="badge badge badge-success">{{$transaction->total_time->hours}}</span>
-                                    @endif
-                                </td>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-success p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">دخول المركبات</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-circle-down"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-danger p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">خروج المركبات</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-circle-up"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-info p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">ربح اليوم</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-dollar-sign"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-primary p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">عدد الزائرين</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-users"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-secondary p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">عدد المشتركين</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-hand-holding-dollar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-danger p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">أشتراكات منتهيه</div>
+                                    <div class="data-number">
+                                        505
+                                        <i class="fa-solid fa-fw fa-circle-dollar-to-slot"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-dark p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">أشتراكات محظوره</div>
+                                    <div class="data-number">
+                                        8
+                                        <i class="fa-solid fa-fw fa-ban"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-xl-4">
+                                <div class="box-index bg-primary p-1 rounded-3 text-light mb-5">
+                                    <div class="title text-center">أشتركات قيد التفعيل</div>
+                                    <div class="data-number">
+                                        8
+                                        <i class="fa-solid fa-fw fa-calendar-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="in-map">
+                                    <div><strong>خريطه عمليات ساحه الأنتظار</strong></div>
+                                    <p class="text-danger" style="font-size: 11px;">عمليات ساحات الأنتظار الفرعيه</p>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55027.07928071342!2d31.153401963256975!3d30.45898651056513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145875f6592ee989%3A0xa0f7a3872335c0ce!2sBanha%2C%20Qism%20Banha%2C%20Banha%2C%20Al%20Qalyubia%20Governorate!5e0!3m2!1sen!2seg!4v1659446164105!5m2!1sen!2seg" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+                            
+                        </div><!-- End Row -->
+                    </div>
+                </div><!-- End Row -->
 
-                                <td class="text-truncate">
-                                    @if($transaction->type==2)
-                                    <button type="button" class="btn btn-sm btn-info round">{{__("dashboard.subscribe")}}</button>
-                                    @else
-                                    @if (!$transaction->checkout)
-                                    <i class="la la-clock"></i>
-                                    @else
-                                    <span>{{round($transaction->amount, 2)}}</span>
-                                    @endif
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
 
-
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
-    </div>
-</div>
-<!--/ Recent Transactions -->
 
-<!-- Products sell and New Orders -->
-<div class="row match-height">
-    <div class="col-xl-12 col-4" id="ecommerceChartView">
-        <div class="card card-shadow">
-            <div class="card-header card-header-transparent py-20">
-
-                <ul class="nav nav-pills nav-pills-rounded chart-action float-right btn-group" role="group">
-                    <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay">{{__('dashboard.day')}}</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">{{__('dashboard.week')}}</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">{{__('dashboard.month')}}</a></li>
-                </ul>
-            </div>
-            <div class="widget-content tab-content bg-white p-20">
-                <div class="ct-chart tab-pane active scoreLineShadow" id="scoreLineToDay"></div>
-                <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToWeek"></div>
-                <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToMonth"></div>
-            </div>
-        </div>
-    </div>
-    <!-- <div class="col-12 col-md-4">
-            <div class="card">
-              <div class="card-content">
-                <div class="earning-chart position-relative">
-                  <div class="chart-title position-absolute mt-2 ml-2">
-                    <h1 class="display-4">$1,596</h1>
-                    <span class="text-muted">Total Earning</span>
-                  </div>
-                  <canvas id="earning-chart" class="height-450"></canvas>
-                  <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
-                    <a href="#" class="btn round btn-danger mr-1 btn-glow">Statistics <i class="ft-bar-chart"></i></a>
-                    <span class="text-muted">for the <a href="#" class="danger darken-2">last year.</a></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-</div>
-<!--/ Products sell and New Orders -->
 
 @endsection
 

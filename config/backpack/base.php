@@ -45,40 +45,45 @@ return [
         // 'packages/backpack/base/css/bundle.css', // has primary color electric purple (backpack default)
         // 'packages/backpack/base/css/blue-bundle.css', // has primary color blue
 
-        'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700',
-        'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css',
-        
+
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css',
+        '/asset/css/style.css',
+
+        // 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700',
+        // 'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css',
 
 
 
-        'app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css',
+
+        // 'app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css',
 
 
 
-        
-        (config('app.locale') == 'ar') ?  'app-assets/css-rtl/vendors.css' : 'app-assets/css/vendors.css',
-        'app-assets/vendors/css/weather-icons/climacons.min.css',
-        'app-assets/fonts/meteocons/style.css',
-        'app-assets/vendors/css/charts/morris.css',
-        'app-assets/vendors/css/charts/chartist.css',
-        'app-assets/vendors/css/charts/chartist-plugin-tooltip.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/app.css' : 'app-assets/css/app.css',
-        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/custom-rtl.css' : 'app-assets/css/custom.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/menu/menu-types/vertical-content-menu.css' : 'app-assets/css/core/menu/menu-types/vertical-content-menu.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/colors/palette-gradient.css' : 'app-assets/css/core/colors/palette-gradient.css',
-        'app-assets/fonts/simple-line-icons/style.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/timeline.css' : 'app-assets/css/pages/timeline.css',
-        (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/dashboard-ecommerce.css' : 'app-assets/css/pages/dashboard-ecommerce.css',
-        (config('app.locale') == 'ar') ? 'assets/css/style-rtl.css' : 'assets/css/style.css',
 
-        // Here's what's inside the bundle:
-        // 'packages/@digitallyhappy/backstrap/css/style.min.css',
-        // 'packages/animate.css/animate.min.css',
-        // 'packages/noty/noty.css',
+        // (config('app.locale') == 'ar') ?  'app-assets/css-rtl/vendors.css' : 'app-assets/css/vendors.css',
+        // 'app-assets/vendors/css/weather-icons/climacons.min.css',
+        // 'app-assets/fonts/meteocons/style.css',
+        // 'app-assets/vendors/css/charts/morris.css',
+        // 'app-assets/vendors/css/charts/chartist.css',
+        // 'app-assets/vendors/css/charts/chartist-plugin-tooltip.css',
+        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/app.css' : 'app-assets/css/app.css',
+        // // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/custom-rtl.css' : 'app-assets/css/custom.css',
+        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/menu/menu-types/vertical-content-menu.css' : 'app-assets/css/core/menu/menu-types/vertical-content-menu.css',
+        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/core/colors/palette-gradient.css' : 'app-assets/css/core/colors/palette-gradient.css',
+        // 'app-assets/fonts/simple-line-icons/style.css',
+        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/timeline.css' : 'app-assets/css/pages/timeline.css',
+        // (config('app.locale') == 'ar') ? 'app-assets/css-rtl/pages/dashboard-ecommerce.css' : 'app-assets/css/pages/dashboard-ecommerce.css',
+        // (config('app.locale') == 'ar') ? 'assets/css/style-rtl.css' : 'assets/css/style.css',
 
-        // Load the fonts separately (so that you can replace them at will):
-        // 'packages/source-sans-pro/source-sans-pro.css',
-        'packages/line-awesome/css/line-awesome.min.css',
+        // // Here's what's inside the bundle:
+        // // 'packages/@digitallyhappy/backstrap/css/style.min.css',
+        // // 'packages/animate.css/animate.min.css',
+        // // 'packages/noty/noty.css',
+
+        // // Load the fonts separately (so that you can replace them at will):
+        // // 'packages/source-sans-pro/source-sans-pro.css',
+        // 'packages/line-awesome/css/line-awesome.min.css',
 
         // Example (the fonts above, loaded from CDN instead)
         // 'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css',
@@ -96,7 +101,7 @@ return [
     // ------
     // HEADER
     // ------
-    
+
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
     'project_logo'   => ' <img class="brand-logo" alt="modern admin logo" src="/app-assets/images/ico/icon.png">',
@@ -150,33 +155,35 @@ return [
     'scripts' => [
         // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
         // 'packages/backpack/base/js/bundle.js',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p',
+        '/asset/js/jquery.min.js',
+        '/asset/js/main.js',
+
+        // 'app-assets/vendors/js/vendors.min.js',
+        // 'app-assets/vendors/js/ui/headroom.min.js',
+        // 'app-assets/vendors/js/charts/chartist.min.js',
+        // 'app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js',
+        // 'app-assets/vendors/js/charts/raphael-min.js',
+        // 'app-assets/vendors/js/charts/morris.min.js',
+        // 'app-assets/vendors/js/timeline/horizontal-timeline.js',
+        // 'app-assets/js/core/app-menu.js',
+        // 'app-assets/js/core/app.js',
+        // 'app-assets/js/scripts/customizer.js',
+        // 'app-assets/js/scripts/pages/dashboard-ecommerce.js',
+        // 'app-assets/js/scripts/pages/dashboard-sales.js',
 
 
-        'app-assets/vendors/js/vendors.min.js',
-        'app-assets/vendors/js/ui/headroom.min.js',
-        'app-assets/vendors/js/charts/chartist.min.js',
-        'app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js',
-        'app-assets/vendors/js/charts/raphael-min.js',
-        'app-assets/vendors/js/charts/morris.min.js',
-        'app-assets/vendors/js/timeline/horizontal-timeline.js',
-        'app-assets/js/core/app-menu.js',
-        'app-assets/js/core/app.js',
-        'app-assets/js/scripts/customizer.js',
-        'app-assets/js/scripts/pages/dashboard-ecommerce.js',
-        'app-assets/js/scripts/pages/dashboard-sales.js',
 
+        // 'app-assets/vendors/js/charts/chart.min.js',
+        // 'app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js',
 
- 
-        'app-assets/vendors/js/charts/chart.min.js',
-        'app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js',
-
-        // examples (everything inside the bundle, loaded from CDN)
-        // 'https://code.jquery.com/jquery-3.4.1.min.js',
-        // 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
-        // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
-        // 'https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js',
-        // 'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
-        'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
+        // // examples (everything inside the bundle, loaded from CDN)
+        // // 'https://code.jquery.com/jquery-3.4.1.min.js',
+        // // 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
+        // // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
+        // // 'https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js',
+        // // 'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+        // 'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
         // 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js'
 
         // examples (VueJS or React)
