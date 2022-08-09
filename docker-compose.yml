@@ -2,26 +2,33 @@ version: '3.3'
 
 services:
     app:
-        build:
-            context: .
-            dockerfile: .docker/app/Dockerfile
-        image: 'shouts.dev/laravel'
-        container_name: park2-app
+        build: ./docker/app
+        container_name: park_app
         ports:
-            - "8002:80"
+            - "9000:9000"
         volumes:
             - ./:/var/www/html
         networks:
-            - park2-network
-        depends_on:
-            - mysql
+            - park-network
+
+    nginx:
+        container_name: park_nginx
+        image: nginx:stable-alpine
+        ports:
+            - "8080:80"
+        volumes:
+           - ./:/var/www/html
+           - ./docker/nginx:/etc/nginx/conf.d
+        networks:
+            - park-network
+
     mysql:
         image: mysql
-        container_name: park2-db
+        container_name: park-db
         restart: unless-stopped
         tty: true
         ports:
-            - "3308:3306"
+            - "3306:3306"
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -31,8 +38,8 @@ services:
         volumes:
             - ./.docker/mysql:/var/lib/mysql
         networks:
-            - park2-network
+            - park-network
 
 networks:
-    park2-network:
+    park-network:
         driver: bridge
