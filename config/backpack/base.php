@@ -154,8 +154,8 @@ return [
     // JS files that are loaded in all pages, using Laravel's asset() helper
     'scripts' => [
         // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
-        // 'packages/backpack/base/js/bundle.js',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p',
+        'packages/backpack/base/js/bundle.js',
+        // 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p',
         '/asset/js/jquery.min.js',
         '/asset/js/main.js',
 
@@ -184,7 +184,7 @@ return [
         // // 'https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js',
         // // 'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
         // 'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
-        // 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js'
+        'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js'
 
         // examples (VueJS or React)
         // 'https://unpkg.com/vue@2.4.4/dist/vue.min.js',

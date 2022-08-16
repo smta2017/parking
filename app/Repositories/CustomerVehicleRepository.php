@@ -21,6 +21,7 @@ class CustomerVehicleRepository extends BaseRepository
         'plate_number',
         'vehicle_color',
         'vehicle_brand',
+        'slot',
         'vehicle_model',
         'vehicle_model_year',
         'vehicle_type',

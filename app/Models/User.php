@@ -145,6 +145,9 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'phone',
+        'phone2',
+        'address',
+        'address2',
         'national_id',
         'dob',
         'avatar',
@@ -175,6 +178,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'phone' => 'string',
+        'phone2' => 'string',
+        'address' => 'string',
+        'address2' => 'string',
         'dop' => 'date',
         'avatar' => 'string',
         'phone_verified_at' => 'datetime',
@@ -188,7 +194,7 @@ class User extends Authenticatable
         'facebook_id' => 'string',
         'remember_token' => 'string'
     ];
-   
+
     public function vehicles($crud = false)
     {
         return '<a class="btn btn-sm btn-link" target="_blank" href="customer-vehicle?customer_id=' . urlencode($this->id) . '" data-toggle="tooltip" title="Just a demo custom button."><i class="la la-car"></i> ' . trans('backpack::crud.model.vehicles') . ' </a>';
@@ -201,7 +207,7 @@ class User extends Authenticatable
 
     public function Transactions()
     {
-        return $this->hasMany(Transaction::class, 'client_id', 'id');
+        return $this->hasMany(Transaction::class, 'customer_id', 'id');
     }
 
     public function CustomerVehicles()
@@ -211,7 +217,7 @@ class User extends Authenticatable
 
     public function subscribe()
     {
-        return $this->morphMany('App\Models\PlanSubscription','subscriber');
+        return $this->morphMany('App\Models\PlanSubscription', 'subscriber');
     }
 
 

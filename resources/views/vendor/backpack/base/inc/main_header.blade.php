@@ -1,72 +1,70 @@
 <div class="top-nav">
-  <div class="container-xxl">
-    <div class="row">
+            <div class="container-xxl">
+                <div class="row">
+                    
+                    <div class="col-md-3 col-xl-2">
+                        <div class="top-nav-logo py-3">
+                            <img src="/asset/img/top-logo.webp" class="float-start me-2" alt="" />
+                            <span style="margin-top:12px;display:inline-block;">ديوان عام محافظه القاهره</span><br />
+                            <strong>نظام ساحات الأنتظار</strong>
+                        </div>
+                    </div>
 
-      <div class="col-md-3 col-xl-2">
-        <div class="top-nav-logo py-3">
-          <img src="/asset/img/top-logo.webp" class="float-start me-2 mt-2" alt="" />
-          <span>ديوان عام محافظه القاهره</span><br />
-          <strong>نظام ساحات الأنتظار</strong>
-        </div>
-      </div>
+                    <div class="col-md-3 col-xl-2">
+                        <div class="text-center py-3 date-time">
+                            <span>
+                                <span style="color:#FEBE0A;">التوقيت الأن</span> <br />
+                                <span>11:08 AM</span>
+                            </span>
+                            <span>
+                                <span style="color:#FEBE0A;">تاريخ اليوم</span> <br />
+                                <span>02/08/2022</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 col-xl-2 text-center">
+                        <div class="box py-3 select">
+                            <h6 style="color:#FEBE0A;">أختار ساحه الأنتظار</h6>
+                            <select class="form-control p-0">
+                                <option value="">ساحة العبور</option>
+                                <option value="">ساحة المنتزه</option>
+                                <option value="">ساحة وسط البلد</option>
+                            </select>
+                        </div>
+                    </div>
 
-      <div class="col-md-3 col-xl-2">
-        <div class="text-center py-3">
-          <span style="display: inline-block; margin: 0 5px;">
-            <strong>التوقيت الأن</strong> <br />
-            <span>11:08 AM</span>
-          </span>
-          <span style="display: inline-block; margin: 0 5px;">
-            <strong>تاريخ اليوم</strong> <br />
-            <span>02/08/2022</span>
-          </span>
-        </div>
-      </div>
+                    <div class="col-md-3 col-xl-2">
+                        <span class="back">
+                            النظام تحت التجربه و الأختبار
+                            <a href="{{ backpack_url('logout') }}">خروج</a> 
+                        </span>
 
-      <div class="col-md-3 col-xl-2">
-        <div class="box text-center py-3">
-          <h6>أختار ساحه الأنتظار</h6>
-          <select class="form-control">
-            <option value="">ساحة العبور</option>
-            <option value="">ساحة المنتزه</option>
-            <option value="">ساحة وسط البلد</option>
-          </select>
-        </div>
-      </div>
+                    </div>
 
-      <div class="col-md-3 col-xl-2">
-        <div class="demo text-center py-3">
-          <span class="back">
-            <span class="title">النظام تحت التجربه و الأختبار</span>
-          </span>
-        </div>
-      </div>
+                    <div class="col-md-4">
+                        <div class="box text-end py-3 last-box">
+                            <img src="/asset/img/255.webp" alt="" />
+                            <div class="box select2">
+                                <select class="form-control">
+                                    <option value="">شركه الساحات الحديثه</option>
+                                </select>
+                            </div>
 
-      <div class="col-md-4">
-        <div class="box text-end py-3">
-          <img src="/asset/img/255.webp" alt="" />
-          <div class="dropdown" style="display: inline-block;">
-            <button class="btn dropdown-toggle" id="top-btn" data-bs-toggle="dropdown">
-              الساحات الحديثة
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="top-btn">
-              <li><a class="dropdown-item" href="#">تسجيل خروج</a></li>
-            </ul>
-          </div>
+                            <img src="https://static.wixstatic.com/media/c24732_da6335432f4740f68474c87a3b32d1ff~mv2.png/v1/fill/w_120,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Picture1sssss_edited_edited.png" class="mt-2" alt="" />
+                        </div>
+                    </div>
 
-          <img src="/asset/img/Picture.webp" class="mt-2" alt="" />
-        </div>
-      </div>
+                </div>
+            </div><!-- End Container -->
+        </div><!-- End top nav -->
 
-    </div>
-  </div><!-- End Container -->
-</div><!-- End top nav -->
-<div class="main-menu py-2">
+        <div class="main-menu py-2">
             <div class="container-xxl">
                 <div class="row">
                     <div class="col-md-7">
 
-                        <ul class="list-inline mb-0">
+                        <ul class="list-inline mt-1 mb-0">
                             <li class="list-inline-item">
                                 <span class="toggle-menu text-light">
                                     <i class="fa-solid fa-bars"></i>
@@ -82,12 +80,13 @@
                             </li>
                             <li class="list-inline-item">
                                 <span>دخول</span>
-                                <span class="text-success mx-2"><strong>651 <i class="fa-solid fa-angles-down"></i></strong></span>
+                                <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;transform:rotate(90deg)" />
                             </li>
                             
                             <li class="list-inline-item">
                                 <span>خروج</span>
-                                <span class="text-danger mx-2"><strong>300 <i class="fa-solid fa-angles-up"></i></strong></span>
+                                <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;filter:invert(1);transform:rotate(270deg)" />
+                                <!-- <span class="text-danger mx-2"><strong>300 <i class="fa-solid fa-angles-up"></i></strong></span> -->
                             </li>
                             
                             <li class="list-inline-item">
@@ -106,7 +105,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-5 text-end">
                         <ul class="list-inline mb-0">
                             
                             <li class="list-inline-item">
@@ -134,6 +133,8 @@
             </div>
         </div><!-- End main-menu -->
 
+        
+      
 
 <script>
   setInterval(function() {

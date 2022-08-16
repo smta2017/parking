@@ -27,6 +27,7 @@ class ZoneFactory extends Factory
             'manager' => $this->faker->word,
             'phone' => $this->faker->word,
             'capacity' => $this->faker->numberBetween(10,50),
+            'is_closed' => $this->faker->boolean(),
             'hour_rate' => $this->faker->numberBetween(5,10),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')

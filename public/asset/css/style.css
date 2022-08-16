@@ -2,6 +2,7 @@
 /* Start Global */
 body {
     font-family: 'Tajawal', sans-serif !important;
+    /* zoom: 90%; */
 }
 .text-success {
     color: #5EE08A !important;
@@ -26,9 +27,9 @@ img {
 .block-area::placeholder {
     color: #fff;  
 }
-/* .table-striped > tbody > tr:nth-of-type(odd)>* {
-    background: #dae6f7 !important;
-} */
+.pagination {
+    justify-content: center;
+}
 .show-img {
     position: fixed;
     width: 100%;
@@ -52,62 +53,104 @@ img {
     background-image: url('/asset/img/top-nav.webp');
     background-size: 100% 100%;
     color: #FFFFFF;
-    /* overflow: hidden; */
+    height: 85px;
+    overflow: hidden;
 }
 .top-nav .top-nav-logo {
     overflow: hidden;
+}
+.top-nav .top-nav-logo img {
+    width: 36px;
+    height: 54px;
+    object-fit: cover;
 }
 .top-nav .top-nav-logo span {
     font-size: 11px;
 }
 .top-nav .box select {
     background: none;
-    border: 1px solid #4f4f4f;
+    border: 0;
     color: #FFF;
-    text-align: center;
     box-shadow: none;
+    font-size: 12px;
+}
+.top-nav .select h6 {
+    font-size: 12px;
+}
+.top-nav .select,
+.top-nav .select2 {
+    position: relative;
+    display: inline-block;
+}
+.top-nav .select2 {
+    margin: 0 0 30px 20px;
+}
+.top-nav .select::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f107";
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+}
+.top-nav .select2::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f107";
+    position: absolute;
+    left: -8px;
+    bottom: 5px;
 }
 .top-nav .box option{
     color: #000;
 }
-.top-nav .demo {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-}
-.top-nav .demo .back{
+.top-nav .back{
+    clip-path: polygon(49% 0, 100% 18%, 59% 100%, 3% 85%);
     background: #ff4040;
-    position: absolute;
-    top: -62px;
-    right: 50%;
-    transform: rotate(26deg);
-    height: 210px;
-    width: 130px;
-    margin-right: -65px;
+    height: 140px;
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-.top-nav .demo .title {
-    font-size: 11px;
-    transform: rotate(336deg);
+    align-items: center;
+    width: 321px;
+    transform: translateY(-25px);
+    font-size: 13px;
+    font-weight: bold;
 }
 .top-nav .dropdown-toggle {
     background: none;
     color: #FFF;
     box-shadow: none;
 }
+.date-time > span {
+    margin: 0 6px !important;
+    display: inline-block !important;
+    font-size: 12px;
+}
 @media (max-width: 768px) {
-    .top-nav .demo .back{
-        background: #ff4040;
-        position: static;
-        transform: unset;
-        height: auto;
+    .top-nav .back{
+        clip-path: unset;
+        padding: 0;
+        margin: 20px 0 -30px;
+        height: 50px;
         width: 100%;
-        margin: 0;
-        display: block;
-        padding: 10px;
     }
+    .top-nav {
+        height: auto !important;
+        overflow: auto;
+    }
+    .top-nav .select {
+        display: block;
+    }
+    .top-nav .box select {
+        text-align: center;
+    }
+    .top-nav .select::after {
+        left: 40px !important;
+    }
+    .date-time > span {
+        margin: 5px 40px !important;
+    }
+    
 }
 /* End top-nav */
 
@@ -124,9 +167,9 @@ img {
     cursor: pointer;
 }
 .main-menu .custom-btn {
-    color: #FFF;
+    color: #000;
     background: #ff9200;
-    padding: 0 10px;
+    padding: 5px 18px;
     border-radius: 20px;
     display: inline-block;
 }
@@ -141,7 +184,7 @@ img {
 aside {
     position: fixed;
     top: 0;
-    height: 100vh;
+    height: 100%;
     background-color: #ff9200;
     overflow: auto;
     width: 0;
@@ -157,6 +200,9 @@ aside .title {
     padding: 10px;
     text-align: center;
     font-size: 15px;
+}
+aside .title a {
+    color: #FFF;
 }
 aside .list a {
     color: #000;
@@ -180,8 +226,12 @@ aside .over-lay {
 /* End aside */
 
 /* Start content */
+.bg-custom {
+    background-color: #010045;
+    color: #FFF;
+}
 .ta-index tr:nth-of-type(1){
-    background: #010045 !important;
+    background-color: #010045;
     color: #FFF;
     font-size: 12px;
     border: unset;
@@ -192,22 +242,23 @@ aside .over-lay {
 }
 .ta-index tr:first-child th:first-child {
     border-top-right-radius: 20px;
-    /* border-bottom-right-radius: 20px; */
 }
 .ta-index tr:first-child th:last-child {
     border-top-left-radius: 20px;
-    /* border-bottom-left-radius: 20px; */
 }
 .ta-index tr td {
     font-size: 12px;
     text-align: center;
 }
-.content .box-index .data-number {
+.box-index {
+    border-radius: 12px !important;
+}
+.box-index .data-number {
     text-align: center;
     background: #f5f5f5;
     border-radius: 5px;
     margin-top: 5px;
-    font-weight: bold;
+    font-weight: 900;
     font-size: 31px;
     position: relative;
     color: #010045;

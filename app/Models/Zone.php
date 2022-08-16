@@ -60,6 +60,7 @@ class Zone extends Model
     public $fillable = [
         'name',
         'address',
+        'is_closed',
         'manager',
         'capacity',
         'hour_rate',
@@ -74,6 +75,7 @@ class Zone extends Model
     protected $casts = [
         'name' => 'string',
         'address' => 'string',
+        'is_closed' => 'integer',
         'manager' => 'string',
         'capacity' => 'integer',
         'hour_rate' => 'float',

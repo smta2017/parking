@@ -55,5 +55,9 @@ function () {
     Route::crud('permission', 'PermissionCrudController');
     Route::crud('role', 'RoleCrudController');
     Route::crud('user', 'UserCrudController');
+    Route::resource('subscriptions', 'SubscriptionController');
+    Route::resource('customers', 'CustomerController');
+    Route::resource('vehicles', 'VehicleController');
+    Route::get('get-customer-by-phone', 'CustomerController@showByPhone');
 
 });
