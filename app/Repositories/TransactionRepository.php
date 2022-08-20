@@ -20,7 +20,7 @@ class TransactionRepository extends BaseRepository
     /**
      * @var array
      */
-    protected $fieldSearchable = ['client_id', 'type'];
+    protected $fieldSearchable = ['customer_id', 'type'];
 
     /**
      * Return searchable fields
@@ -49,7 +49,7 @@ class TransactionRepository extends BaseRepository
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
 
-        $request["client_id"] = env('DEFAULT_CLIENT');
+        $request["customer_id"] = env('DEFAULT_CLIENT');
         $request["type"] = Transaction::GENERAL_TRANSACTION;
 
         $transaction = $this->create($request->all());
@@ -65,7 +65,7 @@ class TransactionRepository extends BaseRepository
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
 
-        $request["client_id"] = $vehicle;
+        $request["customer_id"] = $vehicle;
         $request["type"] = Transaction::SUBSCRIBE_TRANSACTION;
 
         $transaction = $this->create($request);
@@ -85,10 +85,10 @@ class TransactionRepository extends BaseRepository
         return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
     }
 
-    public function setCheckOutClient($client_id)
+    public function setCheckOutClient($customer_id)
     {
         session(['session_zone_id' => auth()->user()->zone_id]);
-        $transaction = Transaction::subscribe()->where('client_id', $client_id)->first();
+        $transaction = Transaction::subscribe()->where('customer_id', $customer_id)->first();
         $hour_rate = Zone::hourRate();
         $second_hour_rate = Zone::secondHourRate();
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);

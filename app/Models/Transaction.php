@@ -82,7 +82,7 @@ class Transaction extends Model
         'plate_img',
         'zone_id',
         'created_by',
-        'client_id',
+        'customer_id',
         'out_at',
         'type',
         'qr_code',
@@ -97,7 +97,7 @@ class Transaction extends Model
     protected $casts = [
         'plate_number' => 'string',
         'plate_img' => 'string',
-        'client_id' => 'integer',
+        'customer_id' => 'integer',
         'type' => 'integer',
         'zone_id' => 'integer',
         'created_by' => 'integer',
@@ -117,7 +117,7 @@ class Transaction extends Model
     ];
 
     public static $rules_client = [
-        'client_id' => 'required|exists:users,id,is_customer,1'
+        'customer_id' => 'required|exists:users,id,is_customer,1'
     ];
 
 
@@ -157,7 +157,7 @@ class Transaction extends Model
 
     public function Vehicle()
     {
-        return $this->belongsTo(\App\Models\CustomerVehicle::class, 'client_id', 'id');
+        return $this->belongsTo(\App\Models\CustomerVehicle::class, 'customer_id', 'id');
     }
 
     public function Zone()

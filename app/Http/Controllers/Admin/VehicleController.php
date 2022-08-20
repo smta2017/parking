@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CustomerVehicle;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller
+class VehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,13 +25,11 @@ class SubscriptionController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'vehicle_id' => 'required|numeric|exists:customer_vehicles,id'
-        ]);
-        $vehicle =  CustomerVehicle::with('Customer')->find($request->vehicle_id);
-        $subscriptions = app('rinvex.subscriptions.plan_subscription')->with('plan')->ofSubscriber($vehicle)->get();
 
-        return \view('pages.subscription-create', \compact('vehicle', 'subscriptions'));
+        $customer_id = $request->customer_id;
+        $vehicles =  CustomerVehicle::where('customer_id', $customer_id)->orderBy('created_at','desc')->get();
+
+        return view('pages.vehicle-create', \compact('vehicles', 'customer_id'));
     }
 
     /**
@@ -42,21 +40,20 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'plan_id' => 'required|numeric',
-            'vehicle_id' => 'required|numeric'
+        $this->validate($request, [
+            'customer_id' => 'required|numeric',
+            'plate_char' => 'required|',
+            'plate_number' => 'required|numeric'
         ]);
 
-        $vehicle = CustomerVehicle::find($request["vehicle_id"]);
-        $plan = app('rinvex.subscriptions.plan')->find($request["plan_id"]);
+        $request['plate_number']=$request->plate_number . '-' .$request->plate_char;
+        
+        if(CustomerVehicle::create($request->all())){
 
-        $new_subscription = $vehicle->newSubscription($request["vehicle_id"] . "-" . $plan["price"] . "-" . $request["plan_id"], $plan);
-        // $new_subscription->data = $ar;
-        // $new_subscription->update();
-        if ($new_subscription) {
-            return redirect()->back()->withSuccess('تمت اضافة الاشتراك بنجاح');
+            return redirect()->back()->withSuccess('تمت الاضافة بنجاح');
         }
-        return ['success' => false];
+
+        return $request;
     }
 
     /**

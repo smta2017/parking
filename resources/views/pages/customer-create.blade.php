@@ -1,4 +1,4 @@
-@extends(backpack_view('blank'))
+@extends('layouts.app')
 
 
 @section('content')
@@ -8,6 +8,18 @@
         <div class="row">
 
             <div class="col-md-8">
+                @if($errors)
+                <ul style="color: red;">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
+
+                @if(session('success'))
+                <h1 style="color:green ;">{{session('success')}}</h1>
+                @endif
+
 
                 <form action="/admin/customers" method="POST" class="mt-4">
                     <h6 class="mb-0">أضافه مشترك جديد</h6>
@@ -49,8 +61,32 @@
                     </div>
 
                 </form>
-            </div><!-- End Col 8 -->
 
+                <hr>
+
+                <table id="customertbl" class="table table-striped ta-index">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>أسم العميل</th>
+                            <th>تليفون</th>
+                            <th>الايميل</th>
+                            <th>تحكم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($customers as $customer)
+                        <tr>
+                            <td>{{$customer->id}}</td>
+                            <td>{{$customer->name}}</td>
+                            <td>{{$customer->phone}}</td>
+                            <td>{{$customer->email}}</td>
+                            <td><a href="/admin/vehicles/create?customer_id={{$customer->id}}">المركبات</a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div><!-- End Col 8 -->
             <div class="col-md-4">
                 <img src="/asset/img/Digital-wallet.webp" style="max-width:100%" alt="">
             </div><!-- End Col 4 -->
@@ -59,4 +95,18 @@
 </div>
 
 
+@endsection
+
+@section('after_scripts')
+
+<script>
+    $(document).ready(function() {
+        $('#customertbl').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+    });
+</script>
 @endsection

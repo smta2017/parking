@@ -201,7 +201,7 @@ class User extends Authenticatable
 
     public function Transactions()
     {
-        return $this->hasMany(Transaction::class, 'client_id', 'id');
+        return $this->hasMany(Transaction::class, 'customer_id', 'id');
     }
 
     public function CustomerVehicles()

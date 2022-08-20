@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/asset/css/dataTables.bootstrap5.min.css" />
+    
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 
@@ -38,9 +40,9 @@
 
         <h6 class="title"><i class="fa-solid fa-fw fa-calculator"></i> الأشتراكات و المشتركين</h6>
         <ul class="list-unstyled my-2 px-2 list">
-            <li class="my-1"><a href="subscription"><i class="fa-solid fa-fw fa-users"></i> اضافة أشتراك</a></li>
-            <li class="my-1"><a href="customers"><i class="fa-solid fa-fw fa-user"></i> اضافة مشترك</a></li>
-            <li class="my-1"><a href="add-new-subscriber.html"><i class="fa-solid fa-fw fa-car"></i> اضافة سيارة</a></li>
+            <!-- <li class="my-1"><a href="/admin/subscription/create"><i class="fa-solid fa-fw fa-users"></i> اضافة أشتراك</a></li> -->
+            <li class="my-1"><a href="/admin/customers/create"><i class="fa-solid fa-fw fa-user"></i>المشتركين</a></li>
+            <!-- <li class="my-1"><a href="/admin/vehicles/create"><i class="fa-solid fa-fw fa-car"></i> اضافة سيارة</a></li> -->
             <li class="my-1"><a href="subscribers.html"><i class="fa-solid fa-fw fa-trash-can"></i> حذف مشترك</a></li>
             <li class="my-1"><a href="subscribers.html"><i class="fa-solid fa-fw fa-arrows-rotate"></i> تجديد عضويه</a></li>
             <li class="my-1"><a href="subscribers.html"><i class="fa-solid fa-fw fa-ban"></i> حظر دخول</a></li>
@@ -112,13 +114,8 @@
                 <div class="col-md-4">
                     <div class="box text-end py-3 last-box">
                         <img src="/asset/img/255.webp" alt="" />
-                        <div class="box select2">
-                            <select class="form-control">
-                                <option value="">شركه الساحات الحديثه</option>
-                                <option value="">ساحة المنتزه</option>
-                                <option value="">ساحة وسط البلد</option>
-                            </select>
-                        </div>
+                        <a  href="{{ backpack_url('logout') }}"><i class="ft-power"></i> {{ trans('backpack::base.logout') }}</a>
+
 
                         <img src="https://static.wixstatic.com/media/c24732_da6335432f4740f68474c87a3b32d1ff~mv2.png/v1/fill/w_120,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Picture1sssss_edited_edited.png" class="mt-2" alt="" />
                     </div>
@@ -228,6 +225,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="/asset/js/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" ></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" ></script>
     <script src="/asset/js/main.js"></script>
     @yield('after_scripts')
 

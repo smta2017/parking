@@ -345,7 +345,7 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkIn(CreateTransactionAPIRequest $request)
     {
-        $request["client_id"] = env('DEFAULT_CLIENT', 2);
+        $request["customer_id"] = env('DEFAULT_CLIENT', 2);
         $request["type"] = Transaction::GENERAL_TRANSACTION;
 
         $transaction = $this->transactionRepository->setCheckIn($request);
@@ -358,14 +358,14 @@ class TransactionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/transactions/checkin-client/{client_id}",
+     *      path="/transactions/checkin-client/{customer_id}",
      *      summary="Store a newly client created Transaction in storage",
      *      tags={"Mobile-Api"},
      *      description="Store client Transaction",
      *      security = {{"Bearer": {}}},
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="client_id",
+     *          name="customer_id",
      *          description="id of clinet",
      *          type="integer",
      *          required=true,
@@ -460,14 +460,14 @@ class TransactionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Post(
-     *      path="/transactions/checkout-clinet/{client_id}",
+     *      path="/transactions/checkout-clinet/{customer_id}",
      *      summary="Set checkout for Transaction",
      *      tags={"Mobile-Api"},
      *      security = {{"Bearer": {}}},
      *      description="checkout Transaction",
      *      produces={"application/json"},
      *      @SWG\Parameter(
-     *          name="client_id",
+     *          name="customer_id",
      *          description="qr code of Transaction",
      *          type="string",
      *          required=true,
@@ -494,9 +494,9 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function checkOutClient($client_id)
+    public function checkOutClient($customer_id)
     {
-        $transaction = $this->transactionRepository->setCheckOutClient($client_id);
+        $transaction = $this->transactionRepository->setCheckOutClient($customer_id);
 
         return $this->sendResponse(new CheckOutClientResource($transaction), 'CheckOut saved successfully');
     }

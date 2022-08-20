@@ -14,7 +14,7 @@ class AddTypeColumnToTransactionsTable extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('type')->nullable()->after('client_id');
+            $table->integer('type')->nullable()->after('customer_id');
         });
     }
 

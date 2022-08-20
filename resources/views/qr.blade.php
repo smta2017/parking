@@ -7,7 +7,7 @@
                 <div style="margin: 0 0 0 30px ;">
                     <h1>ساحة المنتزة</h1>
                     <h3> كود الاشتراك : {{$id}}</h3>
-                </div>
+                </div>  
             </td>
         </tr>
     </tbody>
