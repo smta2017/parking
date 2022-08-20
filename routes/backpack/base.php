@@ -43,6 +43,7 @@ function () {
     // if not otherwise configured, setup the dashboard routes
     if (config('backpack.base.setup_dashboard_routes')) {
         Route::get('dashboard', 'AdminController@dashboard')->name('backpack.dashboard');
+        Route::get('newdashboard', 'AdminController@newDashboard')->name('backpack.newdashboard');
         Route::get('/', 'AdminController@redirect')->name('backpack');
     }
 

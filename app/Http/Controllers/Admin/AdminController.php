@@ -27,6 +27,19 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
+        $this->dashboardData();
+        return view(backpack_view('dashboard'), $this->data);
+    }
+
+    public function newDashboard()
+    {
+        $this->dashboardData();
+        return view('pages.newdashboard', $this->data);
+    }
+
+
+    public function dashboardData()
+    {
         $this->data['title'] = trans('backpack::base.dashboard'); // set the page title
         $this->data['breadcrumbs'] = [
             trans('backpack::crud.admin')     => backpack_url('dashboard'),
@@ -40,10 +53,7 @@ class AdminController extends Controller
         $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
         $this->data['transactions'] = $transactions;
         $this->data['dashboardInfo'] = $transaction->getDashboardInfo();
-
-        return view(backpack_view('dashboard'), $this->data);
     }
-
     /**
      * Redirect to the dashboard.
      *
