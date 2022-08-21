@@ -46,7 +46,8 @@ class CustomerController extends Controller
 
         $request['is_customer'] = 1;
         if ($user = User::create($request->all())) {
-            return redirect()->back()->withSuccess('تمت الاضافة بنجاح');
+            // return redirect()->back()->withSuccess('تمت الاضافة بنجاح');
+            return redirect('/admin/vehicles/create?customer_id=' . $user->id);//->back()->withSuccess('تمت الاضافة بنجاح');
 
             // return \view('pages.subscription-create');
         }
