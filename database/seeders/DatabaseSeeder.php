@@ -42,8 +42,8 @@ class DatabaseSeeder extends Seeder
             'is_customer' => true
         ]);
 
-          // default Admin
-          \App\Models\Admin::factory()->create([
+        // default Admin
+        \App\Models\Admin::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'zone_id' => 1
@@ -59,12 +59,49 @@ class DatabaseSeeder extends Seeder
         // default plan
         \DB::statement('ALTER TABLE plans AUTO_INCREMENT = 1;');
 
+
         $plan = app('rinvex.subscriptions.plan')->create([
-            'name' => ['en' => 'Default', 'ar' => 'افتراضي'],
-            'description' => ['en' => 'Default plan', 'ar' => 'افتراضي'],
+            'name' => ['en' => 'Monthly', 'ar' => 'شهري'],
+            'description' => ['en' => 'Monthly plan', 'ar' => 'شهري', 'kd' => 'dsdsd'],
             'price' => 500,
             'signup_fee' => 0,
             'invoice_period' => 1,
+            'invoice_interval' => 'month',
+            'trial_period' => 0,
+            'trial_interval' => 'day',
+            'sort_order' => 1,
+            'currency' => 'EGP',
+        ]);
+        $plan = app('rinvex.subscriptions.plan')->create([
+            'name' => ['en' => 'Quarterly', 'ar' => 'ربع سنوي'],
+            'description' => ['en' => 'Quarterly', 'ar' => 'ربع سنوي'],
+            'price' => 1500,
+            'signup_fee' => 0,
+            'invoice_period' => 3,
+            'invoice_interval' => 'month',
+            'trial_period' => 0,
+            'trial_interval' => 'day',
+            'sort_order' => 1,
+            'currency' => 'EGP',
+        ]);
+        $plan = app('rinvex.subscriptions.plan')->create([
+            'name' => ['en' => 'Midterm', 'ar' => 'نصف سنوي'],
+            'description' => ['en' => 'Midterm plan', 'ar' => 'نصف سنوي'],
+            'price' => 3000,
+            'signup_fee' => 0,
+            'invoice_period' => 6,
+            'invoice_interval' => 'month',
+            'trial_period' => 0,
+            'trial_interval' => 'day',
+            'sort_order' => 1,
+            'currency' => 'EGP',
+        ]);
+        $plan = app('rinvex.subscriptions.plan')->create([
+            'name' => ['en' => 'annualy', 'ar' => 'سنوي'],
+            'description' => ['en' => 'annualy plan', 'ar' => 'سنوي'],
+            'price' => 6000,
+            'signup_fee' => 0,
+            'invoice_period' => 12,
             'invoice_interval' => 'month',
             'trial_period' => 0,
             'trial_interval' => 'day',
