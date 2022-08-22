@@ -46,7 +46,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\Admin::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'zone_id' => 1
+        ]);
+
+        // default Super Admin
+        \App\Models\SuperAdmin::factory()->create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@admin.com',
         ]);
 
 

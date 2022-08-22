@@ -23,6 +23,8 @@ class CreateZonesTable extends Migration
             $table->integer('capacity');
             $table->integer('parent_id')->nullable();
             $table->float('hour_rate');
+            $table->integer('is_closed')->nullable();
+            $table->integer('parent_zone_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
