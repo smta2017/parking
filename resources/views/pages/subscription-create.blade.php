@@ -64,8 +64,20 @@
                             <label> نوع الاشتراك<strong class="text-danger">*</strong></label>
                             <select name="plan_id" id="plans">
                                 <!-- <option value="-1">اختر الاشتراك</option> -->
-                                @foreach (\Rinvex\Subscriptions\Models\Plan::get() as $plan)
+                                @foreach ($plans as $plan)
                                 <option value="{{$plan->id}}">{{$plan->name .'-'. $plan->price}}</option>
+                                @endforeach
+                            </select>
+                            <br />
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>اختر الباكية<strong class="text-danger">*</strong></label>
+                            <select name="bucket_id" id="plans">
+                                <option value="">اختر الباكية</option>
+
+                                @foreach ($zone_buckets as $bucket)
+                                    <option value="{{$bucket->id}}">{{$bucket->name}}</option>
                                 @endforeach
                             </select>
                             <br />
@@ -85,6 +97,7 @@
                             <th>السعر</th>
                             <th>بداية الاشتراك</th>
                             <th>نهاية الاشتراك</th>
+                            <th>الباكية</th>
                             <th>slug</th>
                         </tr>
                     </thead>
@@ -97,9 +110,8 @@
                             <td>{{$subscription->plan->price}}</td>
                             <td>{{$subscription->starts_at}}</td>
                             <td>{{$subscription->ends_at}}</td>
+                            <td>{{$subscription->SubscriptionBuckets[0]['ZoneBucket']['name']}}</td>
                             <td>{{$subscription->slug}}</td>
-                           
-                           
                         </tr>
                         @endforeach
                     </tbody>

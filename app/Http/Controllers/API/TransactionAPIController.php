@@ -12,6 +12,7 @@ use App\Http\Requests\API\CreateClinetTransactionAPIRequest;
 use App\Http\Resources\CheckInClientResource;
 use App\Http\Resources\CheckInResource;
 use App\Http\Resources\CheckOutClientResource;
+use App\Http\Resources\CheckOutOvernightResource;
 use App\Http\Resources\CheckOutResource;
 use App\Http\Resources\TransactionCollectResource;
 use App\Http\Resources\TransactionResource;
@@ -294,7 +295,6 @@ class TransactionAPIController extends AppBaseController
         return $this->sendSuccess('Transaction deleted successfully');
     }
 
-
     /**
      * @param CreateTransactionAPIRequest $request
      * @return Response
@@ -345,31 +345,36 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkIn(CreateTransactionAPIRequest $request)
     {
-        $request["customer_id"] = env('DEFAULT_CLIENT', 2);
-        $request["type"] = Transaction::GENERAL_TRANSACTION;
-
         $transaction = $this->transactionRepository->setCheckIn($request);
         return $this->sendResponse(new CheckInResource($transaction), 'CheckIn saved successfully');
     }
-
 
     /**
      * @param CreateTransactionAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/transactions/checkin-client/{customer_id}",
-     *      summary="Store a newly client created Transaction in storage",
+     *      path="/transactions/checkin-overnight",
+     *      summary="Store a newly overnight transaction",
      *      tags={"Mobile-Api"},
-     *      description="Store client Transaction",
+     *      description="Store Transaction",
      *      security = {{"Bearer": {}}},
      *      produces={"application/json"},
+     *     
      *      @SWG\Parameter(
-     *          name="customer_id",
-     *          description="id of clinet",
-     *          type="integer",
+     *          name="plate_img",
+     *          description="plate photo",
+     *          type="file",
      *          required=true,
-     *          in="path"
+     *          in="formData"
+     *      ),
+     *      @SWG\Parameter(
+     *             name="plate_number",
+     *             description="plate_number",
+     *             default="sameh",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -392,22 +397,58 @@ class TransactionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function checkInClient($vehicle_id)
+    public function checkInOvernight(CreateTransactionAPIRequest $request)
     {
-        $vehicle = CustomerVehicle::find($vehicle_id);
-        // return $vehicle_id;
-        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($vehicle)->orderBy('ends_at', 'desc')->first();
-        // return $subs;
-        if (!$subs) {
-            return $this->sendError([], __('no_subscription_found'));
-        }
-        if ($subs->ended()) {
-            return $this->sendError([], __('subscription_expired'));
-        }
-
-        $transaction = $this->transactionRepository->setCheckInClient($vehicle_id);
-        return $this->sendResponse(new CheckInClientResource($transaction), 'CheckIn saved successfully');
+        $transaction = $this->transactionRepository->setCheckInOvernight($request);
+        return $this->sendResponse(new CheckInResource($transaction), 'Overnight check in saved successfully');
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/transactions/checkout-overnight/{qr_code}",
+     *      summary="Set checkout for Transaction",
+     *      tags={"Mobile-Api"},
+     *      security = {{"Bearer": {}}},
+     *      description="checkout Transaction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="qr_code",
+     *          description="qr code of Transaction",
+     *          type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckOut"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkOutOvernight($customer_id)
+    {
+          $transaction = $this->transactionRepository->setCheckOutOvernight($customer_id);
+
+        return $this->sendResponse(new CheckOutOvernightResource($transaction), 'Overnight check out saved successfully');
+    }
+
 
     /**
      * @param int $id
@@ -452,7 +493,63 @@ class TransactionAPIController extends AppBaseController
     {
         $transaction = $this->transactionRepository->setCheckOut($qr_code);
 
-        return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut saved successfully');
+        return $this->sendResponse(new CheckOutResource($transaction), 'Check out saved successfully');
+    }
+
+    /**
+     * @param CreateTransactionAPIRequest $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/transactions/checkin-client/{customer_id}",
+     *      summary="Store a newly client created Transaction in storage",
+     *      tags={"Mobile-Api"},
+     *      description="Store client Transaction",
+     *      security = {{"Bearer": {}}},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="customer_id",
+     *          description="id of clinet",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckIn"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkInClient($vehicle_id)
+    {
+        $vehicle = CustomerVehicle::find($vehicle_id);
+
+        $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($vehicle)->orderBy('ends_at', 'desc')->first();
+        return $subs;
+        if (!$subs) {
+            return $this->sendError([], __('no_subscription_found'));
+        }
+        if ($subs->ended()) {
+            return $this->sendError([], __('subscription_expired'));
+        }
+
+        $transaction = $this->transactionRepository->setCheckInClient($vehicle_id);
+        return $this->sendResponse(new CheckInClientResource($transaction), 'Client check in saved successfully');
     }
 
     /**
@@ -498,7 +595,7 @@ class TransactionAPIController extends AppBaseController
     {
         $transaction = $this->transactionRepository->setCheckOutClient($customer_id);
 
-        return $this->sendResponse(new CheckOutClientResource($transaction), 'CheckOut saved successfully');
+        return $this->sendResponse(new CheckOutClientResource($transaction), 'Client check out saved successfully');
     }
 
     /**
@@ -544,7 +641,7 @@ class TransactionAPIController extends AppBaseController
     {
         $transaction = $this->transactionRepository->setCheckOutByPlate($plate);
 
-        return $this->sendResponse(new CheckOutResource($transaction), 'CheckOut by plate saved successfully');
+        return $this->sendResponse(new CheckOutResource($transaction), 'Check out by plate saved successfully');
     }
 
 

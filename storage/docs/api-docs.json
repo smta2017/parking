@@ -653,13 +653,13 @@
                 ]
             }
         },
-        "/subscriptions": {
+        "/create-tenant": {
             "post": {
                 "tags": [
-                    "Mobile-Api"
+                    "Tenant"
                 ],
-                "summary": "Create a newly subscription for a vehicle",
-                "description": "New Subscription",
+                "summary": "Store a newly created tenant in storage",
+                "description": "Store tenant",
                 "produces": [
                     "application/json"
                 ],
@@ -667,12 +667,22 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "vehicle that should be stored",
+                        "description": "Customer that should be stored",
                         "required": false,
                         "schema": {
                             "example": {
-                                "customer_id": 15,
-                                "plan_id": 1
+                                "name": "customer1",
+                                "company_name": "company name",
+                                "email": "test@dsfd.com",
+                                "address": "customer1",
+                                "phone": "01236556653",
+                                "password": "password",
+                                "zone_id": [
+                                    1,
+                                    2,
+                                    3,
+                                    4
+                                ]
                             }
                         }
                     }
@@ -695,12 +705,7 @@
                             "type": "object"
                         }
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/transactions": {
@@ -980,23 +985,31 @@
                 ]
             }
         },
-        "/transactions/checkin-client/{client_id}": {
+        "/transactions/checkin-overnight": {
             "post": {
                 "tags": [
                     "Mobile-Api"
                 ],
-                "summary": "Store a newly client created Transaction in storage",
-                "description": "Store client Transaction",
+                "summary": "Store a newly overnight transaction",
+                "description": "Store Transaction",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "client_id",
-                        "in": "path",
-                        "description": "id of clinet",
+                        "name": "plate_img",
+                        "in": "formData",
+                        "description": "plate photo",
                         "required": true,
-                        "type": "integer"
+                        "type": "file"
+                    },
+                    {
+                        "name": "plate_number",
+                        "in": "query",
+                        "description": "plate_number",
+                        "required": false,
+                        "type": "string",
+                        "default": "sameh"
                     }
                 ],
                 "responses": {
@@ -1009,6 +1022,51 @@
                                 },
                                 "data": {
                                     "$ref": "#/definitions/CheckIn"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/transactions/checkout-overnight/{qr_code}": {
+            "post": {
+                "tags": [
+                    "Mobile-Api"
+                ],
+                "summary": "Set checkout for Transaction",
+                "description": "checkout Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "qr_code",
+                        "in": "path",
+                        "description": "qr code of Transaction",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CheckOut"
                                 },
                                 "message": {
                                     "type": "string"
@@ -1070,7 +1128,52 @@
                 ]
             }
         },
-        "/transactions/checkout-clinet/{client_id}": {
+        "/transactions/checkin-client/{customer_id}": {
+            "post": {
+                "tags": [
+                    "Mobile-Api"
+                ],
+                "summary": "Store a newly client created Transaction in storage",
+                "description": "Store client Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "customer_id",
+                        "in": "path",
+                        "description": "id of clinet",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CheckIn"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/transactions/checkout-clinet/{customer_id}": {
             "post": {
                 "tags": [
                     "Mobile-Api"
@@ -1082,7 +1185,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "client_id",
+                        "name": "customer_id",
                         "in": "path",
                         "description": "qr code of Transaction",
                         "required": true,
@@ -1638,6 +1741,39 @@
                     "type": "string",
                     "format": "date-time"
                 }
+            }
+        }
+    },
+    "parameters": {
+        "body": {
+            "name": "body",
+            "in": "body",
+            "description": "vehicle that should be stored",
+            "required": false,
+            "schema": {
+                "example": {
+                    "customer_id": 15,
+                    "plan_id": 1
+                }
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "description": "successful operation",
+            "schema": {
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "data": {
+                        "$ref": "#"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         }
     },

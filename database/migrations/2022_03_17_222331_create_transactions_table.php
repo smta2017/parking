@@ -16,6 +16,8 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->integer('customer_id')->nullable();
+            $table->integer('type')->nullable();
             $table->string('plate_number')->nullable();
             $table->string('plate_img')->nullable();
             $table->dateTime('out_at')->nullable();

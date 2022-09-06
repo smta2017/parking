@@ -13,7 +13,7 @@ class PlanController extends AppBaseController
      * @param Request $request
      * @return Response
      *
-     * @SWG\Post(
+     * #@SWG\Post(
      *      path="/subscriptions",
      *      summary="Create a newly subscription for a vehicle",
      *      tags={"Mobile-Api"},
@@ -54,6 +54,7 @@ class PlanController extends AppBaseController
      */
     public function createSubscription(Request $request)
     {
+        return $request;
         $vehicle_id = $request["customer_id"];
 
         $plan = app('rinvex.subscriptions.plan')->find($request["plan_id"]);

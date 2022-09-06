@@ -22,7 +22,9 @@ class CreateZonesTable extends Migration
             $table->string('phone');
             $table->integer('capacity');
             $table->integer('parent_id')->nullable();
-            $table->float('hour_rate');
+            $table->float('hour_rate')->default(10);
+            $table->float('second_hour_rate')->nullable()->default(5);
+            $table->float('overnight_rate')->nullable()->default(20);
             $table->integer('is_closed')->nullable();
             $table->integer('parent_zone_id')->nullable();
             $table->timestamps();

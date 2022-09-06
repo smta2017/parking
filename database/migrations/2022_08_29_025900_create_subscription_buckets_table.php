@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTypeColumnToTransactionsTable extends Migration
+class CreateSubscriptionBucketsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddTypeColumnToTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('type')->nullable()->after('customer_id');
+        Schema::create('subscription_buckets', function (Blueprint $table) {
+            $table->id();
+            $table->integer('plan_subscription_id')->nullable();
+            $table->integer('zone_bucket_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddTypeColumnToTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('type')->nullable();
-        });
+        Schema::dropIfExists('subscription_buckets');
     }
 }

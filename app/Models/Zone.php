@@ -77,6 +77,8 @@ class Zone extends Model
         'manager' => 'string',
         'capacity' => 'integer',
         'hour_rate' => 'float',
+        'second_hour_rate' => 'float',
+        'overnight_rate' => 'float',
         'phone' => 'string'
     ];
 
@@ -91,7 +93,10 @@ class Zone extends Model
 
     public  function scopeZoneCapacity($query)
     {
-        return $query->find(session('session_zone_id'))->capacity;
+        if (session('session_zone_id')) {   
+            return $query->find(session('session_zone_id'))->capacity;
+        }
+        return 0;
     }
 
     public  function scopeHourRate($query)
@@ -99,9 +104,24 @@ class Zone extends Model
         return $query->find(session('session_zone_id'))->hour_rate;
     }
 
+    public  function scopeOvernightRate($query)
+    {
+        return $query->find(session('session_zone_id'))->overnight_rate;
+    }
+
     public  function scopeSecondHourRate($query)
     {
         return $query->find(session('session_zone_id'))->second_hour_rate;
+    }
+
+    public function ParentZone()
+    {
+        return $this->belongsTo(ParentZone::class);
+    }
+
+    public function ZoneBuckets()
+    {
+        return $this->hasMany(ZoneBucket::class);
     }
 
 }

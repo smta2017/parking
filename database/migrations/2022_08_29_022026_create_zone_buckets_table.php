@@ -4,16 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSecondHourRateColumnToZonesTable extends Migration
+class CreateZoneBucketsTable extends Migration
 {
-
-
-
-
-
-
-
-
     /**
      * Run the migrations.
      *
@@ -21,11 +13,11 @@ class AddSecondHourRateColumnToZonesTable extends Migration
      */
     public function up()
     {
-      
-
-
-        Schema::table('zones', function (Blueprint $table) {
-            $table->float('second_hour_rate')->nullable()->after('hour_rate')->default(5);
+        Schema::create('zone_buckets', function (Blueprint $table) {
+            $table->id();
+            $table->integer('zone_id')->nullable();
+            $table->string('name')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -36,8 +28,6 @@ class AddSecondHourRateColumnToZonesTable extends Migration
      */
     public function down()
     {
-        Schema::table('zones', function (Blueprint $table) {
-            $table->dropColumn('second_hour_rate')->nullable();
-        });
+        Schema::dropIfExists('zone_buckets');
     }
 }

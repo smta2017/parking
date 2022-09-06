@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use App\Http\Controllers\API\TransactionAPIController;
 use App\Repositories\TransactionRepository;
 use Illuminate\Container\Container;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -47,7 +48,7 @@ class AdminController extends Controller
         ];
 
 
-        session(['session_zone_id' => 1]);
+        // session(['session_zone_id' => 1]);
 
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
         $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
@@ -63,5 +64,14 @@ class AdminController extends Controller
     {
         // The '/admin' route is not to be used as a page, because it breaks the menu's active state.
         return redirect(backpack_url('dashboard'));
+    }
+
+    public function changeZone(Request $request)
+    {
+        session(['session_zone_id' => $request->change_zone_id]);
+
+        return redirect()->back();
+
+        // return  session('session_zone_id');
     }
 }

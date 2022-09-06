@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/asset/css/dataTables.bootstrap5.min.css" />
-    
+
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 
@@ -86,6 +86,8 @@
                         <span>
                             <span style="color:#FEBE0A;">التوقيت الأن</span> <br />
                             <span>11:08 AM</span>
+                            <?php $tenant_zones = \Auth::guard('backpack')->user()->Tenant->TenantZones ?>
+
                         </span>
                         <span>
                             <span style="color:#FEBE0A;">تاريخ اليوم</span> <br />
@@ -97,24 +99,26 @@
                 <div class="col-md-3 col-xl-2 text-center">
                     <div class="box py-3 select">
                         <h6 style="color:#FEBE0A;">أختار ساحه الأنتظار</h6>
-                        <select class="form-control p-0">
-                            <option value="">ساحة العبور</option>
-                            <option value="">ساحة المنتزه</option>
-                            <option value="">ساحة وسط البلد</option>
-                        </select>
+                        <form method="GET" action="/admin/change-zone">
+                            <select class="form-control p-0" name="change_zone_id" onchange='if(this.value != 0) { this.form.submit(); }'>
+                                @foreach ($tenant_zones as $tenant_zone)
+                                    @foreach($tenant_zone->ParentZone->Zones as $zone)
+                                        <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}">{{$tenant_zone->ParentZone->name}} -  {{$zone->id}}-{{$zone->name}} </option>
+                                    @endforeach
+                                @endforeach
+                            </select>
+                        </form>
                     </div>
                 </div>
-
                 <div class="col-md-3 col-xl-2">
                     <span class="back">
                         النظام تحت التجربه و الأختبار
                     </span>
                 </div>
-
                 <div class="col-md-4">
                     <div class="box text-end py-3 last-box">
                         <img src="/asset/img/255.webp" alt="" />
-                        <a  href="{{ backpack_url('logout') }}"><i class="ft-power"></i> {{ trans('backpack::base.logout') }}</a>
+                        <a href="{{ backpack_url('logout') }}"><i class="ft-power"></i><span style="color:white"> {{\Auth::guard('backpack')->user()->Tenant->id}} - {{\Auth::guard('backpack')->user()->Tenant->company_name}} -</span> {{ trans('backpack::base.logout') }}</a>
 
 
                         <img src="https://static.wixstatic.com/media/c24732_da6335432f4740f68474c87a3b32d1ff~mv2.png/v1/fill/w_120,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Picture1sssss_edited_edited.png" class="mt-2" alt="" />
@@ -168,6 +172,10 @@
                             <span>نسبه الأشغال</span>
                             <span class="text-danger mx-2"><strong>30%</strong></span>
                         </li>
+                        <li class="list-inline-item">
+                            <span>الساحة</span>
+                            <span class="text-danger mx-2"><strong>@if(session('session_zone_id')){{ \App\Models\Zone::find(session('session_zone_id'))['name']}} @endif</strong></span>
+                        </li>
                     </ul>
                 </div>
 
@@ -202,7 +210,6 @@
     @yield('content')
 
 
-
     <!-- Model employee-data -->
     <div class="modal fade" id="employee-data" style="z-index: 9999999999999;" tabindex="-1" aria-labelledby="employee-dataModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
@@ -225,8 +232,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="/asset/js/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" ></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" ></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="/asset/js/main.js"></script>
     @yield('after_scripts')
 

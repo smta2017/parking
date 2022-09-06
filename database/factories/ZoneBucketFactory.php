@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ParentZoneFactory extends Factory
+class ZoneBucketFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,8 @@ class ParentZoneFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+            'zone_id' =>  $this->faker->numberBetween(1,10),
+            'name' => $this->faker->name(),
         ];
     }
 }

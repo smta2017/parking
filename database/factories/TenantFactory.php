@@ -14,7 +14,11 @@ class TenantFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'company_name' => $this->faker->name(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->unique()->e164PhoneNumber,
+            'address' => $this->faker->jobTitle,
         ];
     }
 }

@@ -13,20 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //default zone
-        \App\Models\Zone::factory()->create([
-            'name' => 'الفلكي',
-            'hour_rate' => 10,
-            'second_hour_rate' => 5,
-            'capacity' => 70,
-        ]);
-
-        \App\Models\Zone::factory()->create([
-            'name' => 'المنتزة',
-            'hour_rate' => 10,
-            'second_hour_rate' => 5,
-            'capacity' => 100,
-        ]);
 
         // default user
         \App\Models\User::factory()->create([
@@ -42,11 +28,6 @@ class DatabaseSeeder extends Seeder
             'is_customer' => true
         ]);
 
-        // default Admin
-        \App\Models\Admin::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-        ]);
 
         // default Super Admin
         \App\Models\SuperAdmin::factory()->create([
@@ -56,15 +37,45 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\User::factory(10)->create();
+        \App\Models\ParentZone::factory(10)->create();
         \App\Models\Zone::factory(10)->create();
         \App\Models\Transaction::factory(100)->create();
+        \App\Models\Tenant::factory(100)->create();
+        \App\Models\Admin::factory(100)->create();
+        \App\Models\TenantZone::factory(100)->create();
 
 
+        //default zone
+        \App\Models\Zone::factory()->create([
+            'name' => 'الفلكي',
+            'hour_rate' => 10,
+            'second_hour_rate' => 5,
+            'capacity' => 70,
+        ]);
+
+        \App\Models\Zone::factory()->create([
+            'name' => 'المنتزة',
+            'hour_rate' => 10,
+            'second_hour_rate' => 5,
+            'capacity' => 100,
+        ]);
+
+        // default Admin
+        \App\Models\Admin::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+        ]);
 
         // default plan
         \DB::statement('ALTER TABLE plans AUTO_INCREMENT = 1;');
 
 
+        // zone_bucket
+
+        $this->call([
+            ZoneBucketSeeder::class,
+        ]);
+        
         $plan = app('rinvex.subscriptions.plan')->create([
             'name' => ['en' => 'Monthly', 'ar' => 'شهري'],
             'description' => ['en' => 'Monthly plan', 'ar' => 'شهري', 'kd' => 'dsdsd'],

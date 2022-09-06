@@ -25,4 +25,7 @@ Route::group([
     Route::resource('customers', 'CustomerController');
     Route::resource('vehicles', 'VehicleController');
     Route::crud('admin', 'AdminCrudController');
+
+    Route::get('change-zone', 'AdminController@changeZone');
+
 }); // this should be the absolute last line of this file

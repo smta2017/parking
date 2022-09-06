@@ -48,10 +48,10 @@ class AuthRepository extends BaseRepository
             'token_type' => 'Bearer',
             'full_token' => 'Bearer ' . $token,
             'user' => [
-                'id' => auth()->user()->id,
-                'name' => auth()->user()->name,
-                'email' => auth()->user()->email,
-                'avatar' => url('') . '/storage/images/avatar/' . auth()->user()->avatar,
+                'id' => auth('api')->user()->id,
+                'name' => auth('api')->user()->name,
+                'email' => auth('api')->user()->email,
+                'avatar' => url('') . '/storage/images/avatar/' . auth('api')->user()->avatar,
             ]
         ]);
     }
@@ -68,11 +68,12 @@ class AuthRepository extends BaseRepository
             $request = ['phone' => $request['email'], 'password' => $request['password']];
         }
 
-        if (!auth()->attempt($request)) {
+        if (!auth('api')->attempt($request)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        // return auth('api')->user();
 
-        return  ApiResponse::format("success", $this->respondWithToken(auth()->user()->createToken('')->plainTextToken));
+        return  ApiResponse::format("success", $this->respondWithToken(auth('api')->user()->createToken('')->plainTextToken));
     }
 
     /**

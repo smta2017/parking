@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ParentZone;
+use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TenantZoneFactory extends Factory
@@ -14,7 +16,8 @@ class TenantZoneFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'tenant_id' =>Tenant::pluck('id')->random(),
+            'parent_zone_id' =>ParentZone::pluck('id')->random(),
         ];
     }
 }

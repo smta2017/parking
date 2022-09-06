@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CustomerVehicle;
+use App\Models\SubscriptionBucket;
+use App\Models\ZoneBucket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -30,8 +33,24 @@ class SubscriptionController extends Controller
         ]);
         $vehicle =  CustomerVehicle::with('Customer')->find($request->vehicle_id);
         $subscriptions = app('rinvex.subscriptions.plan_subscription')->with('plan')->ofSubscriber($vehicle)->get();
+        $plans = \Rinvex\Subscriptions\Models\Plan::get();
 
-        return \view('pages.subscription-create', \compact('vehicle', 'subscriptions'));
+        $zone_buckets = \DB::select('select zone_buckets.* 
+        from zone_buckets 
+        left join subscription_buckets on (zone_buckets.id=subscription_buckets.zone_bucket_id)
+        left join plan_subscriptions on (plan_subscriptions.id=subscription_buckets.plan_subscription_id)
+
+         where (plan_subscriptions.ends_at is null or plan_subscriptions.ends_at <= CURDATE())
+        ;');
+        // $zone_buckets = ZoneBucket::rightJoin('subscription_buckets','zone_buckets.id','subscription_buckets.zone_bucket_id')->where('zone_id', session('session_zone_id'))
+        //     ->whereHas('SubscriptionBuckets.PlanSubscription', function ($q) {
+        //         $q->whereNotIn('id', [1]);
+        //     })->orderBy('name')->get();
+
+        // return $subscriptions;
+        // return $zone_buckets ;
+
+        return \view('pages.subscription-create', \compact('vehicle', 'subscriptions', 'plans', 'zone_buckets'));
     }
 
     /**
@@ -44,15 +63,20 @@ class SubscriptionController extends Controller
     {
         $request->validate([
             'plan_id' => 'required|numeric',
-            'vehicle_id' => 'required|numeric'
+            'vehicle_id' => 'required|numeric',
+            'bucket_id' => 'required|numeric'
         ]);
 
         $vehicle = CustomerVehicle::find($request["vehicle_id"]);
         $plan = app('rinvex.subscriptions.plan')->find($request["plan_id"]);
 
         $new_subscription = $vehicle->newSubscription($request["vehicle_id"] . "-" . $plan["price"] . "-" . $request["plan_id"], $plan);
-        // $new_subscription->data = $ar;
-        // $new_subscription->update();
+
+        SubscriptionBucket::create([
+            'plan_subscription_id' => $new_subscription->id,
+            'zone_bucket_id' => $request->bucket_id
+        ]);
+
         if ($new_subscription) {
             return redirect()->back()->withSuccess('تمت اضافة الاشتراك بنجاح');
         }

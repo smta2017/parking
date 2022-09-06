@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class TransactionRepository
@@ -49,7 +50,7 @@ class TransactionRepository extends BaseRepository
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
 
-        $request["customer_id"] = env('DEFAULT_CLIENT');
+        $request["customer_id"] = env('DEFAULT_CLIENT', 2);
         $request["type"] = Transaction::GENERAL_TRANSACTION;
 
         $transaction = $this->create($request->all());
@@ -57,11 +58,47 @@ class TransactionRepository extends BaseRepository
         return  $this->update(['plate_img' => $imageName], $transaction->id);
     }
 
+    public function setCheckInOvernight(Request $request)
+    {
+        $imageName = time() . '.' . $request->plate_img->extension();
+        $request->plate_img->storeAs('/images/plate', $imageName, 's3');
+
+        // Storage::disk('s3')->put('images/plate', $request->plate_img);
+
+        $use = auth()->user();
+
+        $request["created_by"] = auth()->user()->id;
+        $request["zone_id"] = auth()->user()->zone_id;
+
+        $request["customer_id"] = env('DEFAULT_CLIENT', 2);
+        $request["type"] = Transaction::OVERNIGHT_TRANSACTION;
+
+        $transaction = $this->create($request->all());
+
+        return  $this->update(['plate_img' => $imageName], $transaction->id);
+    }
+
+
+
+    public function setCheckOutOvernight($qr_code)
+    {
+        session(['session_zone_id' => auth()->user()->zone_id]);
+        $day = 12;
+        $transaction = Transaction::find($qr_code);
+        $second_hour_rate = Zone::secondHourRate();
+        $overnightRate = Zone::overnightRate();
+        $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
+        $extra_hors = (($total_hors - $day) >= 0) ? $total_hors - $day : 0;
+        $total_amount =  ($second_hour_rate * $extra_hors) + $overnightRate;
+        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
+    }
+
+
     public function setCheckInClient($vehicle)
     {
         // $imageName = time() . '.' . $request->plate_img->extension();
         // $request->plate_img->move(storage_path('app/public/images/plate'), $imageName);
-        $request=[];
+        $request = [];
         $request["created_by"] = auth()->user()->id;
         $request["zone_id"] = auth()->user()->zone_id;
 
@@ -161,7 +198,10 @@ class TransactionRepository extends BaseRepository
 
     public function reserved_persntage()
     {
-        return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
+        if (Zone::zoneCapacity()) {
+            return \round(($this->totalReserved() / Zone::zoneCapacity()) * 100, 0);
+        }
+        return 0;
     }
 
     public function dashboardInfo()
