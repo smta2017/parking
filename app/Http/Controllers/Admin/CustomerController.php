@@ -27,7 +27,8 @@ class CustomerController extends Controller
     public function create()
     {
 
-        return \view('backpack::custom.customer-create');
+         $customers = User::customer()->orderBy('created_at')->get();
+        return \view('pages.customer-create',compact('customers'));
     }
 
     /**
@@ -38,12 +39,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|unique:users,name',
+            'phone' => 'required|numeric|unique:users,phone'
+        ]);
 
         $request['is_customer'] = 1;
         if ($user = User::create($request->all())) {
-            // return $user;
-            // \session(['subscriper_customer' => $user]);
-            return \view('backpack::custom.subscription-create');
+            // return redirect()->back()->withSuccess('تمت الاضافة بنجاح');
+            return redirect('/admin/vehicles/create?customer_id=' . $user->id);//->back()->withSuccess('تمت الاضافة بنجاح');
+
+            // return \view('pages.subscription-create');
         }
         // return $request->all();
     }
@@ -72,7 +78,7 @@ class CustomerController extends Controller
         ]);
 
         if ($customer = User::customer()->where('phone', $request->phone)->first()) {
-            return ['success' => true, 'data' => ['customer' => $customer,'vehicles'=>$customer->CustomerVehicles]];
+            return ['success' => true, 'data' => ['customer' => $customer, 'vehicles' => $customer->CustomerVehicles]];
         }
 
         return ['success' => false];

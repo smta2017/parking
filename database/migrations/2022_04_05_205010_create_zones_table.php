@@ -16,13 +16,17 @@ class CreateZonesTable extends Migration
     {
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('address')->nullable();
-            $table->string('manager')->nullable();
-            $table->string('phone')->nullable();
-            $table->integer('capacity')->nullable();
+            $table->string('name');
+            $table->string('address');
+            $table->string('manager');
+            $table->string('phone');
+            $table->integer('capacity');
+            $table->integer('parent_id')->nullable();
+            $table->float('hour_rate')->default(10);
+            $table->float('second_hour_rate')->nullable()->default(5);
+            $table->float('overnight_rate')->nullable()->default(20);
             $table->integer('is_closed')->nullable();
-            $table->float('hour_rate')->nullable();
+            $table->integer('parent_zone_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,9 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
  *       @SWG\Property(property="driver_name", type="string", description="driver name"),
  * ) 
-  
- 
-/**
+
  * @SWG\Definition(
  *      definition="CheckOut",
  *      required={"plate_number"},
@@ -26,8 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  *       @SWG\Property(property="mobile", type="string", description="driver mobile"),
  *       @SWG\Property(property="driver_name", type="string", description="driver name"),
  * ) 
-  
-  
  * @SWG\Definition(
  *      definition="Transaction",
  *      required={"plate_number","plate_img"},
@@ -69,6 +65,7 @@ class Transaction extends Model
 
     public const GENERAL_TRANSACTION = 1;
     public const SUBSCRIBE_TRANSACTION = 2;
+    public const OVERNIGHT_TRANSACTION = 3;
 
     public $table = 'transactions';
 
@@ -82,7 +79,7 @@ class Transaction extends Model
         'plate_img',
         'zone_id',
         'created_by',
-        'client_id',
+        'customer_id',
         'out_at',
         'type',
         'qr_code',
@@ -97,7 +94,7 @@ class Transaction extends Model
     protected $casts = [
         'plate_number' => 'string',
         'plate_img' => 'string',
-        'client_id' => 'integer',
+        'customer_id' => 'integer',
         'type' => 'integer',
         'zone_id' => 'integer',
         'created_by' => 'integer',
@@ -117,22 +114,22 @@ class Transaction extends Model
     ];
 
     public static $rules_client = [
-        'client_id' => 'required|exists:users,id,is_customer,1'
+        'customer_id' => 'required|exists:users,id,is_customer,1'
     ];
 
 
 
     public function newQuery()
     {
-        session(['session_zone_id' => 1]);
-
+        // session(['session_zone_id' => 1]);
+        // session('session_zone_id');
         if (session('session_zone_id')) {
             return parent::newQuery()->where('zone_id', session('session_zone_id'));
         }
 
-        if (\auth()->user()->zone_id) {
-            return parent::newQuery()->where('zone_id', \auth()->user()->zone_id);
-        }
+        // if (\auth()->check()) {
+        //     return parent::newQuery()->where('zone_id', \auth()->user()->zone_id);
+        // }
 
         return  parent::newQuery();
     }
@@ -157,7 +154,7 @@ class Transaction extends Model
 
     public function Vehicle()
     {
-        return $this->belongsTo(\App\Models\CustomerVehicle::class, 'client_id', 'id');
+        return $this->belongsTo(\App\Models\CustomerVehicle::class, 'customer_id', 'id');
     }
 
     public function Zone()

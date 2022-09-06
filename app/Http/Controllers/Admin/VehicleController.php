@@ -23,9 +23,13 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return \view('backpack::custom.vehicle-create');
+
+        $customer_id = $request->customer_id;
+        $vehicles =  CustomerVehicle::where('customer_id', $customer_id)->orderBy('created_at','desc')->get();
+
+        return view('pages.vehicle-create', \compact('vehicles', 'customer_id'));
     }
 
     /**
@@ -36,15 +40,20 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'customer_id' => 'required|numeric',
+            'plate_char' => 'required|',
+            'plate_number' => 'required|numeric'
+        ]);
 
-        if ($request->hasFile('input_pdf')) {
-            $request['plate_image'] = $request->file('input_pdf')->getClientOriginalName();
+        $request['plate_number']=$request->plate_number . '-' .$request->plate_char;
+        
+        if(CustomerVehicle::create($request->all())){
+
+            return redirect()->back()->withSuccess('تمت الاضافة بنجاح');
         }
-        $request['plate_number'] = $request['plate_number'] . '-' . $request['plate_char'];
-        $request['customer_id'] = 30;
-        if ($vehicle=CustomerVehicle::create($request->all())){
-            return \view('backpack::custom.subscription-create');
-        }
+
+        return $request;
     }
 
     /**
