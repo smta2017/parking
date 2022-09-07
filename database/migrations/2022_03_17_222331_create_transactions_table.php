@@ -23,7 +23,6 @@ class CreateTransactionsTable extends Migration
             $table->dateTime('out_at')->nullable();
             $table->string('qr_code')->nullable();
             $table->float('is_payed')->nullable();
-            $table->integer('customer_id')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('zone_id')->nullable();
             $table->timestamps();
