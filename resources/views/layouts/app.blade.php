@@ -86,7 +86,7 @@
                         <span>
                             <span style="color:#FEBE0A;">التوقيت الأن</span> <br />
                             <span>11:08 AM</span>
-                            <?php $tenant_zones = \Auth::guard('backpack')->user()->Tenant->TenantZones ?>
+                            <?php $tenant_zones = \Auth::guard()->user()->Tenant->TenantZones ?>
 
                         </span>
                         <span>
@@ -118,7 +118,7 @@
                 <div class="col-md-4">
                     <div class="box text-end py-3 last-box">
                         <img src="/asset/img/255.webp" alt="" />
-                        <a href="{{ backpack_url('logout') }}"><i class="ft-power"></i><span style="color:white"> {{\Auth::guard('backpack')->user()->Tenant->id}} - {{\Auth::guard('backpack')->user()->Tenant->company_name}} -</span> {{ trans('backpack::base.logout') }}</a>
+                        <a href="{{ backpack_url('logout') }}"><i class="ft-power"></i><span style="color:white"> {{\Auth::guard()->user()->Tenant->id}} - {{\Auth::guard()->user()->Tenant->company_name}} -</span> {{ trans('backpack::base.logout') }}</a>
 
 
                         <img src="https://static.wixstatic.com/media/c24732_da6335432f4740f68474c87a3b32d1ff~mv2.png/v1/fill/w_120,h_34,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Picture1sssss_edited_edited.png" class="mt-2" alt="" />
