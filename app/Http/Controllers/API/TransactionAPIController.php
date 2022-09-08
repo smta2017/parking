@@ -644,7 +644,6 @@ class TransactionAPIController extends AppBaseController
         return $this->sendResponse(new CheckOutResource($transaction), 'Check out by plate saved successfully');
     }
 
-
     public function actualCollect(Request $request)
     {
         // return $request->all();
@@ -666,7 +665,6 @@ class TransactionAPIController extends AppBaseController
 
         return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');
     }
-
 
     public function getDashboardInfo()
     {
