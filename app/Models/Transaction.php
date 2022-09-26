@@ -123,6 +123,8 @@ class Transaction extends Model
     {
         // session(['session_zone_id' => 1]);
         // session('session_zone_id');
+
+        $df = \session('session_zone_id');
         if (session('session_zone_id')) {
             return parent::newQuery()->where('zone_id', session('session_zone_id'));
         }

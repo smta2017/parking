@@ -214,6 +214,15 @@ class TransactionRepository extends BaseRepository
             'available' => $this->available(),
             'total_reserved' => $this->totalReserved(),
             'reserved_persntage' => $this->reserved_persntage(),
+            // عدد الزائرين
+
+            // عدد المشتركين
+
+            // أشتراكات منتهيه
+
+            // أشتراكات محظوره
+
+            // أشتركات قيد التفعيل
         ];
     }
 }

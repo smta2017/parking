@@ -48,10 +48,12 @@ class AdminController extends Controller
         ];
 
 
-        // session(['session_zone_id' => 1]);
+        $default_user_zone = auth()->user()->Tenant->TenantZones[0]->id;
+        session(['session_zone_id' => $default_user_zone]);
 
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
         $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
+        // \dd( $transactions);
         $this->data['transactions'] = $transactions;
         $this->data['dashboardInfo'] = $transaction->getDashboardInfo();
     }

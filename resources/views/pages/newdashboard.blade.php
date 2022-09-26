@@ -55,91 +55,23 @@
                             <th>التكلفه</th>
                         </tr>
                     </thead>
+                    @foreach ($transactions as $transaction)
 
                     <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
+                        <td> {{ \session('session_zone_id') }} - {{$transaction->id}}</td>
+                        <td>{{$transaction->created_by->name}}</td>
+                        <td><img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></td>
+                        <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
+                        <td><strong class="text-success">{{$transaction->checkin}}</strong></td>
+                        <td><strong class="text-danger">{{$transaction->checkout}}</strong></td>
                         <td><strong class="text-info">تم الخروج</strong></td>
                         <td>61</td>
-                        <td><strong class="text-danger">1 : 10</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
+                        <td><strong class="text-danger">{{$transaction->total_time->days . ' - '. $transaction->total_time->hours}}</strong></td>
+                        <td><strong class="text-info">{{$transaction->amount}}</strong></td>
                     </tr>
-                    <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
-                        <td><strong class="text-info">تم الخروج</strong></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">4 ساعات</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
-                        <td><i class="fa-solid fa-clock"></i></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">4 ساعات</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
-                        <td><strong class="text-info">تم الخروج</strong></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">4 ساعات</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
-                        <td><strong class="text-info">تم الخروج</strong></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">4 ساعات</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
-                        <td><strong class="text-info">تم الخروج</strong></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">4 ساعات</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>185</td>
-                        <td>محمود السيد</td>
-                        <td><img src="/asset/img/ph-10.webp" width="40" height="20" alt=""></td>
-                        <td><strong class="text-primary">و ب ص 194</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">11 : 25 AM</strong></td>
-                        <td><strong class="text-info">تم الخروج</strong></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">4 ساعات</strong></td>
-                        <td><strong class="text-info">10 جنيهات</strong></td>
-                    </tr>
+                    @endforeach
+
+
 
                 </table>
 
@@ -178,7 +110,7 @@
                         <div class="box-index bg-success p-1 rounded-3 text-light mb-5">
                             <div class="title text-center">دخول المركبات</div>
                             <div class="data-number">
-                                505
+                                {{$dashboardInfo['current_day_checkIn_count']}}
                                 <i class="fa-solid fa-fw fa-circle-down"></i>
                             </div>
                         </div>
@@ -188,7 +120,7 @@
                         <div class="box-index bg-danger p-1 rounded-3 text-light mb-5">
                             <div class="title text-center">خروج المركبات</div>
                             <div class="data-number">
-                                505
+                                {{$dashboardInfo['current_day_checkOut_count']}}
                                 <i class="fa-solid fa-fw fa-circle-up"></i>
                             </div>
                         </div>
@@ -198,7 +130,7 @@
                         <div class="box-index bg-info p-1 rounded-3 text-light mb-5">
                             <div class="title text-center">ربح اليوم</div>
                             <div class="data-number">
-                                505
+                                {{$dashboardInfo['current_day_collected']}}
                                 <i class="fa-solid fa-fw fa-dollar-sign"></i>
                             </div>
                         </div>
@@ -264,19 +196,19 @@
                 <div><strong>عمليات موظفين ساحه الأنتظار</strong></div>
                 <span class="text-danger" style="font-size:11px">جميع عمليات الموظفين العاملين الأن</span>
                 <table class="table table-striped ta-index">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>أسم الموظف</th>
-                        <th>رقم الموبيل</th>
-                        <th>رقم الرخصه</th>
-                        <th>ساحه الأنتظار</th>
-                        <th>الحاله</th>
-                        <th>حضور</th>
-                        <th>حاله الماكينه</th>
-                        <th>المبالغ المحصله</th>
-                    </tr>
-</thead>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>أسم الموظف</th>
+                            <th>رقم الموبيل</th>
+                            <th>رقم الرخصه</th>
+                            <th>ساحه الأنتظار</th>
+                            <th>الحاله</th>
+                            <th>حضور</th>
+                            <th>حاله الماكينه</th>
+                            <th>المبالغ المحصله</th>
+                        </tr>
+                    </thead>
 
                     <tr>
                         <td>

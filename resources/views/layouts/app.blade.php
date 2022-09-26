@@ -17,6 +17,17 @@
 
 <body>
 
+    <?php
+
+    use App\Http\Controllers\API\TransactionAPIController;
+    use App\Repositories\TransactionRepository;
+    use Illuminate\Container\Container;
+
+    $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
+    $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
+    $dashboardInfo = $transaction->getDashboardInfo();
+
+    ?>
     <div class="show-img">
         <div class="data text-center">
             <div>
@@ -102,9 +113,9 @@
                         <form method="GET" action="/admin/change-zone">
                             <select class="form-control p-0" name="change_zone_id" onchange='if(this.value != 0) { this.form.submit(); }'>
                                 @foreach ($tenant_zones as $tenant_zone)
-                                    @foreach($tenant_zone->ParentZone->Zones as $zone)
-                                        <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}">{{$tenant_zone->ParentZone->name}} -  {{$zone->id}}-{{$zone->name}} </option>
-                                    @endforeach
+                                @foreach($tenant_zone->ParentZone->Zones as $zone)
+                                <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}">{{$tenant_zone->ParentZone->name}} - {{$zone->id}}-{{$zone->name}} </option>
+                                @endforeach
                                 @endforeach
                             </select>
                         </form>
@@ -161,16 +172,16 @@
 
                         <li class="list-inline-item">
                             <span>مشغول</span>
-                            <span class="text-warning mx-2"><strong>500</strong></span>
+                            <span class="text-warning mx-2"><strong>{{$dashboardInfo['total_reserved']}}</strong></span>
                         </li>
                         <li class="list-inline-item">
                             <span>شاغر</span>
-                            <span class="text-info mx-2"><strong>500</strong></span>
+                            <span class="text-info mx-2"><strong>{{$dashboardInfo['available']}}</strong></span>
                         </li>
 
                         <li class="list-inline-item">
                             <span>نسبه الأشغال</span>
-                            <span class="text-danger mx-2"><strong>30%</strong></span>
+                            <span class="text-danger mx-2"><strong>{{$dashboardInfo['reserved_persntage']}}%</strong></span>
                         </li>
                         <li class="list-inline-item">
                             <span>الساحة</span>
@@ -189,11 +200,11 @@
 
                         <li class="list-inline-item">
                             <span>ربح اليوم</span>
-                            <span class="text-success mx-2"><strong>1200</strong></span>
+                            <span class="text-success mx-2"><strong>{{$dashboardInfo['current_day_collected']}}</strong></span>
                         </li>
                         <li class="list-inline-item">
                             <span>ربح الشهر</span>
-                            <span class="text-success mx-2"><strong>1200</strong></span>
+                            <span class="text-success mx-2"><strong>{{$dashboardInfo['current_day_collected']}}</strong></span>
                         </li>
 
                         <li class="list-inline-item">
