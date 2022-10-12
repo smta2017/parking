@@ -25,6 +25,7 @@ class TransactionFactory extends Factory
         return [
             'plate_number' => $this->faker->numberBetween(111, 999) . ' - ' . Str::random(4),
             'plate_img' => 'default.jpeg',
+            'type' => $this->faker->randomElement([1,2,3]),//$this->faker->randomElement([$this->faker->dateTimeBetween($startDate = '0 days', $endDate = '2 hours', $timezone = null), null]),
             'out_at' => $this->faker->date('Y-m-d H:i:s'),//$this->faker->randomElement([$this->faker->dateTimeBetween($startDate = '0 days', $endDate = '2 hours', $timezone = null), null]),
             'qr_code' => $this->faker->randomDigitNotNull,
             'is_payed' => $this->faker->randomDigitNotNull,

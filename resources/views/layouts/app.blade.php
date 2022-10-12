@@ -96,25 +96,25 @@
                     <div class="text-center py-3 date-time">
                         <span>
                             <span style="color:#FEBE0A;">التوقيت الأن</span> <br />
-                            <span>11:08 AM</span>
+                            <span id="clock-wrapper"></span>
                             <?php $tenant_zones = \Auth::guard()->user()->Tenant->TenantZones ?>
 
                         </span>
                         <span>
                             <span style="color:#FEBE0A;">تاريخ اليوم</span> <br />
-                            <span>02/08/2022</span>
+                            <span id="date-wrapper"></span>
                         </span>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-xl-2 text-center">
                     <div class="box py-3 select">
-                        <h6 style="color:#FEBE0A;">أختار ساحه الأنتظار</h6>
+                        <h6 style="color:#FEBE0A;"> {{session('session_zone_id')}} أختار ساحه الأنتظار</h6>
                         <form method="GET" action="/admin/change-zone">
                             <select class="form-control p-0" name="change_zone_id" onchange='if(this.value != 0) { this.form.submit(); }'>
                                 @foreach ($tenant_zones as $tenant_zone)
                                 @foreach($tenant_zone->ParentZone->Zones as $zone)
-                                <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}">{{$tenant_zone->ParentZone->name}} - {{$zone->id}}-{{$zone->name}} </option>
+                                <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}">      {{$zone->id}}-{{$zone->name}} </option>
                                 @endforeach
                                 @endforeach
                             </select>
@@ -217,7 +217,6 @@
             </div>
         </div>
     </div><!-- End main-menu -->
-
     @yield('content')
 
 

@@ -61,7 +61,7 @@ class TransactionRepository extends BaseRepository
     public function setCheckInOvernight(Request $request)
     {
         $imageName = time() . '.' . $request->plate_img->extension();
-        $request->plate_img->storeAs('/images/plate', $imageName, 's3');
+        $request->plate_img->storeAs('/images/plate', $imageName, env('FILESYSTEM_DRIVER'));
 
         // Storage::disk('s3')->put('images/plate', $request->plate_img);
 

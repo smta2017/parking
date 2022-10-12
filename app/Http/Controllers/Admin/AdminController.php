@@ -48,8 +48,11 @@ class AdminController extends Controller
         ];
 
 
-        $default_user_zone = auth()->user()->Tenant->TenantZones[0]->ParentZone->Zones[0]->id;
-        session(['session_zone_id' => $default_user_zone]);
+        
+        if(!session('session_zone_id')){
+            $default_user_zone = auth()->user()->Tenant->TenantZones[0]->ParentZone->Zones[0]->id;
+            session(['session_zone_id' => $default_user_zone]);
+        }
 
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
         $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
@@ -72,8 +75,7 @@ class AdminController extends Controller
     {
         session(['session_zone_id' => $request->change_zone_id]);
 
-        return redirect()->back();
-
         // return  session('session_zone_id');
+        return \redirect()->back();
     }
 }

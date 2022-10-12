@@ -13,7 +13,7 @@
                         <div style="font-size: 14px;"><strong>العمليات داخل ساحه الأنتظار</strong></div>
                         <span class="text-danger" style="font-size:10px">عمليات الدخول و الخروج لجميع المركبات</span>
                     </div>
-                    <div class="col-md-7">
+                    <!-- <div class="col-md-7">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="ابحث-برقم اللوحات المعدنيه / برقم الفاتوره" />
                             <button class="input-group-text btn btn-info text-light" id="basic-addon1">ابحث</button>
@@ -30,7 +30,7 @@
                                 <li><a class="dropdown-item" href="#">حالة المركبة</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
         <div class="row">
             <div class="col-lg-7" style="overflow: auto;">
-                <table class="table table-striped ta-index">
+                <table id="maintbl" class="table table-striped ta-index">
                     <thead>
 
                         <tr>
@@ -75,7 +75,7 @@
 
                 </table>
 
-                <nav aria-label="Page navigation example">
+                <!-- <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
@@ -91,7 +91,7 @@
                             </a>
                         </li>
                     </ul>
-                </nav>
+                </nav> -->
             </div>
 
             <div class="col-lg-5">
@@ -166,7 +166,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-xl-4">
+                    <!-- <div class="col-md-6 col-xl-4">
                         <div class="box-index bg-dark p-1 rounded-3 text-light mb-5">
                             <div class="title text-center">أشتراكات محظوره</div>
                             <div class="data-number">
@@ -184,14 +184,14 @@
                                 <i class="fa-solid fa-fw fa-calendar-check"></i>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div><!-- End Row -->
             </div>
         </div><!-- End Row -->
 
 
-        <div class="row">
+        <div class="row" style="margin-top: 50px;">
             <div class="col-lg-7" style="overflow: auto;">
                 <div><strong>عمليات موظفين ساحه الأنتظار</strong></div>
                 <span class="text-danger" style="font-size:11px">جميع عمليات الموظفين العاملين الأن</span>
@@ -314,5 +314,37 @@
 
     </div>
 </div>
+
+@endsection
+
+@section('after_scripts')
+
+<script>
+    $(document).ready(function() {
+        $('#maintbl').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+    });
+
+    setInterval(function() {
+    var date = new Date();
+
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+    var ampm = date.getHours() >= 12 ? 'pm' : 'am';
+    today = yyyy + '/' + mm + '/' + dd;
+    var hour = (date.getHours() % 12) || 12
+    $('#clock-wrapper').html(
+       hour + ":" + date.getMinutes() + ' - ' + ampm 
+    );
+    $('#date-wrapper').html(
+      today 
+    );
+  }, 500);
+</script>
 
 @endsection

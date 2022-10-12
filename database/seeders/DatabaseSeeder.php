@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder
             'is_customer' => true
         ]);
 
+        \App\Models\User::factory(10)->create([
+            'is_customer' => true
+        ]);
+
 
         // default Super Admin
         \App\Models\SuperAdmin::factory()->create([

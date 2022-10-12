@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'gender' => $this->gender,
             'sms_notification' => $this->sms_notification,
             'is_active' => $this->is_active,
+            'is_customer' => $this->is_customer,
             'lang' => $this->lang,
             'firebase_token' => $this->firebase_token,
             'google_id' => $this->google_id,
