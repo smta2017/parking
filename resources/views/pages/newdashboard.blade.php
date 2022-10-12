@@ -201,6 +201,7 @@
                             <th>#</th>
                             <th>أسم الموظف</th>
                             <th>رقم الموبيل</th>
+                            <th>email </th>
                             <th>رقم الرخصه</th>
                             <th>ساحه الأنتظار</th>
                             <th>الحاله</th>
@@ -219,8 +220,8 @@
                             <img src="/asset/img/face.webp" width="30" height="30" alt="">
                         </td>
                         <td>{{$saye->name}}</td>
+                        <td><strong class="text-primary">{{$saye->phone}}</strong></td>
                         <td><strong class="text-primary">{{$saye->email}}</strong></td>
-                        <td><strong class="text-primary">{{$saye->name}}</strong></td>
                         <td><strong class="text-primary">{{$saye->Zone->name}}</strong></td>
                         <td><strong class="text-primary">في الخدمه</strong></td>
                         <td><strong class="text-success">11 : 25 AM</strong></td>
