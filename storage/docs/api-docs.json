@@ -1149,6 +1149,16 @@
                 "produces": [
                     "application/json"
                 ],
+                "parameters": [
+                    {
+                        "name": "is_admin",
+                        "in": "query",
+                        "description": "is_admin",
+                        "required": false,
+                        "type": "string",
+                        "default": "1"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",

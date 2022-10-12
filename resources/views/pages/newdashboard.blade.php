@@ -195,7 +195,7 @@
             <div class="col-lg-7" style="overflow: auto;">
                 <div><strong>عمليات موظفين ساحه الأنتظار</strong></div>
                 <span class="text-danger" style="font-size:11px">جميع عمليات الموظفين العاملين الأن</span>
-                <table class="table table-striped ta-index">
+                <table id="sayesstbl" class="table table-striped ta-index">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -210,80 +210,28 @@
                         </tr>
                     </thead>
 
+                    
+                    @foreach ($sayes as $saye)
+
                     <tr>
                         <td>
                             <img src="https://static.wixstatic.com/media/c24732_22df1e21acfd4661af5a6479422b50e5~mv2.gif" style="width:28px;height:28px;object-fit:cover" />
                             <img src="/asset/img/face.webp" width="30" height="30" alt="">
                         </td>
-                        <td>محمود السيد</td>
-                        <td><strong class="text-primary">01021464469</strong></td>
-                        <td><strong class="text-primary">123456789</strong></td>
-                        <td><strong class="text-primary">بنها</strong></td>
+                        <td>{{$saye->name}}</td>
+                        <td><strong class="text-primary">{{$saye->email}}</strong></td>
+                        <td><strong class="text-primary">{{$saye->name}}</strong></td>
+                        <td><strong class="text-primary">{{$saye->Zone->name}}</strong></td>
                         <td><strong class="text-primary">في الخدمه</strong></td>
                         <td><strong class="text-success">11 : 25 AM</strong></td>
                         <td><strong class="text-primary">متصل</strong></td>
                         <td><strong class="text-primary">10 جنيهات</strong></td>
                     </tr>
-                    <tr>
-                        <td>
-                            <img src="https://static.wixstatic.com/media/c24732_22df1e21acfd4661af5a6479422b50e5~mv2.gif" style="width:28px;height:28px;object-fit:cover" />
-                            <img src="/asset/img/face.webp" width="30" height="30" alt="">
-                        </td>
-                        <td>محمود السيد</td>
-                        <td><strong class="text-primary">01021464469</strong></td>
-                        <td><strong class="text-primary">123456789</strong></td>
-                        <td><strong class="text-primary">بنها</strong></td>
-                        <td><strong class="text-primary">في الخدمه</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-danger">كسول</strong></td>
-                        <td><strong class="text-primary">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://static.wixstatic.com/media/c24732_22df1e21acfd4661af5a6479422b50e5~mv2.gif" style="width:28px;height:28px;object-fit:cover" />
-                            <img src="/asset/img/face2.webp" width="30" height="30" alt="">
-                        </td>
-                        <td>محمود السيد</td>
-                        <td><strong class="text-primary">01021464469</strong></td>
-                        <td><strong class="text-primary">123456789</strong></td>
-                        <td><strong class="text-primary">بنها</strong></td>
-                        <td><strong class="text-primary">في الخدمه</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-primary">متصل</strong></td>
-                        <td><strong class="text-primary">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://static.wixstatic.com/media/c24732_22df1e21acfd4661af5a6479422b50e5~mv2.gif" style="width:28px;height:28px;object-fit:cover" />
-                            <img src="/asset/img/face2.webp" width="30" height="30" alt="">
-                        </td>
-                        <td>محمود السيد</td>
-                        <td><strong class="text-primary">01021464469</strong></td>
-                        <td><strong class="text-primary">123456789</strong></td>
-                        <td><strong class="text-primary">بنها</strong></td>
-                        <td><strong class="text-primary">في الخدمه</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-primary">متصل</strong></td>
-                        <td><strong class="text-primary">10 جنيهات</strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://static.wixstatic.com/media/c24732_22df1e21acfd4661af5a6479422b50e5~mv2.gif" style="width:28px;height:28px;object-fit:cover" />
-                            <img src="/asset/img/face2.webp" width="30" height="30" alt="">
-                        </td>
-                        <td>محمود السيد</td>
-                        <td><strong class="text-primary">01021464469</strong></td>
-                        <td><strong class="text-primary">123456789</strong></td>
-                        <td><strong class="text-primary">بنها</strong></td>
-                        <td><strong class="text-primary">في الخدمه</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
-                        <td><strong class="text-primary">متصل</strong></td>
-                        <td><strong class="text-primary">10 جنيهات</strong></td>
-                    </tr>
+                    @endforeach
 
                 </table>
 
-                <nav aria-label="Page navigation example">
+                <!-- <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
@@ -299,7 +247,7 @@
                             </a>
                         </li>
                     </ul>
-                </nav>
+                </nav> -->
             </div>
 
             <div class="col-lg-5">
@@ -322,6 +270,12 @@
 <script>
     $(document).ready(function() {
         $('#maintbl').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+        $('#sayesstbl').DataTable({
             "ordering": true,
             "order": [
                 [1, "desc"]

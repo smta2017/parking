@@ -220,6 +220,10 @@ class User extends Authenticatable
         return $this->morphMany('App\Models\PlanSubscription', 'subscriber');
     }
 
+    public function Zone()
+    {
+        return $this->belongsTo(Zone::class, 'zone_id', 'id');
+    }
 
 
     /**

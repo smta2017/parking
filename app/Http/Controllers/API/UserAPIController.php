@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UserResource;
+use App\Models\Admin;
 use Response;
 
 /**
@@ -36,6 +37,14 @@ class UserAPIController extends AppBaseController
      *      tags={"User"},
      *      description="Get all Users",
      *      produces={"application/json"},
+     *        @SWG\Parameter(
+     *             name="is_admin",
+     *             description="is_admin",
+     *             default="1",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -60,12 +69,18 @@ class UserAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if ($request->is_admin) {
+            $users= Admin::get();
+        return $this->sendResponse(UserResource::collection($users), 'Users retrieved successfully');
+            
+        }
         $users = $this->userRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
+        
         return $this->sendResponse(UserResource::collection($users), 'Users retrieved successfully');
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Routing\Controller;
 
 use App\Http\Controllers\API\TransactionAPIController;
+use App\Models\User;
 use App\Repositories\TransactionRepository;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -56,7 +57,11 @@ class AdminController extends Controller
 
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
         $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
-        // \dd( $transactions);
+
+        $sayes= User::whereZoneId(session('session_zone_id'))->get();
+
+        $this->data['sayes'] = $sayes;
+        
         $this->data['transactions'] = $transactions;
         $this->data['dashboardInfo'] = $transaction->getDashboardInfo();
     }

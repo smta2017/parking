@@ -121,6 +121,11 @@ class Zone extends Model
         return $this->belongsTo(ParentZone::class);
     }
 
+    public function Sayess()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function ZoneBuckets()
     {
         return $this->hasMany(ZoneBucket::class);
