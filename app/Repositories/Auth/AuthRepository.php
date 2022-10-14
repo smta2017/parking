@@ -52,6 +52,10 @@ class AuthRepository extends BaseRepository
                 'name' => auth('api')->user()->name,
                 'email' => auth('api')->user()->email,
                 'avatar' => url('') . '/storage/images/avatar/' . auth('api')->user()->avatar,
+                'zone' => [
+                    'id'=>auth('api')->user()->Zone->id,
+                    'name'=>auth('api')->user()->Zone->name,
+                ]
             ]
         ]);
     }
