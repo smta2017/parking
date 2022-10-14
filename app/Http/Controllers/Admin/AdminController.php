@@ -51,7 +51,13 @@ class AdminController extends Controller
 
         
         if(!session('session_zone_id')){
-            $default_user_zone = auth()->user()->Tenant->TenantZones[0]->ParentZone->Zones[0]->id;
+            try {
+                
+                $default_user_zone = auth()->user()->Tenant->TenantZones[0]->ParentZone->Zones[0]->id;
+            } catch (\Throwable $th) {
+                \Auth::logout();
+                return redirect('login');
+            }
             session(['session_zone_id' => $default_user_zone]);
         }
 

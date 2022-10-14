@@ -28,4 +28,9 @@ Route::group([
 
     Route::get('change-zone', 'AdminController@changeZone');
 
+    Route::resource('sayess', 'SayesController');
+
+
+
+
 }); // this should be the absolute last line of this file

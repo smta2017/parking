@@ -201,7 +201,7 @@
                             <th>#</th>
                             <th>أسم الموظف</th>
                             <th>رقم الموبيل</th>
-                            <th>email </th>
+                            <th style="max-width: 100px;">email </th>
                             <th>رقم الرخصه</th>
                             <th>ساحه الأنتظار</th>
                             <th>الحاله</th>
@@ -222,6 +222,7 @@
                         <td>{{$saye->name}}</td>
                         <td><strong class="text-primary">{{$saye->phone}}</strong></td>
                         <td><strong class="text-primary">{{$saye->email}}</strong></td>
+                        <td><strong class="text-primary">00</strong></td>
                         <td><strong class="text-primary">{{$saye->Zone->name}}</strong></td>
                         <td><strong class="text-primary">في الخدمه</strong></td>
                         <td><strong class="text-success">11 : 25 AM</strong></td>

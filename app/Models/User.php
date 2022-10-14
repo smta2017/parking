@@ -205,6 +205,11 @@ class User extends Authenticatable
         return $query->where('is_customer', 1);
     }
 
+    public function scopeSayesZone($query)
+    {
+        return $query->whereNull('is_customer')->whereZoneId(session('session_zone_id'));
+    }
+   
     public function Transactions()
     {
         return $this->hasMany(Transaction::class, 'customer_id', 'id');

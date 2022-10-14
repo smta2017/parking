@@ -85,6 +85,11 @@ class TransactionRepository extends BaseRepository
         session(['session_zone_id' => auth()->user()->zone_id]);
         $day = 12;
         $transaction = Transaction::find($qr_code);
+
+        if ($transaction->type != 3) {
+            return \response()->json(['succsess' => false, 'message' => 'invalid transaction type']);
+        }
+
         $second_hour_rate = Zone::secondHourRate();
         $overnightRate = Zone::overnightRate();
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
@@ -115,6 +120,9 @@ class TransactionRepository extends BaseRepository
     {
         session(['session_zone_id' => auth()->user()->zone_id]);
         $transaction = Transaction::find($qr_code);
+        if ($transaction->type != 1) {
+            return \response()->json(['succsess' => false, 'message' => 'invalid transaction type']);
+        }
         $hour_rate = Zone::hourRate();
         $second_hour_rate = Zone::secondHourRate();
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
@@ -126,6 +134,11 @@ class TransactionRepository extends BaseRepository
     {
         session(['session_zone_id' => auth()->user()->zone_id]);
         $transaction = Transaction::subscribe()->where('customer_id', $customer_id)->first();
+
+        if ($transaction->type != 2) {
+            return \response()->json(['succsess' => false, 'message' => 'invalid transaction type']);
+        }
+
         $hour_rate = Zone::hourRate();
         $second_hour_rate = Zone::secondHourRate();
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);

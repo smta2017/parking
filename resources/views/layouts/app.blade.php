@@ -62,7 +62,7 @@
 
         <h6 class="title"><i class="fa-solid fa-fw fa-users"></i> الموظفين و العاملين</h6>
         <ul class="list-unstyled my-2 px-2 list">
-            <li class="my-1"><a href="add-user.html"><i class="fa-solid fa-fw fa-user-plus"></i> أنشاء ملف موظف جديد</a></li>
+            <li class="my-1"><a href="/admin/sayess/create"><i class="fa-solid fa-fw fa-user-plus"></i> أنشاء ملف موظف جديد</a></li>
             <li class="my-1"><a data-bs-toggle="modal" data-bs-target="#employee-data" href="#"><i class="fa-solid fa-fw fa-file"></i> ملفات العاملين</a></li>
         </ul>
 

@@ -350,6 +350,52 @@ class TransactionAPIController extends AppBaseController
     }
 
     /**
+     * @param int $id
+     * @return Response
+     *
+     * @SWG\Post(
+     *      path="/transactions/checkout/{qr_code}",
+     *      summary="Set checkout for Transaction",
+     *      tags={"Mobile-Api"},
+     *      security = {{"Bearer": {}}},
+     *      description="checkout Transaction",
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="qr_code",
+     *          description="qr code of Transaction",
+     *          type="string",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/CheckOut"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function checkOut($qr_code)
+    {
+        $transaction = $this->transactionRepository->setCheckOut($qr_code);
+
+        return $this->sendResponse(new CheckOutResource($transaction), 'Check out saved successfully');
+    }
+
+    /**
      * @param CreateTransactionAPIRequest $request
      * @return Response
      *
@@ -447,53 +493,6 @@ class TransactionAPIController extends AppBaseController
           $transaction = $this->transactionRepository->setCheckOutOvernight($customer_id);
 
         return $this->sendResponse(new CheckOutOvernightResource($transaction), 'Overnight check out saved successfully');
-    }
-
-
-    /**
-     * @param int $id
-     * @return Response
-     *
-     * @SWG\Post(
-     *      path="/transactions/checkout/{qr_code}",
-     *      summary="Set checkout for Transaction",
-     *      tags={"Mobile-Api"},
-     *      security = {{"Bearer": {}}},
-     *      description="checkout Transaction",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="qr_code",
-     *          description="qr code of Transaction",
-     *          type="string",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/CheckOut"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
-     */
-    public function checkOut($qr_code)
-    {
-        $transaction = $this->transactionRepository->setCheckOut($qr_code);
-
-        return $this->sendResponse(new CheckOutResource($transaction), 'Check out saved successfully');
     }
 
     /**
