@@ -28,6 +28,7 @@ class CheckOutResource extends JsonResource
             'checkin' => $this->created_at->format('Y-m-d H:i'),
             'checkin_hu' => $this->created_at->diffForHumans(),
             'checkout' => $this->out_at,
+            'bucket' => $this['bucket'],
             'total_time' => [
                 'days' => $diff_time2->days,
                 'hours' => $diff_time2->h . ':' . $diff_time2->i . ':' . $diff_time2->s,

@@ -322,6 +322,14 @@ class TransactionAPIController extends AppBaseController
      *             required=false,
      *             in="query"
      *      ),
+     *      @SWG\Parameter(
+     *             name="zone_bucket_id",
+     *             description="zone_bucket_id",
+     *             default="1",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",
@@ -490,7 +498,7 @@ class TransactionAPIController extends AppBaseController
      */
     public function checkOutOvernight($customer_id)
     {
-          $transaction = $this->transactionRepository->setCheckOutOvernight($customer_id);
+        $transaction = $this->transactionRepository->setCheckOutOvernight($customer_id);
 
         return $this->sendResponse(new CheckOutOvernightResource($transaction), 'Overnight check out saved successfully');
     }
@@ -670,5 +678,11 @@ class TransactionAPIController extends AppBaseController
         return $transaction = $this->transactionRepository->dashboardInfo();
 
         // return $this->sendResponse(CheckOutResource::collection($transaction), 'Successfully');
+    }
+
+    public function getTransactionPerType($type = 1, $theDay)
+    {
+        (!$theDay) ?? $theDay = date('d-m-y');
+        return $transaction = $this->transactionRepository->transactions(['type' => $type, 'created_at' => $theDay]);
     }
 }

@@ -833,6 +833,14 @@
                         "required": false,
                         "type": "string",
                         "default": "sameh"
+                    },
+                    {
+                        "name": "zone_bucket_id",
+                        "in": "query",
+                        "description": "zone_bucket_id",
+                        "required": false,
+                        "type": "string",
+                        "default": "1"
                     }
                 ],
                 "responses": {
@@ -845,6 +853,51 @@
                                 },
                                 "data": {
                                     "$ref": "#/definitions/CheckIn"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/transactions/checkout/{qr_code}": {
+            "post": {
+                "tags": [
+                    "Mobile-Api"
+                ],
+                "summary": "Set checkout for Transaction",
+                "description": "checkout Transaction",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "qr_code",
+                        "in": "path",
+                        "description": "qr code of Transaction",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/CheckOut"
                                 },
                                 "message": {
                                     "type": "string"
@@ -915,51 +968,6 @@
             }
         },
         "/transactions/checkout-overnight/{qr_code}": {
-            "post": {
-                "tags": [
-                    "Mobile-Api"
-                ],
-                "summary": "Set checkout for Transaction",
-                "description": "checkout Transaction",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "qr_code",
-                        "in": "path",
-                        "description": "qr code of Transaction",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/CheckOut"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/transactions/checkout/{qr_code}": {
             "post": {
                 "tags": [
                     "Mobile-Api"

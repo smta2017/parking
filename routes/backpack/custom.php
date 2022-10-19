@@ -29,6 +29,7 @@ Route::group([
     Route::get('change-zone', 'AdminController@changeZone');
 
     Route::resource('sayess', 'SayesController');
+    Route::resource('money', 'MoneyController');
 
 
 

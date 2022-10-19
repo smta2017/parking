@@ -197,12 +197,21 @@ class TransactionRepository extends BaseRepository
     }
     public function totalReserved()
     {
-        $total_transaction_count = Transaction::count();
-
         $total_inside = Transaction::whereNull('out_at')->count();
-        return    $total_inside;
+        return $total_inside;
     }
 
+    public function currentDayOvernight()
+    {
+        $total_overnight = Transaction::whereDate('created_at', Carbon::today())->whereType(Transaction::OVERNIGHT_TRANSACTION)->count();
+        return $total_overnight;
+    }
+    
+    public function currentDaySubscribe()
+    {
+        $total_subscribe = Transaction::whereDate('created_at', Carbon::today())->whereType(Transaction::SUBSCRIBE_TRANSACTION)->count();
+        return $total_subscribe;
+    }
     public function available()
     {
         $avilable = Zone::zoneCapacity() - $this->totalReserved();
@@ -227,6 +236,9 @@ class TransactionRepository extends BaseRepository
             'available' => $this->available(),
             'total_reserved' => $this->totalReserved(),
             'reserved_persntage' => $this->reserved_persntage(),
+            'current_day_overnight' => $this->currentDayOvernight(),
+            'current_day_subscribe' => $this->currentDaySubscribe(),
+
             // عدد الزائرين
 
             // عدد المشتركين
@@ -237,5 +249,11 @@ class TransactionRepository extends BaseRepository
 
             // أشتركات قيد التفعيل
         ];
+    }
+
+
+    public function transactions($filter)
+    {
+        return $this->all($filter, null, null)->sortByDesc('created_at');
     }
 }

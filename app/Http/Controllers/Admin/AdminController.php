@@ -58,7 +58,7 @@ class AdminController extends Controller
                 \Auth::logout();
                 return redirect('login');
             }
-            session(['session_zone_id' => $default_user_zone]);
+            // session(['session_zone_id' => $default_user_zone]);
         }
 
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));

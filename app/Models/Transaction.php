@@ -83,7 +83,8 @@ class Transaction extends Model
         'out_at',
         'type',
         'qr_code',
-        'is_payed'
+        'is_payed',
+        'zone_bucket_id'
     ];
 
     /**
@@ -163,4 +164,10 @@ class Transaction extends Model
     {
         return $this->belongsTo(\App\Models\Zone::class, 'zone_id', 'id');
     }
+    
+    public function bucket(){
+        return $this->belongsTo(\App\Models\ZoneBucket::class, 'zone_bucket_id', 'id');
+
+    }
+    
 }

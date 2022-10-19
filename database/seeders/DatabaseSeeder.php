@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'is_customer' => true
         ]);
 
-        \App\Models\User::factory(10)->create([
+        \App\Models\User::factory(5)->create([
             'is_customer' => true
         ]);
 

@@ -44,7 +44,7 @@
             <img src="/asset/img/logo-2.webp" alt="" />
         </div>
         <ul class="list-inline text-center my-3 top-icon">
-            <li class="list-inline-item"><a href="index.html"><i class="fa-solid fa-fw fa-house"></i></a></li>
+            <li class="list-inline-item"><a href="/admin"><i class="fa-solid fa-fw fa-house"></i></a></li>
             <li class="list-inline-item"><a href="#"><i class="fa-solid fa-fw fa-bell"></i></a></li>
             <li class="list-inline-item"><a href="#"><i class="fa-solid fa-fw fa-bell"></i></a></li>
         </ul>
@@ -160,11 +160,15 @@
                             <span class="text-success mx-2"><strong>مفتوح</strong></span>
                         </li>
                         <li class="list-inline-item">
+                        <span class="text-warning mx-2"><strong>{{$dashboardInfo['current_day_checkIn_count']}}</strong></span>
+
                             <span>دخول</span>
                             <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;transform:rotate(90deg)" />
                         </li>
 
                         <li class="list-inline-item">
+                        <span class="text-warning mx-2"><strong>{{$dashboardInfo['current_day_checkOut_count']}}</strong></span>
+
                             <span>خروج</span>
                             <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;filter:invert(1);transform:rotate(270deg)" />
                             <!-- <span class="text-danger mx-2"><strong>300 <i class="fa-solid fa-angles-up"></i></strong></span> -->
@@ -195,7 +199,7 @@
 
                         <li class="list-inline-item">
                             <span>عدد الموظفين</span>
-                            <span class="text-warning mx-2"><strong>8</strong></span>
+                            <span class="text-warning mx-2"><strong>{{count($sayes)}}</strong></span>
                         </li>
 
                         <li class="list-inline-item">

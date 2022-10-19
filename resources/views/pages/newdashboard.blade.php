@@ -64,10 +64,30 @@
                         <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
                         <td><strong class="text-success">{{$transaction->checkin}}</strong></td>
                         <td><strong class="text-danger">{{$transaction->checkout}}</strong></td>
-                        <td><strong class="text-info">تم الخروج</strong></td>
-                        <td>61</td>
-                        <td><strong class="text-danger">{{$transaction->total_time->days . ' - '. $transaction->total_time->hours}}</strong></td>
-                        <td><strong class="text-info">{{$transaction->amount}}</strong></td>
+                        <td><strong class="text-info">
+                                @if ($transaction->checkout==null)
+                                <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;transform:rotate(90deg)" />
+                                قيد الانتظار
+                                @else
+                                <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;filter:invert(1);transform:rotate(270deg)" />
+                                خرج
+                                @endif
+                            </strong></td>
+                        <td>
+                           {{$transaction->bucket->name}}
+                        </td>
+                        <td><strong class="text-danger">{{$transaction->total_time->days . ' | '. $transaction->total_time->hours}}</strong></td>
+                        <td><strong class="text-info">
+                                @if ($transaction->type==1)
+                                {{$transaction->amount}}
+                                @elseif ($transaction->type==2)
+                                اشتراك
+                                @elseif ($transaction->type==3)
+                                {{$transaction->amount}}
+                                <br>
+                                مبيت
+                                @endif
+                            </strong></td>
                     </tr>
                     @endforeach
 
@@ -166,11 +186,11 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-md-6 col-xl-4">
+                    <div class="col-md-6 col-xl-4">
                         <div class="box-index bg-dark p-1 rounded-3 text-light mb-5">
-                            <div class="title text-center">أشتراكات محظوره</div>
+                            <div class="title text-center">المبيت</div>
                             <div class="data-number">
-                                8
+                                {{$dashboardInfo['current_day_overnight']}}
                                 <i class="fa-solid fa-fw fa-ban"></i>
                             </div>
                         </div>
@@ -178,13 +198,13 @@
 
                     <div class="col-md-6 col-xl-4">
                         <div class="box-index bg-primary p-1 rounded-3 text-light mb-5">
-                            <div class="title text-center">أشتركات قيد التفعيل</div>
+                            <div class="title text-center">اشتراكات </div>
                             <div class="data-number">
-                                8
+                                {{$dashboardInfo['current_day_subscribe']}}
                                 <i class="fa-solid fa-fw fa-calendar-check"></i>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                 </div><!-- End Row -->
             </div>
@@ -211,7 +231,7 @@
                         </tr>
                     </thead>
 
-                    
+
                     @foreach ($sayes as $saye)
 
                     <tr>
@@ -286,21 +306,21 @@
     });
 
     setInterval(function() {
-    var date = new Date();
+        var date = new Date();
 
-    var dd = String(date.getDate()).padStart(2, '0');
-    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = date.getFullYear();
-    var ampm = date.getHours() >= 12 ? 'pm' : 'am';
-    today = yyyy + '/' + mm + '/' + dd;
-    var hour = (date.getHours() % 12) || 12
-    $('#clock-wrapper').html(
-       hour + ":" + date.getMinutes() + ' - ' + ampm 
-    );
-    $('#date-wrapper').html(
-      today 
-    );
-  }, 500);
+        var dd = String(date.getDate()).padStart(2, '0');
+        var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = date.getFullYear();
+        var ampm = date.getHours() >= 12 ? 'pm' : 'am';
+        today = yyyy + '/' + mm + '/' + dd;
+        var hour = (date.getHours() % 12) || 12
+        $('#clock-wrapper').html(
+            hour + ":" + date.getMinutes() + ' - ' + ampm
+        );
+        $('#date-wrapper').html(
+            today
+        );
+    }, 500);
 </script>
 
 @endsection
