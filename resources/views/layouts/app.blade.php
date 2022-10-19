@@ -67,7 +67,7 @@
         </ul>
 
         <h6 class="title">
-            <a href="/money">
+            <a href="/admin/money">
                 <i class="fa-solid fa-fw fa-hand-holding-dollar"></i> الأرباح و الماليات
             </a>
         </h6>
@@ -199,7 +199,7 @@
 
                         <li class="list-inline-item">
                             <span>عدد الموظفين</span>
-                            <span class="text-warning mx-2"><strong>{{count($sayes)}}</strong></span>
+                            <span class="text-warning mx-2"><strong>8</strong></span>
                         </li>
 
                         <li class="list-inline-item">
