@@ -6,6 +6,7 @@ use App\Http\Controllers\API\PlanController as APIPlanController;
 use App\Http\Controllers\API\TenantApiController;
 use App\Http\Controllers\API\TransactionAPIController;
 use App\Http\Controllers\API\UserAPIController;
+use App\Http\Controllers\API\ZoneBucketAPIController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('checkout-plate/{plate}', [TransactionAPIController::class, 'checkOutByPlate']);        
     });
     Route::resource('transactions', TransactionAPIController::class);
+Route::get('current-zone-buckets',[ZoneBucketAPIController::class, 'currentUserZoneBuckets']);
+
 });
 
 
@@ -56,3 +59,6 @@ Route::resource('customerVehicles', App\Http\Controllers\API\CustomerVehicleAPIC
 
 
 Route::post('create-tenant',[TenantApiController::class, 'createTenant']);
+
+Route::resource('zone_buckets', ZoneBucketAPIController::class);
+

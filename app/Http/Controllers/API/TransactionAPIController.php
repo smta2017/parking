@@ -430,6 +430,14 @@ class TransactionAPIController extends AppBaseController
      *             required=false,
      *             in="query"
      *      ),
+     *      @SWG\Parameter(
+     *             name="zone_bucket_id",
+     *             description="zone_bucket_id",
+     *             default="1",           
+     *             type="string",
+     *             required=false,
+     *             in="query"
+     *      ),
      *      @SWG\Response(
      *          response=200,
      *          description="successful operation",

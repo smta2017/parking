@@ -2,10 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\ZoneBucket;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ZoneBucketFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ZoneBucket::class;
+
     /**
      * Define the model's default state.
      *
@@ -14,8 +22,10 @@ class ZoneBucketFactory extends Factory
     public function definition()
     {
         return [
-            'zone_id' =>  $this->faker->numberBetween(1,10),
-            'name' => $this->faker->name(),
+            'zone_id' => $this->faker->randomDigitNotNull,
+        'name' => $this->faker->word,
+        'created_at' => $this->faker->date('Y-m-d H:i:s'),
+        'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }
 }
