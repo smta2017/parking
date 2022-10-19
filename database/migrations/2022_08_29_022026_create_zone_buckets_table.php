@@ -18,6 +18,7 @@ class CreateZoneBucketsTable extends Migration
             $table->integer('zone_id')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
