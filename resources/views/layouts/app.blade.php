@@ -67,7 +67,7 @@
         </ul>
 
         <h6 class="title">
-            <a href="money.html">
+            <a href="/money">
                 <i class="fa-solid fa-fw fa-hand-holding-dollar"></i> الأرباح و الماليات
             </a>
         </h6>

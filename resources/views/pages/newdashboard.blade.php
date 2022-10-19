@@ -74,7 +74,6 @@
                                 @endif
                             </strong></td>
                         <td>
-                           {{$transaction->bucket->name}}
                         </td>
                         <td><strong class="text-danger">{{$transaction->total_time->days . ' | '. $transaction->total_time->hours}}</strong></td>
                         <td><strong class="text-info">
