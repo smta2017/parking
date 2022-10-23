@@ -27,6 +27,7 @@ Route::group([
     Route::crud('admin', 'AdminCrudController');
 
     Route::get('change-zone', 'AdminController@changeZone');
+    // Route::get('money-repo', 'MoneyController@money-repo');
 
     Route::resource('sayess', 'SayesController');
     Route::resource('money', 'MoneyController');

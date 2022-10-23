@@ -31,6 +31,7 @@ class TransactionFactory extends Factory
             'is_payed' => $this->faker->randomDigitNotNull,
             'zone_id' => $this->faker->numberBetween(1, 10),
             'created_by' => $this->faker->numberBetween(1, 10),
+            'out_by' => $this->faker->numberBetween(1, 10),
             'created_at' => $this->faker->dateTimeBetween($startDate = '-9 days', $endDate = '2 hours', $timezone = null),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

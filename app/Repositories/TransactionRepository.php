@@ -95,7 +95,7 @@ class TransactionRepository extends BaseRepository
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
         $extra_hors = (($total_hors - $day) >= 0) ? $total_hors - $day : 0;
         $total_amount =  ($second_hour_rate * $extra_hors) + $overnightRate;
-        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
+        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString(), 'out_by' => auth()->user()->id], $transaction->id);
     }
 
 
@@ -127,7 +127,7 @@ class TransactionRepository extends BaseRepository
         $second_hour_rate = Zone::secondHourRate();
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
         $total_amount = ($second_hour_rate * $total_hors) + $hour_rate;
-        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
+        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString(), 'out_by' => auth()->user()->id], $transaction->id);
     }
 
     public function setCheckOutClient($customer_id)
@@ -143,7 +143,7 @@ class TransactionRepository extends BaseRepository
         $second_hour_rate = Zone::secondHourRate();
         $total_hors =  $transaction->created_at->diffInHours($transaction->out_at, false);
         $total_amount = ($second_hour_rate * $total_hors) + $hour_rate;
-        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString()], $transaction->id);
+        return $this->update(['is_payed' =>  $total_amount, 'out_at' => Carbon::now()->toDateTimeString(), 'out_by' => auth()->user()->id], $transaction->id);
     }
 
     public function setCheckOutByPlate($plate)
@@ -206,7 +206,7 @@ class TransactionRepository extends BaseRepository
         $total_overnight = Transaction::whereDate('created_at', Carbon::today())->whereType(Transaction::OVERNIGHT_TRANSACTION)->count();
         return $total_overnight;
     }
-    
+
     public function currentDaySubscribe()
     {
         $total_subscribe = Transaction::whereDate('created_at', Carbon::today())->whereType(Transaction::SUBSCRIBE_TRANSACTION)->count();
@@ -251,9 +251,22 @@ class TransactionRepository extends BaseRepository
         ];
     }
 
-
-    public function transactions($filter)
+    public function moneyTransactions(Request $filter,$type=1)
     {
-        return $this->all($filter, null, null)->sortByDesc('created_at');
+        if(!$filter->has('thedate')){
+            $filter->thedate='';
+        }
+
+        return Transaction::where('type', $type)->whereDate('created_at', $filter->thedate)->get();
+    }
+    public function sayesCollect()
+    {
+        // return Transaction::find(50);
+        return Transaction::where('zone_id', session('session_zone_id'))->whereNotNull('out_at')->get();
+        // return Transaction::select('out_by', DB::raw('sum(is_payed) as total'))
+        //     ->whereNotNull('out_at')
+        //     ->where('zone_id', session('session_zone_id'))
+        //     ->groupBy('out_by')
+        //     ->get();
     }
 }

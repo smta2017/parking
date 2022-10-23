@@ -102,7 +102,6 @@ abstract class BaseRepository
         if (!is_null($limit)) {
             $query->limit($limit);
         }
-
         return $query;
     }
 

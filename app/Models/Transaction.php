@@ -155,6 +155,11 @@ class Transaction extends Model
         return $this->belongsTo(\App\Models\User::class, 'created_by', 'id');
     }
 
+    public function OutBy()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'out_by', 'id');
+    }
+
     public function Vehicle()
     {
         return $this->belongsTo(\App\Models\CustomerVehicle::class, 'customer_id', 'id');

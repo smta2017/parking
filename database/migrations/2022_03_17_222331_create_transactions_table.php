@@ -24,6 +24,7 @@ class CreateTransactionsTable extends Migration
             $table->string('qr_code')->nullable();
             $table->float('is_payed')->nullable();
             $table->integer('created_by')->nullable();
+            $table->integer('out_by')->nullable();
             $table->integer('zone_id')->nullable();
             $table->integer('zone_bucket_id')->nullable();
             $table->timestamps();

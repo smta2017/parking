@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/asset/css/dataTables.bootstrap5.min.css" />
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 
@@ -20,12 +21,16 @@
     <?php
 
     use App\Http\Controllers\API\TransactionAPIController;
-    use App\Repositories\TransactionRepository;
+use App\Models\User;
+use App\Repositories\TransactionRepository;
     use Illuminate\Container\Container;
 
     $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
-    $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
+    // $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
     $dashboardInfo = $transaction->getDashboardInfo();
+
+    $sayes_count= User::whereZoneId(session('session_zone_id'))->count();
+
 
     ?>
     <div class="show-img">
@@ -199,7 +204,7 @@
 
                         <li class="list-inline-item">
                             <span>عدد الموظفين</span>
-                            <span class="text-warning mx-2"><strong>{{count($sayes)}}</strong></span>
+                            <span class="text-warning mx-2"><strong>{{$sayes_count}}</strong></span>
                         </li>
 
                         <li class="list-inline-item">
@@ -249,6 +254,9 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="/asset/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @yield('after_scripts')
 
 </body>

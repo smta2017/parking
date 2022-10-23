@@ -17,15 +17,18 @@ class MoneyController extends Controller
     public function __construct(TransactionRepository $transactionRepo)
     {
         $this->transactionRepository = $transactionRepo;
-    }
+    }   
 
-    public function index()
+    public function index(Request $request)
     {
 
         // return \session('session_zone_id');
-        $this->data['gests'] = json_decode(json_encode(CheckOutResource::collection($this->transactionRepository->latestTransactions(['type' => Transaction::GENERAL_TRANSACTION, 'created_at' => '2022-10-08']))));
-        $this->data['subscribe'] = json_decode(json_encode(CheckOutResource::collection($this->transactionRepository->latestTransactions(['type' => Transaction::SUBSCRIBE_TRANSACTION, 'created_at' => '2022-10-08']))));
-        $this->data['over_night'] = json_decode(json_encode(CheckOutResource::collection($this->transactionRepository->latestTransactions(['type' => Transaction::OVERNIGHT_TRANSACTION, 'created_at' => '2022-10-08']))));
+        $this->data['gests'] = json_decode(json_encode(CheckOutResource::collection($this->transactionRepository->moneyTransactions($request,1))));
+        $this->data['subscribe'] = json_decode(json_encode(CheckOutResource::collection($this->transactionRepository->moneyTransactions($request,2))));
+        $this->data['over_night'] = json_decode(json_encode(CheckOutResource::collection($this->transactionRepository->moneyTransactions($request,3))));
+        $this->data['sayess_collect'] = $this->transactionRepository->sayesCollect();
+        
+        // $this->data['sayess_collect'] = ($this->transactionRepository->sayesCollect());
 
         return \view('pages.money', $this->data);
     }
