@@ -199,7 +199,7 @@
 
                         <li class="list-inline-item">
                             <span>عدد الموظفين</span>
-                            <span class="text-warning mx-2"><strong>8</strong></span>
+                            <span class="text-warning mx-2"><strong>{{count($sayes)}}</strong></span>
                         </li>
 
                         <li class="list-inline-item">
