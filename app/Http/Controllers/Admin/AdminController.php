@@ -54,11 +54,11 @@ class AdminController extends Controller
             try {
                 
                 $default_user_zone = auth()->user()->Tenant->TenantZones[0]->ParentZone->Zones[0]->id;
+                session(['session_zone_id' => $default_user_zone]);
             } catch (\Throwable $th) {
                 \Auth::logout();
                 return redirect('login');
             }
-            // session(['session_zone_id' => $default_user_zone]);
         }
 
         $transaction = new TransactionAPIController(new TransactionRepository(new Container()));

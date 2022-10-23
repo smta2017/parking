@@ -45,8 +45,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Zone::factory(10)->create();
         \App\Models\Transaction::factory(100)->create();
         \App\Models\Tenant::factory(100)->create();
-        \App\Models\Admin::factory(100)->create();
-        \App\Models\TenantZone::factory(100)->create();
+        \App\Models\Admin::factory(10)->create();
+        \App\Models\TenantZone::factory(500)->create();
 
 
         //default zone
