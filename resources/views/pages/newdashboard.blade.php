@@ -73,7 +73,7 @@
                                 خرج
                                 @endif
                             </strong></td>
-                        <td>{{$transaction->zone_bucket_id}}</td>
+                        <td>17</td>
                         <td><strong class="text-danger">{{$transaction->total_time->days . ' | '. $transaction->total_time->hours}}</strong></td>
                         <td><strong class="text-info">
                                 @if ($transaction->type==1)
