@@ -60,7 +60,7 @@
                     <tr>
                         <td> {{ \session('session_zone_id') }} - {{$transaction->id}}</td>
                         <td>{{$transaction->created_by->name}}</td>
-                        <td><img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></td>
+                        <td> <a href="#" target="_blanck"> <img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></a></td>
                         <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
                         <td><strong class="text-success">{{$transaction->checkin}}</strong></td>
                         <td><strong class="text-danger">{{$transaction->checkout}}</strong></td>
@@ -118,7 +118,7 @@
                         <div class="box-index bg-warning p-1 rounded-3 mb-5">
                             <div class="title text-center">المركبات المنتظره</div>
                             <div class="data-number">
-                                505
+                                {{$dashboardInfo['total_reserved']}}
                                 <i class="fa-solid fa-fw fa-car"></i>
                             </div>
                         </div>
