@@ -43,6 +43,7 @@ class CheckOutClientResource extends JsonResource
             // 'subscribe_price' => $plan['price'],
             'subscribe_ended' => $subscripe->ended(),
             'created_by' => new UserMiniResource($this->User),
+            'out_by' => new UserMiniResource($this->OutBy),
         ];
     }
 }
