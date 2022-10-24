@@ -84,7 +84,8 @@ class Transaction extends Model
         'type',
         'qr_code',
         'is_payed',
-        'zone_bucket_id'
+        'zone_bucket_id',
+        'out_by'
     ];
 
     /**
@@ -99,6 +100,7 @@ class Transaction extends Model
         'type' => 'integer',
         'zone_id' => 'integer',
         'created_by' => 'integer',
+        'out_by' => 'integer',
         'out_at' => 'string',
         'qr_code' => 'string',
         'is_payed' => 'float'
