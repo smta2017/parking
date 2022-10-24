@@ -255,7 +255,7 @@ class TransactionRepository extends BaseRepository
     public function moneyTransactions(Request $filter,$type=1)
     {
         if(!$filter->has('thedate')){
-            $filter->thedate=date('yy/mm/dd');//'2022/10/24';
+            $filter->thedate=date('Y/m/d');//'2022/10/24';
         }
 
         return Transaction::where('type', $type)->whereDate('created_at', $filter->thedate)->get();
