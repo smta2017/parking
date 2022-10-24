@@ -180,7 +180,7 @@ class TransactionRepository extends BaseRepository
 
     public function currentDayCollected()
     {
-        $total_day_profit = Transaction::overnight()->general()->whereDate('out_at', Carbon::today())->sum('is_payed');
+        $total_day_profit = Transaction::where('type','<>', Transaction::SUBSCRIBE_TRANSACTION)->whereDate('out_at', Carbon::today())->sum('is_payed');
         return $total_day_profit;
     }
 
