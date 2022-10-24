@@ -144,6 +144,11 @@ class Transaction extends Model
         return $query->where('type', self::GENERAL_TRANSACTION);
     }
 
+    public function scopeOvernight($query)
+    {
+        return $query->where('type', self::OVERNIGHT_TRANSACTION);
+    }
+
     public function scopeSubscribe($query)
     {
         return $query->where('type', self::SUBSCRIBE_TRANSACTION);
