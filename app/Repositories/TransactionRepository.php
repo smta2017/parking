@@ -202,6 +202,11 @@ class TransactionRepository extends BaseRepository
         return $total_inside;
     }
 
+    public function currentDayGeneral()
+    {
+        $total_general = Transaction::whereDate('created_at', Carbon::today())->whereType(Transaction::GENERAL_TRANSACTION)->count();
+        return $total_general;
+    }
     public function currentDayOvernight()
     {
         $total_overnight = Transaction::whereDate('created_at', Carbon::today())->whereType(Transaction::OVERNIGHT_TRANSACTION)->count();
@@ -239,6 +244,7 @@ class TransactionRepository extends BaseRepository
             'reserved_persntage' => $this->reserved_persntage(),
             'current_day_overnight' => $this->currentDayOvernight(),
             'current_day_subscribe' => $this->currentDaySubscribe(),
+            'current_day_general' => $this->currentDayGeneral(),
 
             // عدد الزائرين
 

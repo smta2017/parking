@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/asset/css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 
@@ -21,15 +21,15 @@
     <?php
 
     use App\Http\Controllers\API\TransactionAPIController;
-use App\Models\User;
-use App\Repositories\TransactionRepository;
+    use App\Models\User;
+    use App\Repositories\TransactionRepository;
     use Illuminate\Container\Container;
 
     $transaction = new TransactionAPIController(new TransactionRepository(new Container()));
     // $transactions = json_decode(json_encode($transaction->getLatestTransactions()))->original->data;
     $dashboardInfo = $transaction->getDashboardInfo();
 
-    $sayes_count= User::whereZoneId(session('session_zone_id'))->count();
+    $sayes_count = User::whereZoneId(session('session_zone_id'))->count();
 
 
     ?>
@@ -119,7 +119,7 @@ use App\Repositories\TransactionRepository;
                             <select class="form-control p-0" name="change_zone_id" onchange='if(this.value != 0) { this.form.submit(); }'>
                                 @foreach ($tenant_zones as $tenant_zone)
                                 @foreach($tenant_zone->ParentZone->Zones as $zone)
-                                <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}">      {{$zone->id}}-{{$zone->name}} </option>
+                                <option @if($zone->id == session('session_zone_id')) selected @endif value="{{$zone->id}}"> {{$zone->id}}-{{$zone->name}} </option>
                                 @endforeach
                                 @endforeach
                             </select>
@@ -165,14 +165,14 @@ use App\Repositories\TransactionRepository;
                             <span class="text-success mx-2"><strong>مفتوح</strong></span>
                         </li>
                         <li class="list-inline-item">
-                        <span class="text-warning mx-2"><strong>{{$dashboardInfo['current_day_checkIn_count']}}</strong></span>
+                            <span class="text-warning mx-2"><strong>{{$dashboardInfo['current_day_checkIn_count']}}</strong></span>
 
                             <span>دخول</span>
                             <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;transform:rotate(90deg)" />
                         </li>
 
                         <li class="list-inline-item">
-                        <span class="text-warning mx-2"><strong>{{$dashboardInfo['current_day_checkOut_count']}}</strong></span>
+                            <span class="text-warning mx-2"><strong>{{$dashboardInfo['current_day_checkOut_count']}}</strong></span>
 
                             <span>خروج</span>
                             <img src="https://static.wixstatic.com/media/c24732_4f40eda3c755417f92e165dcdcf77564~mv2.gif" alt="Green-animated-arrow-right.gif" style="width:9px;height:9px;object-fit:cover;filter:invert(1);transform:rotate(270deg)" />
@@ -247,15 +247,13 @@ use App\Repositories\TransactionRepository;
         </div>
     </div>
     <!-- End Model employee-data -->
-
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="/asset/js/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="/asset/js/main.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     @yield('after_scripts')
 

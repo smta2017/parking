@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait; // <------------------------------- this one
+use Carbon\Carbon;
 use Spatie\Permission\Traits\HasRoles; // <---------------------- and this one
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -209,10 +210,15 @@ class User extends Authenticatable
     {
         return $query->whereNull('is_customer')->whereZoneId(session('session_zone_id'));
     }
-   
+
     public function Transactions()
     {
         return $this->hasMany(Transaction::class, 'customer_id', 'id');
+    }
+
+    public function sumCollectCurrentDay()
+    {
+        return $this->hasMany(Transaction::class, 'out_by', 'id')->whereDate('out_at',Carbon::today());
     }
 
     public function CustomerVehicles()
@@ -224,6 +230,20 @@ class User extends Authenticatable
     {
         return $this->morphMany('App\Models\PlanSubscription', 'subscriber');
     }
+
+    public function lastLogin()
+    {
+        $tokens = $this->tokens();
+        // $tokens =json_decode(\json_encode($tokens),true);
+
+        // if($tokens){
+        //     $tokens=json_decode(\json_encode($tokens),true);
+            return $tokens;
+
+        // }
+        // return $this->morphMany('App\Models\User', 'subscriber');
+    }
+
 
     public function Zone()
     {

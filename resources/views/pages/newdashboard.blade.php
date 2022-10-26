@@ -158,7 +158,7 @@
                         <div class="box-index bg-primary p-1 rounded-3 text-light mb-5">
                             <div class="title text-center">عدد الزائرين</div>
                             <div class="data-number">
-                                505
+                                {{$dashboardInfo['current_day_general']}}
                                 <i class="fa-solid fa-fw fa-users"></i>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                         <div class="box-index bg-secondary p-1 rounded-3 text-light mb-5">
                             <div class="title text-center">عدد المشتركين</div>
                             <div class="data-number">
-                                505
+                                {{$dashboardInfo['current_day_subscribe']}}
                                 <i class="fa-solid fa-fw fa-hand-holding-dollar"></i>
                             </div>
                         </div>
@@ -237,15 +237,15 @@
                             <img src="https://static.wixstatic.com/media/c24732_22df1e21acfd4661af5a6479422b50e5~mv2.gif" style="width:28px;height:28px;object-fit:cover" />
                             <img src="/asset/img/face.webp" width="30" height="30" alt="">
                         </td>
-                        <td>{{$saye->name}}</td>
+                        <td>{{$saye->id}}-{{$saye->name}}</td>
                         <td><strong class="text-primary">{{$saye->phone}}</strong></td>
                         <td><strong class="text-primary">{{$saye->email}}</strong></td>
                         <td><strong class="text-primary">00</strong></td>
                         <td><strong class="text-primary">{{$saye->Zone->name}}</strong></td>
                         <td><strong class="text-primary">في الخدمه</strong></td>
-                        <td><strong class="text-success">11 : 25 AM</strong></td>
+                        <td><strong class="text-success">@if(count($saye->lastLogin)){{$saye->lastLogin[0]['last_used_at']}}@endif</strong></td>
                         <td><strong class="text-primary">متصل</strong></td>
-                        <td><strong class="text-primary">10 جنيهات</strong></td>
+                        <td><strong class="text-primary">{{$saye->sumCollectCurrentDay->sum('is_payed')}}</strong></td>
                     </tr>
                     @endforeach
 
