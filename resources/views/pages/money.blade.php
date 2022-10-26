@@ -39,7 +39,7 @@
                 <div class="text-center">
                     <span class="ta-title bg-danger text-light px-5">تفاصيل أرباح الزائرين</span>
                 </div>
-                <table class="table table-striped ta-index" style="margin-bottom:9px">
+                <table id="generaltransaction" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
                             <th>التاريخ</th>
@@ -95,7 +95,7 @@
                 <div class="text-center" style="overflow: auto;">
                     <span class="ta-title bg-primary text-light px-5">تفاصيل أرباح المشتركين</span>
                 </div>
-                <table class="table table-striped ta-index" style="margin-bottom:9px">
+                <table id="customertransaction" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
                             <th>التاريخ</th>
@@ -155,7 +155,7 @@
                 <div class="text-center">
                     <span class="ta-title bg-warning text-light px-5">تفاصيل أرباح المبيت اليومي</span>
                 </div>
-                <table class="table table-striped ta-index" style="margin-bottom:9px">
+                <table id="overtransaction" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
                             <th>التاريخ</th>
@@ -210,7 +210,7 @@
                 <div class="text-center">
                     <span class="ta-title bg-warning text-light px-5">تفاصيل أرباح المبيت اليومي</span>
                 </div>
-                <table class="table table-striped ta-index" style="margin-bottom:9px">
+                <table  id="sayesscollect" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
                             <th>التاريخ</th>
@@ -278,13 +278,31 @@
 
     });
 
-    // $(document).ready(function() {
-    //     $('#customertbl').DataTable({
-    //         "ordering": true,
-    //         "order": [
-    //             [1, "desc"]
-    //         ],
-    //     });
-    // });
+    $(document).ready(function() {
+        $('#generaltransaction').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+        $('#customertransaction').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+        $('#overtransaction').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+        $('#sayesscollect').DataTable({
+            "ordering": true,
+            "order": [
+                [1, "desc"]
+            ],
+        });
+    });
 </script>
 @endsection
