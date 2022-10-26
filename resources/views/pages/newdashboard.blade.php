@@ -292,6 +292,10 @@
 <script>
     $(document).ready(function() {
         $('#maintbl').DataTable({
+            "ordering": true,
+            "order": [
+                [0, "desc"]
+            ],
         });
         $('#sayesstbl').DataTable({
             "ordering": true,
