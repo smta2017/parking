@@ -36,6 +36,7 @@ class CheckOutResource extends JsonResource
             'hour_rate' => $this->Zone['hour_rate'],
             'amount' => $this->is_payed, //round(($diff_time / 60) * ($this->Zone['hour_rate']), 2),
             'created_by' => new UserMiniResource($this->User),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i'),
             'out_by' => new UserMiniResource($this->OutBy),
         ];
     }

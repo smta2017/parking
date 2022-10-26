@@ -43,6 +43,7 @@
                     <thead>
 
                         <tr>
+                            <th></th>
                             <th>رقم الفاتوره</th>
                             <th>أسم الموظف</th>
                             <th>اللوحات المعدنيه</th>
@@ -58,7 +59,8 @@
                     @foreach ($transactions as $transaction)
 
                     <tr>
-                        <td> {{ \session('session_zone_id') }} - {{$transaction->id}}</td>
+                        <td style="font-size: 0px;">{{$transaction->updated_at}}</td>
+                        <td>{{$transaction->id}}</td>
                         <td>{{$transaction->created_by->name}}</td>
                         <td> <a href="#" target="_blanck"> <img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></a></td>
                         <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
@@ -290,10 +292,6 @@
 <script>
     $(document).ready(function() {
         $('#maintbl').DataTable({
-            "ordering": true,
-            "order": [
-                [1, "desc"]
-            ],
         });
         $('#sayesstbl').DataTable({
             "ordering": true,
