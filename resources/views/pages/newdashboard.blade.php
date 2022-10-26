@@ -303,7 +303,16 @@
                 [1, "desc"]
             ],
         });
+
+        setInterval(function() {
+            cache_clear()
+        }, 15000);
     });
+
+    function cache_clear() {
+        window.location.reload(true);
+        // window.location.reload(); use this if you do not remove cache
+    }
 
     setInterval(function() {
         var date = new Date();
