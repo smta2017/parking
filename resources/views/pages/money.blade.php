@@ -42,6 +42,7 @@
                 <table id="generaltransaction" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
+                            <th>#</th>
                             <th>التاريخ</th>
                             <th>اللوحات المعدنيه</th>
                             <th>رقم اللوحات</th>
@@ -54,6 +55,7 @@
                     <tbody>
                         @foreach ($gests as $transaction)
                         <tr>
+                            <td> {{$transaction->id}}</td>
                             <td> {{$transaction->checkin}}</td>
                             <td><img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></td>
                             <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
@@ -98,6 +100,7 @@
                 <table id="customertransaction" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
+                            <th>#</th>
                             <th>التاريخ</th>
                             <th>اللوحات المعدنيه</th>
                             <th>رقم اللوحات</th>
@@ -110,6 +113,7 @@
                     <tbody>
                         @foreach ($subscribe as $transaction)
                         <tr>
+                            <td> {{$transaction->id}}</td>
                             <td> {{$transaction->checkin}}</td>
                             <td><img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></td>
                             <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
@@ -158,6 +162,7 @@
                 <table id="overtransaction" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
+                            <th>#</th>
                             <th>التاريخ</th>
                             <th>اللوحات المعدنيه</th>
                             <th>رقم اللوحات</th>
@@ -170,6 +175,7 @@
                     <tbody>
                         @foreach ($over_night as $transaction)
                         <tr>
+                            <td> {{$transaction->id}}</td>
                             <td> {{$transaction->checkin}}</td>
                             <td><img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></td>
                             <td><strong class="text-primary">{{$transaction->plate_number}}</strong></td>
@@ -213,6 +219,7 @@
                 <table  id="sayesscollect" class="table table-striped ta-index" style="margin-bottom:9px">
                     <thead>
                         <tr class="bg-custom">
+                            <th>#</th>
                             <th>التاريخ</th>
                             <th>الموظف</th>
                             <th>اسم الموظف</th>
@@ -224,6 +231,7 @@
                     <tbody>
                         @foreach ($sayess_collect as $transaction)
                         <tr>
+                            <td> {{$transaction->id}}</td>
                             <td> {{$transaction->created_at}}</td>
                             <td><img src="{{$transaction->plate_img}}" width="40" height="20" alt=""></td>
                             <td><strong class="text-primary">{{$transaction->OutBy->name}}</strong></td>
@@ -282,25 +290,25 @@
         $('#generaltransaction').DataTable({
             "ordering": true,
             "order": [
-                [1, "desc"]
+                [0, "desc"]
             ],
         });
         $('#customertransaction').DataTable({
             "ordering": true,
             "order": [
-                [1, "desc"]
+                [0, "desc"]
             ],
         });
         $('#overtransaction').DataTable({
             "ordering": true,
             "order": [
-                [1, "desc"]
+                [0, "desc"]
             ],
         });
         $('#sayesscollect').DataTable({
             "ordering": true,
             "order": [
-                [1, "desc"]
+                [0, "desc"]
             ],
         });
     });
