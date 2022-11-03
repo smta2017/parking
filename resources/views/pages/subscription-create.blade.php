@@ -110,7 +110,7 @@
                             <td>{{$subscription->plan->price}}</td>
                             <td>{{$subscription->starts_at}}</td>
                             <td>{{$subscription->ends_at}}</td>
-                            <td>{{$subscription->SubscriptionBuckets[0]['ZoneBucket']['name']}}</td>
+                            <td>{{$subscription->SubscriptionBuckets}}</td>
                             <td>{{$subscription->slug}}</td>
                         </tr>
                         @endforeach

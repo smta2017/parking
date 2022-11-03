@@ -555,7 +555,7 @@ class TransactionAPIController extends AppBaseController
         $vehicle = CustomerVehicle::find($vehicle_id);
 
         $subs = app('rinvex.subscriptions.plan_subscription')->ofSubscriber($vehicle)->orderBy('ends_at', 'desc')->first();
-        return $subs;
+        // return $subs;
         if (!$subs) {
             return $this->sendError([], __('no_subscription_found'));
         }
